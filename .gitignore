@@ -1,5 +1,6 @@
 solution/
 .env
+data/chroma/chroma.sqlite3
 lab.txt
 .venv/
 src/*.egg-info/
