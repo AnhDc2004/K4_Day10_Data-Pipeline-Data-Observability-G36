@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime
+from html import unescape
 import json
 from pathlib import Path
+import re
 from typing import Iterable
 
 import pandas as pd
@@ -32,10 +34,12 @@ CLEAN_COLUMNS = [
 
 
 def _clean_text(value: object) -> str:
-    """Return a whitespace-normalized string; null-like values become empty."""
+    """Normalize Crossref text, including JATS/HTML tags and encoded entities."""
     if value is None or (not isinstance(value, (list, tuple, set, dict)) and pd.isna(value)):
         return ""
-    return normalize_whitespace(str(value))
+    text = unescape(str(value))
+    text = re.sub(r"<[^>]+>", "", text)
+    return normalize_whitespace(text)
 
 
 def _clean_list(values: Iterable[object] | None) -> list[str]:
