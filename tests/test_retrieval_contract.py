@@ -7,6 +7,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from retrieval.contract import build_document_preview, validate_clean_dataframe
+from retrieval.index import LocalEmbeddingIndex
 
 
 class RetrievalContractTest(unittest.TestCase):
@@ -49,7 +50,28 @@ class RetrievalContractTest(unittest.TestCase):
         self.assertIn("duplicate_paper_ids", result["hard_failures"])
         self.assertEqual(result["empty_fields"]["text_for_embedding"], 1)
 
+    def test_index_metadata_serializes_pandas_timestamp_for_chroma(self) -> None:
+        frame = pd.DataFrame(
+            [
+                {
+                    "paper_id": "10.1000/date",
+                    "title": "Timestamp paper",
+                    "summary": "A summary.",
+                    "authors_joined": "A. Author",
+                    "categories_joined": "RAG",
+                    "published": pd.Timestamp("2026-08-01", tz="UTC"),
+                    "abs_url": "https://doi.org/10.1000/date",
+                    "pdf_url": float("nan"),
+                    "text_for_embedding": "Title: Timestamp paper\nSummary: A summary.",
+                }
+            ]
+        )
+
+        document = LocalEmbeddingIndex._build_documents(frame)[0]
+
+        self.assertEqual(document["metadata"]["published"], "2026-08-01T00:00:00+00:00")
+        self.assertEqual(document["metadata"]["pdf_url"], "")
+
 
 if __name__ == "__main__":
     unittest.main()
-
