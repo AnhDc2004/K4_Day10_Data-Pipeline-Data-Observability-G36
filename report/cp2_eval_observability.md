@@ -71,21 +71,67 @@ Vẫn gửi vai trò 3 như một cải thiện (không block): cleaning nên st
 
 ---
 
-## 3. Audit embedding manifest — **đang bị block**
+## 3. Audit embedding manifest — đã chạy sau commit `role4_cp2`
+
+`audit_index_manifest(settings, embeddings_json, df)` → **success = False**, nhưng chỉ vì đúng **một** vấn đề; toàn bộ phần nội dung đều đạt:
+
+| Hạng mục | Kết quả |
+| --- | --- |
+| `collection_name` | `papers-baseline` ✅ |
+| `embedding_model` | `sentence-transformers/all-MiniLM-L6-v2`, khớp `settings` ✅ |
+| `document_count` / `unique_paper_ids` | 24 / 24 — không có document trùng ✅ |
+| Đối chiếu với clean (24 rows) | `missing_from_index: []`, `extra_in_index: []` ✅ |
+| **`persist_path_portable`** | ❌ **FAIL** |
+
+### B6 — Manifest ghi `persist_path` tuyệt đối của máy build (gửi vai trò 4)
 
 ```
-MANIFEST AUDIT: success = False
-Chua co embedding manifest -- index chua duoc build.
+manifest persist_path : W:\AI\K4_Day10_Data-Pipeline-Data-Observability-G36\data\chroma
+máy này  chroma_dir   : I:\Day01-VinUni\...\K4_Day10_...\data\chroma
 ```
 
-`data/embeddings/` và `data/chroma/` đều trống. `audit_index_manifest` đã sẵn sàng, khi vai trò 4 build xong sẽ kiểm:
+Hậu quả đã kiểm chứng bằng cách gọi thật:
 
-- `collection_name` = `papers-baseline`;
-- `embedding_model` khớp `settings.embedding_model` (`all-MiniLM-L6-v2`);
-- `document_count` = 24 và không có `paper_id` trùng;
-- không có paper_id nào có trong clean mà thiếu trong index (và ngược lại).
+```
+LocalEmbeddingIndex.load(settings, paths.embeddings_json)
+→ LOAD FAIL: InternalError: failed to create whole tree
+```
 
-Chỉ sau bước này mới chạy được `verify_test_set_against_index` — đó là điều kiện cuối trước khi evaluate ở CP3.
+`index.py:138` đọc `Path(payload["persist_path"])` từ manifest thay vì dùng `settings.paths.chroma_dir`, nên **index không load được trên bất kỳ máy nào khác máy đã build** — CP3 chạy `phase1.py` sẽ chết ở đây. Rubric cũng trừ điểm mục "hard-code path".
+
+Đề nghị sửa (1 dòng, thuộc quyền vai trò 4): `load()` dùng `settings.paths.chroma_dir` thay cho `payload["persist_path"]`, hoặc manifest ghi path tương đối so với project root.
+
+Bản thân dữ liệu Chroma **có được commit và đọc được tại chỗ**: `data/chroma/` chứa collection `papers-baseline` với đúng 24 document.
+
+Tôi đã thêm check `persist_path_portable` vào `audit_index_manifest` để lỗi loại này không lọt qua im lặng nữa.
+
+---
+
+## 3b. Verify test set ↔ index — **PASS 100%**
+
+Chạy `verify_test_set_against_index` (dựng index bằng `chroma_dir` cục bộ để đi vòng B6):
+
+```
+samples          : 24
+unique_doc_ids   : 6
+missing_doc_ids  : []      ← mọi paper_id lookup được
+missing_titles   : []      ← mọi title trong câu hỏi lookup được
+success          : true
+```
+
+Đây là điều kiện cuối trước evaluate, và nó đã đạt.
+
+### Preview retrieval (chỉ search, **không gọi LLM**, không ghi artifact)
+
+| Cấu hình | hit_rate@4 | top1 |
+| --- | ---: | ---: |
+| `answer_question` đầy đủ (có exact lookup) | **1.00** | **1.00** |
+| Semantic search thuần (bỏ exact lookup) | 1.00 | 0.83 |
+
+Hai điều rút ra cho CP3/CP5:
+
+1. **Baseline `retrieval_hit_rate` gần như chắc chắn = 1.00** → mọi thay đổi ở CP5 chỉ có thể đi xuống, tức là corruption sẽ hiện rõ trên metric này.
+2. **Exact lookup đang gánh phần lớn kết quả** (top1 1.00 → 0.83 khi bỏ đi). Nên `retrieval_hit_rate` đo khả năng lookup theo title nhiều hơn là chất lượng semantic search. Điều này củng cố dự đoán ở [CP0 §8](cp0_eval_observability_contract.md): corruption **truncate title** sẽ đánh mạnh nhất, dù không check quality nào bắt được nó.
 
 ---
 
@@ -109,6 +155,68 @@ Mục "Evidence & limitations" tự nhắc kiểm `judge.reasoning` để phát 
 
 ---
 
+## 5b. Sau commit `cp2 - 3` (cleaning strip markup) — test set phải build lại
+
+### Unit test của nhóm: 8/8 PASS
+
+```
+python -m unittest discover -s tests -v   →  Ran 8 tests ... OK
+```
+
+`tests/test_cleaning.py` (vai trò 3, 6 test) và `tests/test_retrieval_contract.py` (vai trò 4, 2 test) là **contract regression test**: mỗi người khoá lời hứa của module mình thành assert, để lần sau sửa code mà làm vỡ contract thì test đỏ ngay thay vì phát hiện qua metric tụt. Không phải test set evaluation của tôi. (`pytest` chưa cài trong `.venv`, chạy bằng `unittest` là đủ.)
+
+Đáng chú ý: `test_html_entities_and_jats_markup_are_removed_before_embedding` — vai trò 3 đã làm đúng đề nghị ở §2, giờ strip cả tag JATS lẫn HTML entity.
+
+### Hệ quả: 3 artifact lệch nhau
+
+Cleaning mới decode `&amp;` → `&`, `&lt;` → `<`, và bỏ `<scp>`. Ba nguồn đang ở hai phiên bản khác nhau:
+
+| Artifact | Build từ clean lúc | Tình trạng |
+| --- | --- | --- |
+| `data/clean/papers_clean.csv` | commit `cp2 - 3` (mới nhất) | ✅ nguồn chuẩn |
+| `data/embeddings/` + `data/chroma/` | commit `role4_cp2` (cũ) | ❌ lệch 1 title, 3 `text_for_embedding` |
+| `data/eval/test_set.json` (bản đầu) | clean cũ | ❌ 1/24 ground_truth còn `&amp;` |
+
+Ví dụ lệch cụ thể:
+
+```
+index  : "Title: Hi‐ <scp>RAG</scp> : A Hierarchical…"      clean: "Title: Hi‐ RAG : A Hierarchical…"
+index  : "( Q = 25.66, p &lt; 0.001)"                        clean: "( Q = 25.66, p < 0.001)"
+index  : "research and development (R&amp;D) mission"        clean: "research and development (R&D) mission"
+```
+
+### Đã làm: rebuild test set từ clean mới
+
+Baseline metrics **chưa hề được tính**, nên rebuild bây giờ không vi phạm nguyên tắc khoá test set — khoá chỉ có hiệu lực từ baseline trở đi. Kết quả:
+
+- 24 sample, 6 paper, 4 loại × 6 — quality vẫn **11/11 PASS**, freshness `is_fresh: true`;
+- **0 paper bị loại** (trước là 1 vì markup);
+- `10.1111/exsy.70341` nay hợp lệ và vào test set, thay cho `10.21079/11681/50309`.
+
+### B7 — Index phải rebuild từ clean hiện tại (vai trò 4)
+
+`audit_index_manifest` (đã thêm check drift nội dung) bắt được:
+
+```
+content_drift_title: ['10.1111/exsy.70341']
+content_drift_text : ['10.1111/exsy.70341', '10.1007/s10278-026-02086-9', '10.21079/11681/50309']
+```
+
+Và `verify_test_set_against_index` **nay FAIL đúng chỗ đó**:
+
+```
+missing_titles: ["Hi‐ RAG : A Hierarchical Retrieval‐Augmented Generation Framework…"]
+success: false
+```
+
+Index vẫn giữ title bản `<scp>` nên exact lookup theo title mới trượt. Nếu evaluate ở trạng thái này, sample của paper đó mất boost lookup và `token_f1` giảm **vì artifact lệch phiên bản, không phải vì chất lượng RAG**.
+
+Cần: vai trò 4 rebuild index từ `papers_clean.csv` hiện tại (kèm sửa B6). Sau đó tôi chạy lại `audit_index_manifest` + `verify_test_set_against_index`, cả hai phải `success: true` trước khi CP3 evaluate.
+
+**Nguyên tắc rút ra:** clean data, index và test set phải được sinh từ **cùng một snapshot**. Bất kỳ ai chạy lại cleaning thì index và test set đều phải build lại theo.
+
+---
+
 ## 6. Tự kiểm CP2
 
 - [x] `build_test_set` có đủ `id`, `question_type`, `question`, `ground_truth`, `ground_truth_doc_ids`.
@@ -116,4 +224,9 @@ Mục "Evidence & limitations" tự nhắc kiểm `judge.reasoning` để phát 
 - [x] Test set lưu cố định tại `data/eval/test_set.json` và đã đọc thử lại từ file.
 - [x] Baseline quality/freshness signals đã ghi để đối chiếu sau corruption.
 - [x] Khuôn phase-1 report chạy được, chỉ chờ số liệu thật ở CP3.
-- [ ] **Blocked (vai trò 4)**: chưa audit được embedding manifest và chưa verify được doc ID trong index — `data/embeddings/` và `data/chroma/` còn trống.
+- [x] Audit embedding manifest: collection name, embedding model, document count đều audit được — 24/24 khớp clean.
+- [x] Verify doc ID trong index: 6/6 paper_id và 6/6 title lookup được, `success: true`.
+- [x] Unit test của nhóm: 8/8 PASS (`python -m unittest discover -s tests`).
+- [x] Test set build lại từ clean mới sau khi cleaning strip markup — 24 sample, 0 paper bị loại.
+- [ ] **Chờ vai trò 4 sửa B6** (`persist_path` trong manifest trỏ máy khác) — nếu không, `phase1.py` ở CP3 sẽ chết khi `LocalEmbeddingIndex.load()`.
+- [ ] **Chờ vai trò 4 sửa B7** (rebuild index từ clean hiện tại) — `verify_test_set_against_index` đang `success: false` vì index còn giữ title bản `<scp>`.

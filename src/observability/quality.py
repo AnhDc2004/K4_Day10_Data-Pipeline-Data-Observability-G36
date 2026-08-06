@@ -240,6 +240,18 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
     }
 
     problems: list[str] = []
+
+    # Manifest ghi persist_path tuyet doi cua may build. Neu commit len Git roi may khac load,
+    # `LocalEmbeddingIndex.load` se tro vao path khong ton tai -> khong tai lap duoc.
+    manifest_persist = Path(str(payload.get("persist_path", "")))
+    expected_persist = settings.paths.chroma_dir
+    result["persist_path_portable"] = manifest_persist == expected_persist
+    if manifest_persist != expected_persist:
+        problems.append(
+            f"persist_path trong manifest (`{manifest_persist}`) khac chroma_dir cua may nay "
+            f"(`{expected_persist}`) -> index khong load duoc o day."
+        )
+
     if payload.get("embedding_model") != settings.embedding_model:
         problems.append(f"embedding_model lech: manifest={payload.get('embedding_model')} vs settings={settings.embedding_model}")
     if len(documents) != len(manifest_ids):
@@ -256,6 +268,27 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
             problems.append(f"{len(missing)} paper_id co trong clean nhung khong co trong index.")
         if extra:
             problems.append(f"{len(extra)} paper_id co trong index nhung khong co trong clean.")
+
+        # paper_id khop khong du: cleaning co the doi noi dung (vd decode HTML entity) ma giu nguyen id.
+        # Index cu + clean moi -> answer va ground_truth doc tu hai phien ban khac nhau.
+        by_id = {str(record["paper_id"]): record for record in df.to_dict(orient="records")}
+        drifted_title: list[str] = []
+        drifted_content: list[str] = []
+        for document in documents:
+            row = by_id.get(str(document.get("paper_id")))
+            if row is None:
+                continue
+            if str(document.get("title")) != str(row.get("title")):
+                drifted_title.append(str(document.get("paper_id")))
+            if str(document.get("content")) != str(row.get("text_for_embedding")):
+                drifted_content.append(str(document.get("paper_id")))
+        result["content_drift_title"] = drifted_title[:5]
+        result["content_drift_text"] = drifted_content[:5]
+        if drifted_title or drifted_content:
+            problems.append(
+                f"Index lech noi dung so voi clean hien tai: {len(drifted_title)} title, "
+                f"{len(drifted_content)} text_for_embedding -> can rebuild index tu clean moi."
+            )
 
     result["success"] = not problems
     result["details"] = " ".join(problems)
