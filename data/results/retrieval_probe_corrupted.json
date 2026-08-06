@@ -1,0 +1,655 @@
+{
+  "samples": 38,
+  "top_k": 4,
+  "retrieval_hit_rate_at_4": 0.7631578947368421,
+  "top1_accuracy": 0.631578947368421,
+  "mrr": 0.6864035087719298,
+  "details": [
+    {
+      "id": "10.1111/exsy.70341::probe1",
+      "question": "How does the new benchmark MCPBench contribute to hierarchical tool selection in LLMs?",
+      "ground_truth_doc_ids": [
+        "10.1111/exsy.70341"
+      ],
+      "retrieved_doc_ids": [
+        "10.1093/sleep/zsag091.0346",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.35314/3y9hy151",
+        "10.70121/001c.158711"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.2118/234689-pa::probe0",
+      "question": "What is the main limitation of using large language models for accident analysis in high-risk industrial settings?",
+      "ground_truth_doc_ids": [
+        "10.2118/234689-pa"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.63646/kpqm1958",
+        "10.70121/001c.158711",
+        "10.2196/preprints.106157"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.2118/234689-pa::probe1",
+      "question": "How does the SafeRAG framework enhance the generation of safety reports compared to traditional methods?",
+      "ground_truth_doc_ids": [
+        "10.2118/234689-pa"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.1093/sleep/zsag091.0346",
+        "10.3390/buildings16132637"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.1007/s10278-026-02086-9::probe0",
+      "question": "What novel framework was developed for diagnostic decision support in jawbone lesion assessment?",
+      "ground_truth_doc_ids": [
+        "10.1007/s10278-026-02086-9"
+      ],
+      "retrieved_doc_ids": [
+        "10.1007/s10278-026-02086-9",
+        "10.1007/s10278-026-02086-9",
+        "10.1093/sleep/zsag091.0346",
+        "10.70121/001c.158711"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.1007/s10278-026-02086-9::probe1",
+      "question": "How was the performance of JADE-Plus evaluated in comparison to other models?",
+      "ground_truth_doc_ids": [
+        "10.1007/s10278-026-02086-9"
+      ],
+      "retrieved_doc_ids": [
+        "10.47576/2949-1894.2026.7.7.023",
+        "10.1093/sleep/zsag091.0346",
+        "10.63646/kpqm1958",
+        "10.1007/s10278-026-02086-9"
+      ],
+      "rank": 3,
+      "hit": true,
+      "top1": false,
+      "reciprocal_rank": 0.25
+    },
+    {
+      "id": "10.21203/rs.3.rs-10178277/v1::probe0",
+      "question": "What is the main validation method used to compare Lag-Llama forecasts with retrieval-augmented forecasts in this study?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-10178277/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.21203/rs.3.rs-10178277/v1",
+        "10.1093/sleep/zsag091.0346",
+        "10.52060/juptik.v4i1.4318"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-10178277/v1::probe1",
+      "question": "How much did the retrieval variants reduce the Lag-Llama mean squared error in the IDX7 configuration?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-10178277/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.1093/sleep/zsag091.0346",
+        "10.35314/3y9hy151",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.70121/001c.158711"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.2196/preprints.106157::probe1",
+      "question": "How did the use of a RAG-enabled LLM affect the perceived usability for medical students during their learning process?",
+      "ground_truth_doc_ids": [
+        "10.2196/preprints.106157"
+      ],
+      "retrieved_doc_ids": [
+        "10.2196/preprints.106157",
+        "10.1093/sleep/zsag091.0346",
+        "10.70121/001c.158711",
+        "10.20944/preprints202602.0996.v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.3390/buildings16132637::probe0",
+      "question": "What AI framework does the study propose for automating code compliance checking in roof assemblies?",
+      "ground_truth_doc_ids": [
+        "10.3390/buildings16132637"
+      ],
+      "retrieved_doc_ids": [
+        "10.3390/buildings16132637",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.21079/11681/50309",
+        "10.63646/kpqm1958"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21079/11681/50309::probe0",
+      "question": "What specific strategic focus areas does the US Army Engineer Research and Development Center prioritize in its R&D programs?",
+      "ground_truth_doc_ids": [
+        "10.21079/11681/50309"
+      ],
+      "retrieved_doc_ids": [
+        "10.21079/11681/50309",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.63646/kpqm1958"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21079/11681/50309::probe1",
+      "question": "How does the US Army Corps of Engineers ensure environmental sustainability through its research and development initiatives?",
+      "ground_truth_doc_ids": [
+        "10.21079/11681/50309"
+      ],
+      "retrieved_doc_ids": [
+        "10.21079/11681/50309",
+        "10.3390/buildings16132637",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.63646/kpqm1958"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.63646/kpqm1958::probe0",
+      "question": "What trends in publication output and citation rates were observed in the field of autonomous agentic architectures from 2023 to 2025?",
+      "ground_truth_doc_ids": [
+        "10.63646/kpqm1958"
+      ],
+      "retrieved_doc_ids": [
+        "10.63646/kpqm1958",
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.3390/buildings16132637",
+        "10.21079/11681/50309"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.63646/kpqm1958::probe1",
+      "question": "Which countries were identified as leading contributors to the research on large language models and multi-agent systems?",
+      "ground_truth_doc_ids": [
+        "10.63646/kpqm1958"
+      ],
+      "retrieved_doc_ids": [
+        "10.63646/kpqm1958",
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.52060/juptik.v4i1.4318",
+        "10.2196/preprints.106157"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-10012178/v1::probe0",
+      "question": "What integrated architecture does this paper propose for AI governance prioritization in enterprises?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-10012178/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.3390/buildings16132637",
+        "10.63646/kpqm1958",
+        "10.21079/11681/50309"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-10012178/v1::probe1",
+      "question": "How does the paper assess organizational readiness for AI governance using the Enterprise AI Governance Maturity Model?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-10012178/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-10012178/v1",
+        "10.3390/buildings16132637",
+        "10.63646/kpqm1958",
+        "10.21079/11681/50309"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.47576/2949-1894.2026.7.7.023::probe0",
+      "question": "What specific risks associated with LLM usage in the dairy industry does the paper address?",
+      "ground_truth_doc_ids": [
+        "10.47576/2949-1894.2026.7.7.023"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.1093/sleep/zsag091.0346",
+        "10.21079/11681/50309",
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.47576/2949-1894.2026.7.7.023::probe1",
+      "question": "How does the integration of RAG with LLM enhance decision-making in economic security for dairy enterprises?",
+      "ground_truth_doc_ids": [
+        "10.47576/2949-1894.2026.7.7.023"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.21079/11681/50309",
+        "10.70121/001c.158711",
+        "10.21203/rs.3.rs-10178277/v1"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-9882260/v1::probe0",
+      "question": "What dimensions does the article focus on when evaluating LLM reliability in retrieval-augmented generation?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.2196/preprints.106157",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.1093/sleep/zsag091.0346"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-9882260/v1::probe1",
+      "question": "How does the synthesis differentiate between answer accuracy and reasoning faithfulness in LLMs?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.70121/001c.158711",
+        "10.3390/app16052244"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.52060/juptik.v4i1.4318::probe0",
+      "question": "What method does the research use to improve the accuracy of responses in the AI-based question-answering system?",
+      "ground_truth_doc_ids": [
+        "10.52060/juptik.v4i1.4318"
+      ],
+      "retrieved_doc_ids": [
+        "10.63646/kpqm1958",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.70121/001c.158711"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.52060/juptik.v4i1.4318::probe1",
+      "question": "How does the hybrid retrieval architecture enhance the relevance of answers compared to standard retrieval-augmented generation?",
+      "ground_truth_doc_ids": [
+        "10.52060/juptik.v4i1.4318"
+      ],
+      "retrieved_doc_ids": [
+        "10.35314/3y9hy151",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.2196/preprints.106157",
+        "10.20944/preprints202604.0339.v1"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.54254/2753-8818/2026.dl34055::probe0",
+      "question": "What are the main causes of hallucination in retrieval-augmented generation systems according to the paper?",
+      "ground_truth_doc_ids": [
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "retrieved_doc_ids": [
+        "10.54254/2753-8818/2026.dl34055",
+        "10.2196/preprints.106157",
+        "10.1093/sleep/zsag091.0346",
+        "10.70121/001c.158711"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.54254/2753-8818/2026.dl34055::probe1",
+      "question": "What mitigation strategies does the paper propose to address hallucination in RAG?",
+      "ground_truth_doc_ids": [
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "retrieved_doc_ids": [
+        "10.54254/2753-8818/2026.dl34055",
+        "10.70121/001c.158711",
+        "10.1093/sleep/zsag091.0346",
+        "10.47576/2949-1894.2026.7.7.023"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.22214/ijraset.2026.82233::probe1",
+      "question": "How does the proposed approach combine graph neural networks and language models in answering questions?",
+      "ground_truth_doc_ids": [
+        "10.22214/ijraset.2026.82233"
+      ],
+      "retrieved_doc_ids": [
+        "10.22214/ijraset.2026.82233",
+        "10.3390/app16052244",
+        "10.20944/preprints202604.0339.v1",
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-9770645/v1::probe0",
+      "question": "What techniques were used to adapt the LLM for the insurance sector in Kenya?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.21079/11681/50309",
+        "10.52060/juptik.v4i1.4318",
+        "10.21203/rs.3.rs-10178277/v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.21203/rs.3.rs-9770645/v1::probe1",
+      "question": "How was the QA corpus for the study curated and formatted?",
+      "ground_truth_doc_ids": [
+        "10.21203/rs.3.rs-9770645/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.70121/001c.158711",
+        "10.2196/preprints.106157",
+        "10.1093/sleep/zsag091.0346",
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "rank": null,
+      "hit": false,
+      "top1": false,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "10.1093/sleep/zsag091.0346::probe0",
+      "question": "What specific domain data was used to augment the performance of the LLMs in this study?",
+      "ground_truth_doc_ids": [
+        "10.1093/sleep/zsag091.0346"
+      ],
+      "retrieved_doc_ids": [
+        "10.1093/sleep/zsag091.0346",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.21203/rs.3.rs-9770645/v1",
+        "10.21079/11681/50309"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.32473/flairs.39.1.141782::probe1",
+      "question": "How does the proposed pipeline configuration enhance the integration of patient dialogue and clinical knowledge in mental health support systems?",
+      "ground_truth_doc_ids": [
+        "10.32473/flairs.39.1.141782"
+      ],
+      "retrieved_doc_ids": [
+        "10.32473/flairs.39.1.141782",
+        "10.20944/preprints202602.0996.v1",
+        "10.70121/001c.158711",
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.55041/isjem07213::probe0",
+      "question": "What two retrieval mechanisms are combined in the proposed speculative RAG framework to improve factual correctness?",
+      "ground_truth_doc_ids": [
+        "10.55041/isjem07213"
+      ],
+      "retrieved_doc_ids": [
+        "10.70121/001c.158711",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.55041/isjem07213",
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "rank": 2,
+      "hit": true,
+      "top1": false,
+      "reciprocal_rank": 0.3333333333333333
+    },
+    {
+      "id": "10.55041/isjem07213::probe1",
+      "question": "How does the framework address the issues of inference latency and computation cost in retrieval-augmented generation?",
+      "ground_truth_doc_ids": [
+        "10.55041/isjem07213"
+      ],
+      "retrieved_doc_ids": [
+        "10.2196/preprints.106157",
+        "10.55041/isjem07213",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.70121/001c.158711"
+      ],
+      "rank": 1,
+      "hit": true,
+      "top1": false,
+      "reciprocal_rank": 0.5
+    },
+    {
+      "id": "10.20944/preprints202604.0339.v1::probe1",
+      "question": "How does the integration of external document retrieval improve the accuracy of the review generation process in this research?",
+      "ground_truth_doc_ids": [
+        "10.20944/preprints202604.0339.v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.20944/preprints202604.0339.v1",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.35314/3y9hy151",
+        "10.21203/rs.3.rs-9882260/v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.70121/001c.158711::probe0",
+      "question": "What are the latest evaluation benchmarks for biomedical Retrieval-Augmented Generation systems discussed in this paper?",
+      "ground_truth_doc_ids": [
+        "10.70121/001c.158711"
+      ],
+      "retrieved_doc_ids": [
+        "10.70121/001c.158711",
+        "10.2196/preprints.106157",
+        "10.20944/preprints202602.0996.v1",
+        "10.1093/sleep/zsag091.0346"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.70121/001c.158711::probe1",
+      "question": "How does this paper address ethical concerns related to privacy and bias in biomedical RAG methodologies?",
+      "ground_truth_doc_ids": [
+        "10.70121/001c.158711"
+      ],
+      "retrieved_doc_ids": [
+        "10.70121/001c.158711",
+        "10.1093/sleep/zsag091.0346",
+        "10.2196/preprints.106157",
+        "10.20944/preprints202602.0996.v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.36227/techrxiv.177272838.89432844/v1::probe0",
+      "question": "What are the key components of Deep RAG systems discussed in this survey?",
+      "ground_truth_doc_ids": [
+        "10.36227/techrxiv.177272838.89432844/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.70121/001c.158711",
+        "10.36227/techrxiv.177272838.89432844/v1",
+        "10.47576/2949-1894.2026.7.7.023",
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "rank": 1,
+      "hit": true,
+      "top1": false,
+      "reciprocal_rank": 0.5
+    },
+    {
+      "id": "10.36227/techrxiv.177272838.89432844/v1::probe1",
+      "question": "How does the paper categorize different planning strategies and optimization techniques in Deep RAG?",
+      "ground_truth_doc_ids": [
+        "10.36227/techrxiv.177272838.89432844/v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.36227/techrxiv.177272838.89432844/v1",
+        "10.47576/2949-1894.2026.7.7.023",
+        "10.70121/001c.158711",
+        "10.54254/2753-8818/2026.dl34055"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.3390/app16052244::probe0",
+      "question": "What are the main limitations of existing GraphRAG methods in knowledge graph question answering?",
+      "ground_truth_doc_ids": [
+        "10.3390/app16052244"
+      ],
+      "retrieved_doc_ids": [
+        "10.22214/ijraset.2026.82233",
+        "10.3390/app16052244",
+        "10.54254/2753-8818/2026.dl34055",
+        "10.35314/3y9hy151"
+      ],
+      "rank": 1,
+      "hit": true,
+      "top1": false,
+      "reciprocal_rank": 0.5
+    },
+    {
+      "id": "10.3390/app16052244::probe1",
+      "question": "How does HybRAG improve the integration of semantic and structural reasoning in knowledge graphs?",
+      "ground_truth_doc_ids": [
+        "10.3390/app16052244"
+      ],
+      "retrieved_doc_ids": [
+        "10.3390/app16052244",
+        "10.22214/ijraset.2026.82233",
+        "10.21203/rs.3.rs-9882260/v1",
+        "10.20944/preprints202602.0996.v1"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "10.20944/preprints202602.0996.v1::probe0",
+      "question": "What novel system is proposed to improve performance in complex clinical scenarios using a lightweight Mistral-based language model?",
+      "ground_truth_doc_ids": [
+        "10.20944/preprints202602.0996.v1"
+      ],
+      "retrieved_doc_ids": [
+        "10.20944/preprints202602.0996.v1",
+        "10.1093/sleep/zsag091.0346",
+        "10.70121/001c.158711",
+        "10.32473/flairs.39.1.141782"
+      ],
+      "rank": 0,
+      "hit": true,
+      "top1": true,
+      "reciprocal_rank": 1.0
+    }
+  ]
+}
