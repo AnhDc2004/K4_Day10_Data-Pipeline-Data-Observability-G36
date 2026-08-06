@@ -13,12 +13,20 @@ def _load_model(model_name: str) -> SentenceTransformer:
 
 class MiniLMEmbeddings(Embeddings):
     def __init__(self, model_name: str):
-        self.model = _load_model(model_name)
+        self.model_name = model_name
+        # Keep the provider object private. Ragas reads ``.model`` for telemetry
+        # and expects a string, not a SentenceTransformer instance.
+        self._model = _load_model(model_name)
+
+    @property
+    def model(self) -> str:
+        """Return a telemetry-safe model identifier."""
+        return self.model_name
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
-        embeddings = self.model.encode(texts, normalize_embeddings=True)
+        embeddings = self._model.encode(texts, normalize_embeddings=True)
         return embeddings.tolist()
 
     def embed_query(self, text: str) -> list[float]:
-        embedding = self.model.encode([text], normalize_embeddings=True)
+        embedding = self._model.encode([text], normalize_embeddings=True)
         return embedding[0].tolist()
