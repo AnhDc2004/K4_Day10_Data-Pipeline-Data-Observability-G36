@@ -40,3 +40,13 @@ python -m unittest tests/test_cleaning.py -v
 
 Ba test kiểm tra: schema và phép biến đổi raw → clean; xử lý null/ngày sai/trường
 bắt buộc; deduplicate và `age_days`.
+
+Tạo artifact CP1 từ `data/raw/crossref_records.json`:
+
+```powershell
+python script/run_cleaning_cp1.py
+```
+
+Đầu ra gồm `data/clean/papers_clean.csv`, `data/clean/papers_clean.json` và
+`data/clean/cleaning_report.json`. Report ghi tổng input/output cùng count record
+bị loại do thiếu ID, thiếu title, trùng ID, ngày sai và summary rỗng.

@@ -1,0 +1,10 @@
+{
+  "input_records": 5,
+  "dropped_missing_paper_id": 0,
+  "dropped_missing_title": 0,
+  "filtered_records": 0,
+  "duplicates_removed": 0,
+  "invalid_published_dates": 0,
+  "empty_summaries": 3,
+  "output_records": 5
+}
