@@ -1,0 +1,88 @@
+{
+  "report_name": "repaired",
+  "generated_at": "2026-08-06T16:23:49.025515+00:00",
+  "total_rows": 24,
+  "success": true,
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "row_count_min",
+      "success": true,
+      "observed": 24,
+      "expected": ">= 10 rows",
+      "details": ""
+    },
+    {
+      "name": "schema_columns_present",
+      "success": true,
+      "observed": 8,
+      "expected": "8 cot bat buoc",
+      "details": ""
+    },
+    {
+      "name": "paper_id_not_null",
+      "success": true,
+      "observed": 0,
+      "expected": "0 missing",
+      "details": ""
+    },
+    {
+      "name": "paper_id_unique",
+      "success": true,
+      "observed": 24,
+      "expected": "24 unique",
+      "details": ""
+    },
+    {
+      "name": "duplicate_records",
+      "success": true,
+      "observed": 0,
+      "expected": "0 duplicate rows",
+      "details": ""
+    },
+    {
+      "name": "title_not_null",
+      "success": true,
+      "observed": 0,
+      "expected": "0 missing",
+      "details": ""
+    },
+    {
+      "name": "summary_not_null",
+      "success": true,
+      "observed": 0,
+      "expected": "0 missing",
+      "details": ""
+    },
+    {
+      "name": "text_for_embedding_not_empty",
+      "success": true,
+      "observed": 0,
+      "expected": "0 missing",
+      "details": ""
+    },
+    {
+      "name": "summary_min_chars",
+      "success": true,
+      "observed": 0,
+      "expected": "0 row < 100 ky tu",
+      "details": ""
+    },
+    {
+      "name": "published_parseable",
+      "success": true,
+      "observed": 0,
+      "expected": "0 row khong parse duoc ngay",
+      "details": ""
+    },
+    {
+      "name": "freshness_age_days",
+      "success": true,
+      "observed": 174,
+      "expected": "max age_days <= 180, 0 row thieu age_days",
+      "details": ""
+    }
+  ],
+  "failed_checks": []
+}

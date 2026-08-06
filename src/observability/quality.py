@@ -282,15 +282,19 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
         # paper_id khop khong du: cleaning co the doi noi dung (vd decode HTML entity) ma giu nguyen id.
         # Index cu + clean moi -> answer va ground_truth doc tu hai phien ban khac nhau.
         by_id = {str(record["paper_id"]): record for record in df.to_dict(orient="records")}
+
+        def normalize_content(value: object) -> str:
+            return str(value).replace("\r\n", "\n").replace("\r", "\n")
+
         drifted_title: list[str] = []
         drifted_content: list[str] = []
         for document in documents:
             row = by_id.get(str(document.get("paper_id")))
             if row is None:
                 continue
-            if str(document.get("title")) != str(row.get("title")):
+            if normalize_content(document.get("title")) != normalize_content(row.get("title")):
                 drifted_title.append(str(document.get("paper_id")))
-            if str(document.get("content")) != str(row.get("text_for_embedding")):
+            if normalize_content(document.get("content")) != normalize_content(row.get("text_for_embedding")):
                 drifted_content.append(str(document.get("paper_id")))
         result["content_drift_title"] = drifted_title[:5]
         result["content_drift_text"] = drifted_content[:5]
