@@ -77,6 +77,18 @@ class CleanDataframeTest(unittest.TestCase):
         self.assertEqual(df.iloc[0]["age_days"], 0)
         self.assertEqual(df.attrs["cleaning_report"]["duplicates_removed"], 1)
 
+    def test_mixed_crossref_date_precision_is_parsed(self) -> None:
+        records = [
+            paper(paper_id="day", published="2026-08-06"),
+            paper(paper_id="month", published="2026-08"),
+            paper(paper_id="timestamp", published="2026-08-06T12:30:00Z"),
+        ]
+
+        df = build_clean_dataframe(records, datetime(2026, 8, 10, tzinfo=UTC))
+
+        self.assertEqual(df.attrs["cleaning_report"]["invalid_published_dates"], 0)
+        self.assertFalse(df["published"].isna().any())
+
     def test_writes_clean_artifacts_and_reason_counts(self) -> None:
         from tempfile import TemporaryDirectory
 
