@@ -1,6 +1,6 @@
 {
   "report_name": "corrupted",
-  "generated_at": "2026-08-06T18:41:16.712615+00:00",
+  "generated_at": "2026-08-06T20:46:17.723757+00:00",
   "total_rows": 23,
   "success": false,
   "passed": 6,
@@ -53,7 +53,7 @@
       "success": false,
       "observed": 1,
       "expected": "0 missing",
-      "details": "1/23 row thieu `summary`: ['10.1093/sleep/zsag091.0346']"
+      "details": "1/23 row thieu `summary`: ['10.1007/s10278-026-02086-9']"
     },
     {
       "name": "text_for_embedding_not_empty",
@@ -79,7 +79,7 @@
     {
       "name": "freshness_age_days",
       "success": false,
-      "observed": 852,
+      "observed": 851,
       "expected": "max age_days <= 180, 0 row thieu age_days",
       "details": "1/23 row stale (age_days > 180)."
     }

@@ -1,6 +1,6 @@
 {
   "report_name": "repaired",
-  "generated_at": "2026-08-06T18:43:14.082124+00:00",
+  "generated_at": "2026-08-06T20:48:09.526087+00:00",
   "total_rows": 24,
   "success": true,
   "passed": 11,
@@ -79,7 +79,7 @@
     {
       "name": "freshness_age_days",
       "success": true,
-      "observed": 175,
+      "observed": 174,
       "expected": "max age_days <= 180, 0 row thieu age_days",
       "details": ""
     }

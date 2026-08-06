@@ -150,6 +150,7 @@ def build_clean_dataframe(records: list[PaperRecord], run_date: datetime) -> pd.
     run_timestamp = run_timestamp.tz_localize("UTC") if run_timestamp.tzinfo is None else run_timestamp.tz_convert("UTC")
     age = (run_timestamp.normalize() - df["published"].dt.normalize()).dt.days
     df["age_days"] = age.clip(lower=0).astype("Int64")
+    df["published"] = df["published"].dt.strftime("%Y-%m-%d")
 
     result = df.sort_values(
         ["published", "paper_id"], na_position="last", ascending=[False, True], kind="stable"

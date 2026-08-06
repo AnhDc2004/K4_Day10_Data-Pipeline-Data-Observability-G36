@@ -1,28 +1,28 @@
 {
   "samples": 24,
-  "retrieval_hit_rate": 0.8333333333333334,
-  "mean_token_f1": 0.6756410256410257,
-  "judge_accuracy": 0.875,
-  "mean_judge_score": 4.583333333333333,
+  "retrieval_hit_rate": 1.0,
+  "mean_token_f1": 1.0,
+  "judge_accuracy": 1.0,
+  "mean_judge_score": 5,
   "ragas": {
     "total_samples": 24,
-    "answer_relevancy": 0.1716565554986456,
+    "answer_relevancy": 0.18156266881346106,
     "answer_relevancy_n": 24,
     "per_sample": [
       {
-        "answer_relevancy": 0.44503816803239804,
-        "context_precision": 0.0,
+        "answer_relevancy": 0.7444280755004492,
+        "context_precision": 0.9999999999,
         "context_recall": 1.0,
-        "faithfulness": 0.8333333333333334
+        "faithfulness": 1.0
       },
       {
-        "answer_relevancy": 0.22618123525609213,
-        "context_precision": 0.0,
-        "context_recall": 0.0,
-        "faithfulness": 0.0
+        "answer_relevancy": 0.17411083555578927,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "faithfulness": 1.0
       },
       {
-        "answer_relevancy": 0.021274984452933375,
+        "answer_relevancy": 0.005900639312933811,
         "context_precision": 0.0,
         "context_recall": 0.0,
         "faithfulness": 0.0
@@ -31,7 +31,7 @@
         "answer_relevancy": 0.0,
         "context_precision": 0.999999999975,
         "context_recall": 1.0,
-        "faithfulness": 0.0
+        "faithfulness": 1.0
       },
       {
         "answer_relevancy": 0.43247792321120226,
@@ -64,7 +64,7 @@
         "faithfulness": 1.0
       },
       {
-        "answer_relevancy": 0.0520291457904282,
+        "answer_relevancy": 0.0577042962576018,
         "context_precision": 0.9999999999,
         "context_recall": 1.0,
         "faithfulness": 1.0
@@ -79,7 +79,7 @@
         "answer_relevancy": 0.0,
         "context_precision": 0.999999999975,
         "context_recall": 1.0,
-        "faithfulness": 1.0
+        "faithfulness": 0.0
       },
       {
         "answer_relevancy": 0.0,
@@ -94,7 +94,7 @@
         "faithfulness": 1.0
       },
       {
-        "answer_relevancy": 0.21254844994673347,
+        "answer_relevancy": 0.21267485640738162,
         "context_precision": 0.0,
         "context_recall": 0.0,
         "faithfulness": 0.0
@@ -154,11 +154,11 @@
         "faithfulness": 1.0
       }
     ],
-    "context_precision": 0.66666666661875,
+    "context_precision": 0.74999999994375,
     "context_precision_n": 24,
-    "context_recall": 0.7083333333333334,
+    "context_recall": 0.75,
     "context_recall_n": 24,
-    "faithfulness": 0.6597222222222222,
+    "faithfulness": 0.7083333333333334,
     "faithfulness_n": 24
   }
 }

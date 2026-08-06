@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime
 import logging
 
-from core import load_settings, read_json
+from core import load_settings, read_json, now_utc
 from ingestion import build_clean_dataframe, write_clean_artifacts,fetch_source_records, load_raw_records
 from observability import build_freshness_report, run_data_quality_checks, generate_phase1_report
 from retrieval import validate_clean_dataframe, LocalEmbeddingIndex
@@ -70,7 +69,7 @@ def main() -> None:
     # STEP 3: CLEAN DATA & WRITE ARTIFACTS
     # -------------------------------------------------------------------------
     logger.info("[Step 3/8] Cleaning raw data & writing clean artifacts...")
-    run_date = datetime.now()
+    run_date = now_utc()
     df_clean = build_clean_dataframe(records, run_date=run_date)
 
     cleaning_report_path = settings.paths.quality_dir / "cleaning_report.json"

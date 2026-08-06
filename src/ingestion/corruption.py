@@ -58,6 +58,7 @@ def _rebuild_derived_fields(df: pd.DataFrame) -> None:
         ),
         axis=1,
     )
+    df["published"] = pd.to_datetime(df["published"], errors="coerce", utc=True).dt.strftime("%Y-%m-%d")
 
 
 def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path: Path | str) -> pd.DataFrame:

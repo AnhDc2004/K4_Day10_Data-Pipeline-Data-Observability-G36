@@ -1,78 +1,81 @@
-# Phase 1 - Baseline Report
+# Phase 1 — Báo cáo Baseline
 
-Generated at: 2026-08-06T18:36:38.291894+00:00
+Thời điểm tạo: 2026-08-06T20:27:30.325822+00:00
 
-## 1. Source & scope
+## 1. Nguồn dữ liệu và phạm vi
 
-| Field | Value |
+| Mục | Giá trị |
 | --- | --- |
-| `source` | Crossref REST API |
-| `query` | agentic retrieval augmented generation large language model |
-| `raw_records` | 24 |
-| `clean_records` | 24 |
-| `freshness_threshold_days` | 180 |
+| Nguồn dữ liệu | Crossref REST API |
+| Câu truy vấn | agentic retrieval augmented generation large language model |
+| Số bản ghi thô | 24 |
+| Số bản ghi sau làm sạch | 24 |
+| Ngưỡng freshness (ngày) | 180 |
 
-## 2. Evaluation metrics
+## 2. Chỉ số đánh giá
 
-| Field | Value |
+| Mục | Giá trị |
 | --- | --- |
-| `So sample` | 24 |
-| `Retrieval hit rate` | 0.833 |
-| `Mean token F1` | 0.676 |
-| `Judge accuracy` | 0.875 |
-| `Mean judge score` | 4.583 |
+| Số sample | 24 |
+| Tỉ lệ retrieval trúng | 1.000 |
+| Token F1 trung bình | 1.000 |
+| Độ chính xác theo LLM judge | 1.000 |
+| Điểm judge trung bình | 5 |
 
-| Field | Value |
+**Chỉ số Ragas**
+
+| Mục | Giá trị |
 | --- | --- |
-| `total_samples` | 24 |
-| `answer_relevancy` | 0.171 |
-| `answer_relevancy_n` | 24 |
-| `context_precision` | 0.667 |
-| `context_precision_n` | 24 |
-| `context_recall` | 0.708 |
-| `context_recall_n` | 24 |
-| `faithfulness` | 0.618 |
-| `faithfulness_n` | 24 |
+| Tổng số mẫu | 24 |
+| Mức liên quan của câu trả lời | 0.184 |
+| — số mẫu chấm được | 24 |
+| Độ chính xác ngữ cảnh | 0.750 |
+| — số mẫu chấm được | 24 |
+| Độ bao phủ ngữ cảnh | 0.750 |
+| — số mẫu chấm được | 24 |
+| Mức trung thành với ngữ cảnh | 0.729 |
+| — số mẫu chấm được | 24 |
 
-## 3. Data quality
+## 3. Chất lượng dữ liệu
 
-- Ket qua tong: **PASS** (11/11 check pass)
-- Total rows: 24
-- Report: `E:\Lab1\K4_Day10_Data-Pipeline-Data-Observability-G36\data\quality\phase1-baseline_quality.json`
+- Kết quả tổng: **ĐẠT** (11/11 check đạt)
+- Tổng số dòng: 24
+- Report: `data/quality/phase1-baseline_quality.json`
 
-| Check | Ket qua | Observed | Expected | Chi tiet |
+| Check | Kết quả | Quan sát được | Kỳ vọng | Chi tiết |
 | --- | --- | --- | --- | --- |
-| `row_count_min` | PASS | 24 | >= 10 rows |  |
-| `schema_columns_present` | PASS | 8 | 8 cot bat buoc |  |
-| `paper_id_not_null` | PASS | 0 | 0 missing |  |
-| `paper_id_unique` | PASS | 24 | 24 unique |  |
-| `duplicate_records` | PASS | 0 | 0 duplicate rows |  |
-| `title_not_null` | PASS | 0 | 0 missing |  |
-| `summary_not_null` | PASS | 0 | 0 missing |  |
-| `text_for_embedding_not_empty` | PASS | 0 | 0 missing |  |
-| `summary_min_chars` | PASS | 0 | 0 row < 100 ky tu |  |
-| `published_parseable` | PASS | 0 | 0 row khong parse duoc ngay |  |
-| `freshness_age_days` | PASS | 175 | max age_days <= 180, 0 row thieu age_days |  |
+| `row_count_min` | ĐẠT | 24 | >= 10 rows |  |
+| `schema_columns_present` | ĐẠT | 8 | 8 cot bat buoc |  |
+| `paper_id_not_null` | ĐẠT | 0 | 0 missing |  |
+| `paper_id_unique` | ĐẠT | 24 | 24 unique |  |
+| `duplicate_records` | ĐẠT | 0 | 0 duplicate rows |  |
+| `title_not_null` | ĐẠT | 0 | 0 missing |  |
+| `summary_not_null` | ĐẠT | 0 | 0 missing |  |
+| `text_for_embedding_not_empty` | ĐẠT | 0 | 0 missing |  |
+| `summary_min_chars` | ĐẠT | 0 | 0 row < 100 ky tu |  |
+| `published_parseable` | ĐẠT | 0 | 0 row khong parse duoc ngay |  |
+| `freshness_age_days` | ĐẠT | 174 | max age_days <= 180, 0 row thieu age_days |  |
 
-## 4. Freshness
+## 4. Độ tươi mới của dữ liệu
 
-| Field | Value |
+| Mục | Giá trị |
 | --- | --- |
-| `latest_published` | 2026-08-01 |
-| `oldest_published` | 2026-02-13 |
-| `stale_rows` | 0 |
-| `total_rows` | 24 |
-| `is_fresh` | true |
-| `freshness_threshold_days` | 180 |
-| `max_age_days` | 175 |
-| `min_age_days` | 6 |
-| `mean_age_days` | 83.800 |
-| `missing_published` | 0 |
-| `generated_at` | 2026-08-06T18:34:47.753560+00:00 |
-| `report_path` | E:\Lab1\K4_Day10_Data-Pipeline-Data-Observability-G36\data\quality\freshness_report.json |
+| Ngày xuất bản mới nhất | 2026-08-01 |
+| Ngày xuất bản cũ nhất | 2026-02-13 |
+| Số dòng quá hạn | 0 |
+| Tổng số dòng | 24 |
+| Còn tươi mới | có |
+| Ngưỡng freshness (ngày) | 180 |
+| Tuổi lớn nhất (ngày) | 174 |
+| Tuổi nhỏ nhất (ngày) | 5 |
+| Tuổi trung bình (ngày) | 76.400 |
+| Số dòng thiếu ngày xuất bản | 0 |
+| Thời điểm tạo | 2026-08-06T20:25:51.058296+00:00 |
+| Đường dẫn report | data/quality/freshness_report.json |
 
-## 5. Evidence & limitations
+## 5. Bằng chứng và giới hạn
 
-- Metrics doc tu artifact JSON do evaluator ghi ra; report nay khong tinh lai so lieu.
-- Kiem tra `judge.reasoning` trong answers: neu la fallback heuristic thi `judge_accuracy` khong phai LLM judge.
-- Test set duoc khoa va dung lai nguyen ven cho corrupted/repaired.
+- Chỉ số đọc từ artifact JSON do evaluator ghi ra; report này không tính lại số liệu.
+- Cần kiểm tra `judge.reasoning` trong file answers: nếu là fallback heuristic thì `judge_accuracy` không phải LLM judge và không được trình bày như metric thật.
+- Test set được khoá và dùng lại nguyên vẹn cho corrupted và repaired.
+- Chỉ số Ragas kèm hậu tố `_n` là số mẫu thực sự chấm được; nếu `_n` nhỏ hơn tổng số mẫu thì giá trị trung bình đang tính trên mẫu số nhỏ hơn và không so sánh trực tiếp được.

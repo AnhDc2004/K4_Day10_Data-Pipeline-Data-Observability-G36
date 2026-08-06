@@ -1,0 +1,79 @@
+{
+  "generated_at": "2026-08-06T20:44:13.355189+00:00",
+  "baseline_count": 24,
+  "corrupted_count": 23,
+  "operations": [
+    {
+      "type": "drop_latest",
+      "record_ids": [
+        "10.1111/exsy.70341",
+        "10.2118/234689-pa"
+      ],
+      "parameter": {
+        "count": 2,
+        "sort_field": "published",
+        "order": "descending"
+      },
+      "before_count": 24,
+      "after_count": 22
+    },
+    {
+      "type": "missing_summary",
+      "record_ids": [
+        "10.1007/s10278-026-02086-9"
+      ],
+      "parameter": {
+        "replacement": ""
+      },
+      "before_count": 22,
+      "after_count": 22
+    },
+    {
+      "type": "inject_noise",
+      "record_ids": [
+        "10.1093/sleep/zsag091.0346"
+      ],
+      "parameter": {
+        "marker": "[CORRUPTED_NOISE] irrelevant tokens xqzv qqq 000",
+        "target_field": "summary"
+      },
+      "before_count": 22,
+      "after_count": 22
+    },
+    {
+      "type": "truncate_title",
+      "record_ids": [
+        "10.20944/preprints202602.0996.v1"
+      ],
+      "parameter": {
+        "max_chars": 15,
+        "original": "Clinical Large Language Models with Multi-Stage Instruction Tuning and Advanced Retrieval-Augmented Generation"
+      },
+      "before_count": 22,
+      "after_count": 22
+    },
+    {
+      "type": "old_published_date",
+      "record_ids": [
+        "10.20944/preprints202604.0339.v1"
+      ],
+      "parameter": {
+        "days_shifted_back": 730,
+        "previous_published": "2026-04-07T00:00:00+00:00"
+      },
+      "before_count": 22,
+      "after_count": 22
+    },
+    {
+      "type": "add_duplicate",
+      "record_ids": [
+        "10.21079/11681/50309"
+      ],
+      "parameter": {
+        "copies_added": 1
+      },
+      "before_count": 22,
+      "after_count": 23
+    }
+  ]
+}

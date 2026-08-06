@@ -5,9 +5,9 @@
   "total_rows": 24,
   "is_fresh": true,
   "freshness_threshold_days": 180,
-  "max_age_days": 175,
-  "min_age_days": 6,
-  "mean_age_days": 83.8,
+  "max_age_days": 174,
+  "min_age_days": 5,
+  "mean_age_days": 76.4,
   "missing_published": 0,
-  "generated_at": "2026-08-06T18:43:14.083110+00:00"
+  "generated_at": "2026-08-06T20:48:09.527090+00:00"
 }

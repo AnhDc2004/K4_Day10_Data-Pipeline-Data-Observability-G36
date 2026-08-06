@@ -1,13 +1,13 @@
 {
-  "latest_published": "2026-07-10",
+  "latest_published": "2026-07-13",
   "oldest_published": "2024-04-07",
   "stale_rows": 1,
   "total_rows": 23,
   "is_fresh": false,
   "freshness_threshold_days": 180,
-  "max_age_days": 852,
-  "min_age_days": 28,
-  "mean_age_days": 119.4,
+  "max_age_days": 851,
+  "min_age_days": 24,
+  "mean_age_days": 112.6,
   "missing_published": 0,
-  "generated_at": "2026-08-06T18:41:16.713614+00:00"
+  "generated_at": "2026-08-06T20:46:17.724767+00:00"
 }

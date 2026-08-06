@@ -131,7 +131,7 @@ def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, A
             llm=build_llm(settings=settings, temperature=0.0),
             embeddings=MiniLMEmbeddings(settings.embedding_model),
         )
-        return _summarize_ragas(result)          # <-- thay cho dict(result)
+        return _summarize_ragas(result)
 
     except Exception as exc:
         import traceback

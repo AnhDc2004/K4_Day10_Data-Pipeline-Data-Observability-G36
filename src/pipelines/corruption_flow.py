@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 from core import Settings, load_settings, read_json, write_csv
+from core.utils import now_utc
 from ingestion import load_raw_records, build_clean_dataframe, corrupt_clean_dataframe
 from observability import build_freshness_report, run_data_quality_checks, generate_corruption_report
 from retrieval import validate_clean_dataframe, LocalEmbeddingIndex
@@ -17,6 +18,25 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 logger = logging.getLogger(__name__)
+
+
+def _load_optional_json(*candidates) -> dict | None:
+    """Nạp file JSON đầu tiên tìm thấy trong danh sách ứng viên.
+
+    Dùng cho quality/freshness của baseline: hai artifact này do Phase 1 ghi ra và
+    tên file phụ thuộc ``report_name`` được truyền vào lúc đó. Thiếu file không phải
+    lỗi chặn — comparison report sẽ ghi "không có dữ liệu" ở cột Baseline thay vì
+    mặc định coi là ĐẠT.
+    """
+    for path in candidates:
+        if path and Path(path).exists():
+            logger.info(f"-> Nạp baseline signal từ '{path}'.")
+            return read_json(path)
+    logger.warning(
+        f"Không tìm thấy baseline signal trong: {[str(c) for c in candidates if c]}. "
+        "Cột Baseline của bảng observability sẽ để trống thay vì giả định là ĐẠT."
+    )
+    return None
 
 
 def main() -> None:
@@ -41,11 +61,25 @@ def main() -> None:
     baseline_metrics = read_json(settings.paths.baseline_metrics)
     logger.info(f"-> Nạp thành công {len(df_baseline)} bản ghi baseline clean.")
 
+    # Baseline quality/freshness cho cột Baseline của comparison report.
+    # Không nạp thì report buộc phải hard-code "PASSED"/"FRESH" — vi phạm nguyên tắc
+    # "report phải trỏ tới artifact thật".
+    quality_dir = settings.paths.quality_dir
+    baseline_quality = _load_optional_json(
+        quality_dir / "phase1-baseline_quality.json",
+        quality_dir / "baseline_quality.json",
+    )
+    baseline_freshness = _load_optional_json(
+        getattr(settings.paths, "freshness_report", None),
+        quality_dir / "freshness_report.json",
+        quality_dir / "baseline_freshness_report.json",
+    )
+
     # -------------------------------------------------------------------------
     # 2. TẠO CORRUPTED DATASET & AUDIT LOG
     # -------------------------------------------------------------------------
     logger.info("[Step 2/8] Generating corrupted dataframe with full scenarios...")
-    corruption_log_path = settings.paths.quality_dir / "corruption_log.json"
+    corruption_log_path = settings.paths.corruption_log
     df_corrupted = corrupt_clean_dataframe(df_baseline, output_log_path=corruption_log_path)
 
     # -------------------------------------------------------------------------
@@ -98,7 +132,9 @@ def main() -> None:
     logger.info("[Step 6/8] Repairing dataset from raw snapshot records...")
     raw_records = load_raw_records(settings.paths.raw_records_json)
     
-    run_date = datetime.now()
+    # Dùng giờ UTC để age_days tái lập được; datetime.now() là giờ local không tzinfo,
+    # chạy trên máy khác múi giờ sẽ cho age_days lệch so với baseline.
+    run_date = now_utc()
     df_repaired = build_clean_dataframe(raw_records, run_date=run_date)
 
     # Guard Clause: Dừng ngay nếu vi phạm Data Contract thay vì vá JSON
@@ -116,7 +152,7 @@ def main() -> None:
     logger.info(f"-> Repaired CSV đã lưu tại path riêng: '{settings.paths.repaired_clean_csv}'")
 
     # -------------------------------------------------------------------------
-    # 7. EVALUATE LAI LAN NUOAC (REPAIRED DATASET)
+    # 7. EVALUATE LAI LAN NUA (REPAIRED DATASET)
     # -------------------------------------------------------------------------
     logger.info("[Step 7/8] Rebuilding Repaired Index (Collection: 'papers-repaired') & Re-evaluating...")
     index_repaired = LocalEmbeddingIndex.build(
@@ -159,6 +195,8 @@ def main() -> None:
         repaired_quality=repaired_quality,
         corrupted_freshness=corrupted_freshness,
         repaired_freshness=repaired_freshness,
+        baseline_quality=baseline_quality,
+        baseline_freshness=baseline_freshness,
     )
     logger.info(f"-> Báo cáo so sánh Markdown hoàn tất tại: '{settings.paths.comparison_report}'")
 

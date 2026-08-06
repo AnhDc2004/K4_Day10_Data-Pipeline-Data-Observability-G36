@@ -68,22 +68,6 @@
     "comment": "Publisher: MDPI AG"
   },
   {
-    "paper_id": "10.55041/isjem07213",
-    "title": "Speculative Retrieval-Augmented Generation for Cost-Efficient Large Language Model Inference",
-    "summary": "Abstract - This work focuses on the two crucial bottlenecks in Retrieval-Augmented Generation (RAG): high inference latency and expensive computation cost. RAG enhances the factual correctness of Large Language Models (LLMs) by utilizing external knowledge sources; However, the auto-To achieve a good recall, the system applies a two-way retrieval mechanism:\n\nDense retrieval: This module uses BAAI/bge-small-en-v1.5 to create a 384-dimensional embedding space, where queries and documents are mapped. The embeddings are stored in a FAISS IndexFlatL2.\nSparse retrieval: This module uses TF-IDF vectorization to capture an exact keyword match.\nReranking: A simple heuristic mechanism of matching substrings of the query terms in the documents selected to perform the final step of ranking them for prompt\n\nintroduce a novel speculative RAG framework that combines hybrid retrieval with speculative decoding. Our framework employs hybrid dense vector search (BGE-small) and sparse keyword search (TF-IDF) for enhanced recall followed by a lightweight re-ranker model. A compact draft model (TinyLlama-1.1B) makes tentative future token generation, then a larger verifier model (Mistral-7B) checks the correctness of the candidate token. Empirical experiments demonstrate 33% and 29% improvement in inference latency and token reduction, respectively, compared to the baseline of a typical 7B model, while retaining 94% accuracy on factoid tasks.\n\nKey Words: Retrieval-Augmented Generation, Speculative Decoding, Large Language Models, Inference Optimization, Hybrid Retrieval",
-    "authors": [
-      "Dr. Sumalatha P",
-      "Manoj Kumar"
-    ],
-    "categories": [],
-    "primary_category": "Uncategorized",
-    "published": "2026-05-06",
-    "updated": "2026-05-06",
-    "abs_url": "https://doi.org/10.55041/isjem07213",
-    "pdf_url": "",
-    "comment": "Publisher: Edtech Publishers (OPC) Private Limited; Journal: International Scientific Journal of Engineering and Management"
-  },
-  {
     "paper_id": "10.3390/app16052244",
     "title": "Hybrid Retrieval-Augmented Generation: Semantic and Structural Integration for Large Language Model Reasoning",
     "summary": "Recent GraphRAG methods based on knowledge graphs (KGs) primarily rely on either under-reasoning or a structural path-level retriever, which prevents them from jointly capturing fine-grained semantic relevance and explicit multi-hop reasoning paths. This separation often results in semantic mismatch—where logical links are missing—or structural over-constraint in reasoning— where rigid dependencies limit flexible reasoning—thereby degrading both answer accuracy and the reliability of evidence in complex KGQA tasks. To address these issues, we propose HybRAG, a hybrid retrieval framework that synergistically integrates a semantic node-level retriever and structural path-level retriever. HybRAG constructs a hybrid subgraph that jointly reflects the semantic proximity of entities and the relational structures encoded in the KG. Furthermore, we incorporate retrieval-augmented fine-tuning, which enables the model to internalize advanced reasoning strategies for interpreting disparate semantic and structural signals, rather than merely memorizing domain facts. Through extensive experiments on the WebQSP and CWQ benchmarks, we demonstrate that HybRAG effectively bridges the gap between LLM-centric semantic approaches and GNN-centric structural approaches, outperforming single-retriever baselines. Our findings, including detailed sensitivity and ablation analyses, provide empirical evidence that the systematic alignment of semantic and structural signals is essential for ensuring the reasoning reliability and scalability of next-generation GraphRAG systems.",
@@ -98,6 +82,22 @@
     "abs_url": "https://doi.org/10.3390/app16052244",
     "pdf_url": "",
     "comment": "Publisher: MDPI AG; Journal: Applied Sciences"
+  },
+  {
+    "paper_id": "10.55041/isjem07213",
+    "title": "Speculative Retrieval-Augmented Generation for Cost-Efficient Large Language Model Inference",
+    "summary": "Abstract - This work focuses on the two crucial bottlenecks in Retrieval-Augmented Generation (RAG): high inference latency and expensive computation cost. RAG enhances the factual correctness of Large Language Models (LLMs) by utilizing external knowledge sources; However, the auto-To achieve a good recall, the system applies a two-way retrieval mechanism:\n\nDense retrieval: This module uses BAAI/bge-small-en-v1.5 to create a 384-dimensional embedding space, where queries and documents are mapped. The embeddings are stored in a FAISS IndexFlatL2.\nSparse retrieval: This module uses TF-IDF vectorization to capture an exact keyword match.\nReranking: A simple heuristic mechanism of matching substrings of the query terms in the documents selected to perform the final step of ranking them for prompt\n\nintroduce a novel speculative RAG framework that combines hybrid retrieval with speculative decoding. Our framework employs hybrid dense vector search (BGE-small) and sparse keyword search (TF-IDF) for enhanced recall followed by a lightweight re-ranker model. A compact draft model (TinyLlama-1.1B) makes tentative future token generation, then a larger verifier model (Mistral-7B) checks the correctness of the candidate token. Empirical experiments demonstrate 33% and 29% improvement in inference latency and token reduction, respectively, compared to the baseline of a typical 7B model, while retaining 94% accuracy on factoid tasks.\n\nKey Words: Retrieval-Augmented Generation, Speculative Decoding, Large Language Models, Inference Optimization, Hybrid Retrieval",
+    "authors": [
+      "Dr. Sumalatha P",
+      "Manoj Kumar"
+    ],
+    "categories": [],
+    "primary_category": "Uncategorized",
+    "published": "2026-05-06",
+    "updated": "2026-05-06",
+    "abs_url": "https://doi.org/10.55041/isjem07213",
+    "pdf_url": "",
+    "comment": "Publisher: Edtech Publishers (OPC) Private Limited; Journal: International Scientific Journal of Engineering and Management"
   },
   {
     "paper_id": "10.20944/preprints202602.0996.v1",
@@ -390,24 +390,19 @@
     "comment": "Publisher: Springer Science and Business Media LLC"
   },
   {
-    "paper_id": "10.1097/hc9.0000000000000895",
-    "title": "Development of retrieval-augmented generation–based large language model for drug-induced liver injury using Livertox data",
-    "summary": "Background:\n                    Idiosyncratic DILI is a complex clinical challenge requiring timely and accurate decision support. LiverTox, curated by the National Institute of Health (NIH), offers a comprehensive DILI evidence base, but its encyclopedia-like format hinders point-of-care use. Health care providers increasingly use general large language models (LLMs) for clinical care, raising safety concerns due to LLM hallucinations or misinformation. We hypothesize that retrieval-augmented generation (RAG) integration—grounding LLM responses in LiverTox content—would enable accurate DILI decision support.\n                  \n                  \n                    Methods:\n                    We processed 1343 LiverTox drug monographs into 8759 indexed segments using BioBERT embeddings. We developed a RAG pipeline that employs drug-specific prioritization, section-aware weighting, and semantic search to retrieve the most relevant content per query. Twenty-five DILI questions were evaluated across 6 models: 4 RAG-LLMs: Mistral-7B, Claude-3-Haiku, Claude-3-Opus, and GPT-4o, and 2 non-RAG GPT-4o variants (unconstrained; soft constrained with a prompt to reference LiverTox). Three hepatologists, blinded to the model, evaluated responses for accuracy, completeness, and conciseness using 5-point Likert scales. Analyses included pairwise comparisons and effect size estimation.\n                  \n                  \n                    Results:\n                    \n                      One hundred fifty model responses were evaluated with good inter-rater reliability. GPT-4o (RAG) achieved the highest overall scores (4.47±0.10). RAG-LLMs outperformed non-RAG GPT-4o variants in accuracy (\n                      p\n                      &lt;0.001) and completeness (\n                      p\n                      &lt;0.01). Moderate to large effect sizes in accuracy (d=0.778) and completeness (d=0.526) were noted with RAG. No hallucinations were observed in RAG-LLM outputs, while both non-RAG GPT-4o variants produced several hallucinated responses. There were no significant differences in scoring or hallucinated response rate between the 2 non-RAG variants.\n                    \n                  \n                  \n                    Conclusions:\n                    We developed an RAG-LLM integrated with LiverTox for evidence-based DILI management. RAG-LLM systems outperformed non-RAG variants and produced responses without observed hallucinations in this evaluation. Our LiverTox RAG-LLM enables reliable answers to drug hepatotoxicity questions at the point of care.",
+    "paper_id": "10.1111/exsy.70341",
+    "title": "Hi‐\n                    <scp>RAG</scp>\n                    : A Hierarchical Retrieval‐Augmented Generation Framework for Scalable and Generalisable Tool Selection in Large Language Model Agents",
+    "summary": "ABSTRACT\n                  \n                    As tool repositories for Large Language Model (LLM) agents grow from dozens to hundreds of endpoints, flat retrieval paradigms that treat the repository as an unstructured list suffer from context overload, cross‐domain semantic collision and degraded selection accuracy. We propose Hi‐RAG, a Hierarchical Retrieval‐Augmented Generation framework that exploits the Type  Service  Tool structure of the Model Context Protocol (MCP) via a principled coarse‐to‐fine pipeline. Stage 1 applies a\n                    Tool‐as‐Proxy\n                    hybrid retrieval strategy (BM25 sparse retrieval combined with dense bi‐encoder search, fused via Weighted Reciprocal Rank Fusion) to identify candidate services efficiently. Stage 2 performs type‐aware re‐ranking over a local heterogeneous graph, integrating a domain‐level gating mechanism with contextualised tool attention for precise service scoring. We further introduce\n                    MCPBench\n                    , the first benchmark for hierarchical tool selection, comprising 201 tools across 40 real‐enterprise services—23% of queries require multi‐service reasoning. Experiments across five LLMs show Hi‐RAG improves Top‐1 accuracy by up to 7.5% (single‐service) and 10.0% (multi‐service) over Flat‐RAG, while reducing token consumption by up to 89% against full‐context injection. Comparisons with a strong late‐interaction baseline (ColBERT‐RAG) further confirm the superiority of Hi‐RAG. Zero‐shot evaluation on ToolLLM (16,464 tools) confirms scalability, and formal analyses establish  context growth with respect to repository size.",
     "authors": [
-      "Ashwin Rao",
-      "George Cholankeril",
-      "Avegail Flores",
-      "Gagan Sood",
-      "Terrence E. White",
-      "Fasiha Kanwal",
-      "Hashem B. El-Serag"
+      "Wei Tian",
+      "Yuhao Zhou"
     ],
     "categories": [],
     "primary_category": "Uncategorized",
-    "published": "2026-03",
-    "updated": "2026-02-12",
-    "abs_url": "https://doi.org/10.1097/hc9.0000000000000895",
-    "pdf_url": "",
-    "comment": "Publisher: Ovid Technologies (Wolters Kluwer Health); Journal: Hepatology Communications"
+    "published": "2026-08",
+    "updated": "2026-07-16",
+    "abs_url": "https://doi.org/10.1111/exsy.70341",
+    "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1111/exsy.70341",
+    "comment": "Publisher: Wiley; Journal: Expert Systems"
   }
 ]
