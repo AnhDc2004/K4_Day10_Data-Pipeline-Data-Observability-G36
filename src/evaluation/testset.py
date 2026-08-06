@@ -1,14 +1,19 @@
 from __future__ import annotations
 
+from pathlib import Path
+import re
 from typing import Any
 
 import pandas as pd
 
-from core.utils import first_sentence, normalize_whitespace
+from core.utils import first_sentence, normalize_whitespace, write_json
 
 MIN_PAPERS = 6
 
 REQUIRED_FIELDS = ("paper_id", "title", "summary", "authors_joined", "categories_joined", "published")
+
+# Dung 5 key ma `evaluation.metrics.evaluate_pipeline` truy cap truc tiep, thieu key nao la KeyError.
+REQUIRED_SAMPLE_KEYS = ("id", "question_type", "question", "ground_truth", "ground_truth_doc_ids")
 
 # Cum tu khoa phai giu nguyen: `retrieval/qa.py::_extract_answer` route answer bang cach
 # match chuoi tren question.lower(). Doi cach dien dat -> answer roi ve nhanh summary mac dinh.
@@ -36,6 +41,9 @@ def paper_rejection_reason(row: dict[str, Any]) -> str | None:
     if "'" in title:
         # `qa.answer_question` bat exact title bang regex r"'([^']+)'" -> title co nhay don lam vo lookup.
         return "title_contains_single_quote"
+    if re.search(r"<[^>]+>", title):
+        # Title con markup JATS tho (vd `<scp>RAG</scp>`) -> cau hoi ban va lam nhieu LLM judge.
+        return "title_contains_markup"
     if len(title) < 10:
         return "title_too_short"
     if len(_text(row, "summary")) < 100:
@@ -119,10 +127,80 @@ def draft_questions(row: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def build_test_set(df: pd.DataFrame, output_path) -> list[dict[str, Any]]:
-    """TODO(CP2): compose `select_representative_papers` + `draft_questions`, validate va write_json.
+def validate_test_set(test_set: list[dict[str, Any]], df: pd.DataFrame) -> list[str]:
+    """Tra ve list loi. Rong nghia la test set dung contract cua `metrics.evaluate_pipeline`."""
+    errors: list[str] = []
+    known_ids = set(df["paper_id"].astype(str)) if "paper_id" in df.columns else set()
+    seen_ids: set[str] = set()
 
-    Chua ghi file o CP1: `paper_id` phai on dinh va moi id phai lookup duoc trong index
-    truoc khi khoa test set lai cho ca ba trang thai baseline/corrupted/repaired.
+    for item in test_set:
+        missing_keys = [key for key in REQUIRED_SAMPLE_KEYS if key not in item]
+        if missing_keys:
+            errors.append(f"{item.get('id', '<no id>')}: thieu key {missing_keys}")
+            continue
+        if item["id"] in seen_ids:
+            errors.append(f"{item['id']}: id bi trung")
+        seen_ids.add(item["id"])
+        if not str(item["question"]).strip():
+            errors.append(f"{item['id']}: question rong")
+        if not str(item["ground_truth"]).strip():
+            # ground_truth rong -> token_f1 luon 0 va judge khong co gi de so sanh.
+            errors.append(f"{item['id']}: ground_truth rong")
+        if not item["ground_truth_doc_ids"]:
+            errors.append(f"{item['id']}: ground_truth_doc_ids rong")
+        for doc_id in item["ground_truth_doc_ids"]:
+            if known_ids and doc_id not in known_ids:
+                errors.append(f"{item['id']}: doc_id `{doc_id}` khong co trong cleaned dataframe")
+
+    return errors
+
+
+def verify_test_set_against_index(test_set: list[dict[str, Any]], index) -> dict[str, Any]:
+    """Kiem tra moi `ground_truth_doc_ids` va title trong cau hoi deu lookup duoc trong index.
+
+    Miss o day la loi contract giua clean va index -> sua contract, khong sua test set cho khop.
     """
-    raise NotImplementedError("CP2 task: write locked test set after paper_id is stable.")
+    missing_doc_ids: list[str] = []
+    missing_titles: list[str] = []
+
+    for item in test_set:
+        for doc_id in item["ground_truth_doc_ids"]:
+            if index.lookup(doc_id) is None and doc_id not in missing_doc_ids:
+                missing_doc_ids.append(doc_id)
+        title_match = re.search(r"'([^']+)'", item["question"])
+        if title_match:
+            title = title_match.group(1)
+            if index.lookup(title) is None and title not in missing_titles:
+                missing_titles.append(title)
+
+    return {
+        "samples": len(test_set),
+        "unique_doc_ids": len({doc_id for item in test_set for doc_id in item["ground_truth_doc_ids"]}),
+        "missing_doc_ids": missing_doc_ids,
+        "missing_titles": missing_titles,
+        "success": not missing_doc_ids and not missing_titles,
+    }
+
+
+def build_test_set(df: pd.DataFrame, output_path) -> list[dict[str, Any]]:
+    """Tao evaluation set tu cleaned dataframe va ghi JSON ra `output_path`.
+
+    Test set duoc khoa lai: baseline, corrupted va repaired deu dung dung file nay,
+    neu sinh lai giua chung thi so sanh ba trang thai mat cong bang.
+    """
+    selected, rejected = select_representative_papers(df)
+    if len(selected) < MIN_PAPERS:
+        reasons = ", ".join(sorted({item["reason"] for item in rejected})) or "khong ro"
+        raise ValueError(
+            f"Chi chon duoc {len(selected)}/{MIN_PAPERS} paper hop le tu {len(df)} row clean. "
+            f"Ly do loai: {reasons}. Sua data contract truoc, dung ha tieu chuan test set."
+        )
+
+    test_set = [sample for row in selected for sample in draft_questions(row)]
+
+    errors = validate_test_set(test_set, df)
+    if errors:
+        raise ValueError("Test set khong hop le:\n- " + "\n- ".join(errors))
+
+    write_json(Path(output_path), test_set)
+    return test_set

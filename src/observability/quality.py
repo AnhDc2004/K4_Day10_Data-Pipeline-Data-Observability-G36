@@ -6,7 +6,7 @@ from typing import Any
 import pandas as pd
 
 from core.config import Settings
-from core.utils import now_utc, safe_slug, write_json
+from core.utils import now_utc, read_json, safe_slug, write_json
 
 MIN_ROW_COUNT = 10
 MIN_SUMMARY_CHARS = 100
@@ -208,6 +208,58 @@ def run_data_quality_checks(df: pd.DataFrame, settings: Settings, report_name: s
     write_json(output_path, payload)
     payload["report_path"] = str(output_path)
     return payload
+
+
+def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFrame | None = None) -> dict[str, Any]:
+    """Audit embedding manifest: collection name, so document, va khop voi cleaned data.
+
+    Dung de xac minh index that su duoc build tu dung dataset, thay vi tin vao ten collection.
+    """
+    manifest_path = Path(manifest_path)
+    if not manifest_path.exists():
+        return {
+            "manifest_path": str(manifest_path),
+            "exists": False,
+            "success": False,
+            "details": "Chua co embedding manifest -- index chua duoc build.",
+        }
+
+    payload = read_json(manifest_path)
+    documents = payload.get("documents", [])
+    manifest_ids = {str(document.get("paper_id")) for document in documents}
+
+    result: dict[str, Any] = {
+        "manifest_path": str(manifest_path),
+        "exists": True,
+        "backend": payload.get("backend"),
+        "embedding_model": payload.get("embedding_model"),
+        "collection_name": payload.get("collection_name"),
+        "persist_path": payload.get("persist_path"),
+        "document_count": len(documents),
+        "unique_paper_ids": len(manifest_ids),
+    }
+
+    problems: list[str] = []
+    if payload.get("embedding_model") != settings.embedding_model:
+        problems.append(f"embedding_model lech: manifest={payload.get('embedding_model')} vs settings={settings.embedding_model}")
+    if len(documents) != len(manifest_ids):
+        problems.append(f"{len(documents)} document nhung chi {len(manifest_ids)} paper_id -> co document trung.")
+
+    if df is not None and "paper_id" in df.columns:
+        clean_ids = set(df["paper_id"].astype(str))
+        missing = sorted(clean_ids - manifest_ids)
+        extra = sorted(manifest_ids - clean_ids)
+        result["clean_rows"] = len(clean_ids)
+        result["missing_from_index"] = missing[:5]
+        result["extra_in_index"] = extra[:5]
+        if missing:
+            problems.append(f"{len(missing)} paper_id co trong clean nhung khong co trong index.")
+        if extra:
+            problems.append(f"{len(extra)} paper_id co trong index nhung khong co trong clean.")
+
+    result["success"] = not problems
+    result["details"] = " ".join(problems)
+    return result
 
 
 def build_freshness_report(df: pd.DataFrame, settings: Settings, report_path: Path) -> dict[str, Any]:
