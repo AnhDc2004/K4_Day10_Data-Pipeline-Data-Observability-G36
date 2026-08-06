@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import date, datetime
+import json
 from pathlib import Path
 from typing import Any
 
@@ -41,7 +43,21 @@ class LocalEmbeddingIndex:
         self.documents_by_title = {document["title"].lower(): document for document in documents}
 
     @staticmethod
-    def _build_documents(df: pd.DataFrame) -> list[dict[str, Any]]:
+    def _metadata_value(value: Any) -> Any:
+        """Convert pandas missing scalars to JSON/Chroma-safe values."""
+        if value is None:
+            return ""
+        missing = pd.isna(value)
+        if not hasattr(missing, "__len__") and bool(missing):
+            return ""
+        if isinstance(value, (pd.Timestamp, datetime, date)):
+            return value.isoformat()
+        if hasattr(value, "item"):
+            return value.item()
+        return value
+
+    @classmethod
+    def _build_documents(cls, df: pd.DataFrame) -> list[dict[str, Any]]:
         records = df.to_dict(orient="records")
         documents: list[dict[str, Any]] = []
         for index, row in enumerate(records):
@@ -52,14 +68,17 @@ class LocalEmbeddingIndex:
                     "title": row["title"],
                     "content": row["text_for_embedding"],
                     "metadata": {
-                        "paper_id": row["paper_id"],
-                        "title": row["title"],
-                        "published": row["published"],
-                        "authors_joined": row["authors_joined"],
-                        "categories_joined": row["categories_joined"],
-                        "summary": row["summary"],
-                        "abs_url": row["abs_url"],
-                        "pdf_url": row["pdf_url"],
+                        column: cls._metadata_value(row[column])
+                        for column in (
+                            "paper_id",
+                            "title",
+                            "published",
+                            "authors_joined",
+                            "categories_joined",
+                            "summary",
+                            "abs_url",
+                            "pdf_url",
+                        )
                     },
                 }
             )
@@ -111,17 +130,17 @@ class LocalEmbeddingIndex:
         )
 
         manifest_path = embeddings_output_path or settings.paths.embeddings_json
-        write_json(
-            manifest_path,
-            {
-                "backend": "chroma",
-                "embedding_model": settings.embedding_model,
-                # Keep manifests portable; the local settings own the resolved path.
-                "persist_path": str(persist_path.relative_to(settings.paths.project_dir)),
-                "collection_name": collection_name,
-                "documents": documents,
-            },
-        )
+        manifest = {
+            "backend": "chroma",
+            "embedding_model": settings.embedding_model,
+            # Keep manifests portable; the local settings own the resolved path.
+            "persist_path": str(persist_path.relative_to(settings.paths.project_dir)),
+            "collection_name": collection_name,
+            "documents": documents,
+        }
+        # Fail before writing if a future metadata field reintroduces NaN.
+        json.dumps(manifest, allow_nan=False)
+        write_json(manifest_path, manifest)
         return cls(
             settings=settings,
             collection_name=collection_name,

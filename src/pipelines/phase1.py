@@ -1,220 +1,198 @@
 from __future__ import annotations
 
-import json
-import logging
 from datetime import datetime
-from pathlib import Path
-from typing import Any
+import logging
 
-import pandas as pd
+from core import load_settings, read_json
+from ingestion import build_clean_dataframe, write_clean_artifacts,fetch_source_records, load_raw_records
+from observability import build_freshness_report, run_data_quality_checks, generate_phase1_report
+from retrieval import validate_clean_dataframe, LocalEmbeddingIndex
+from evaluation import evaluate_pipeline, build_test_set, verify_test_set_against_index
 
-# 1. Imports từ các codebase hiện có
-from core.config import Settings
-from ingestion.cleaning import build_clean_dataframe
-from ingestion.crossref import PaperRecord, fetch_source_records, load_raw_records
-from evaluation.testset import build_test_set
-from observability.quality import run_data_quality_checks, build_freshness_report
-from report import generate_phase1_report
-
-# Cấu hình logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+)
 logger = logging.getLogger(__name__)
 
 
-def evaluate_mock_retrieval(df: pd.DataFrame, test_set: list[dict[str, Any]]) -> dict[str, Any]:
-    """Mock evaluation function cho phase 1 baseline khi chưa tích hợp Chroma Vector DB."""
-    if df.empty or not test_set:
-        return {"hit_rate@3": 0.0, "mrr@3": 0.0, "total_eval_queries": 0}
-
-    total_queries = len(test_set)
-    hits = 0
-
-    for test_case in test_set:
-        target_ids = test_case.get("ground_truth_doc_ids", [])
-        # Mock retrieval: Giả lập lấy Top 3 bài báo có sẵn trong dataframe
-        retrieved_ids = df["paper_id"].head(3).tolist()
-        
-        # Kiểm tra Hit Rate
-        if any(doc_id in retrieved_ids for doc_id in target_ids):
-            hits += 1
-
-    hit_rate = hits / total_queries if total_queries > 0 else 0.0
-    return {
-        "hit_rate@3": round(hit_rate, 4),
-        "mrr@3": round(hit_rate, 4),  # Mock đơn giản hóa
-        "total_eval_queries": total_queries
-    }
-
-
 def main() -> None:
-    """Xây dựng baseline pipeline Phase 1 End-to-End."""
+    """Xây dựng và thực thi Phase 1 Baseline Pipeline End-to-End:
+
+    1. Load configuration settings & khởi tạo thư mục dự án.
+    2. Load hoặc fetch raw Crossref records.
+    3. Clean data & ghi nhận file artifacts (CSV, JSON, Audit Report).
+    4. Validate clean dataframe schema cho Retrieval Contract.
+    5. Khởi tạo & xây dựng Local Embedding Index (Chroma Vector Store).
+    6. Chạy bộ Data Quality Checks & Freshness Report.
+    7. Tạo mới hoặc nạp Evaluation Test Set & xác minh với Vector Index.
+    8. Thực thi đánh giá tự động (Retrieval Hit Rate, Token F1, LLM Judge Score).
+    9. Tổng hợp dữ liệu thực tế và xuất báo cáo Markdown Phase 1.
+    """
     logger.info("==================================================")
-    logger.info("  BẮT ĐẦU CHẠY BASELINE PIPELINE (PHASE 1)        ")
+    logger.info("  BẮT ĐẦU CHẠY BASELINE PIPELINE FULL (PHASE 1)   ")
     logger.info("==================================================")
 
-    # STEP 1: Load Settings (Fallback sang MockSettings nếu thiếu biến môi trường)
-    logger.info("[Step 1/8] Loading settings...")
-    try:
-        settings = Settings()
-    except Exception as e:
-        logger.warning(f"Không thể khởi tạo Settings mặc định ({e}). Chuyển sang MockSettings...")
-        
-        class MockPaths:
-            raw_api_response = Path("data/raw/crossref_raw_response.json")
-            raw_records_json = Path("data/raw/crossref_records.json")
-            cleaned_parquet = Path("data/processed/clean_papers.parquet")
-            cleaned_csv = Path("data/processed/clean_papers.csv")
-            test_set_json = Path("data/eval/test_set.json")
-            quality_report_json = Path("data/quality/quality_report.json")
-            freshness_report_json = Path("data/quality/freshness_report.json")
-            phase1_report_md = Path("reports/phase1_baseline_report.md")
+    # -------------------------------------------------------------------------
+    # STEP 1: LOAD SETTINGS & SETUP DIRECTORIES
+    # -------------------------------------------------------------------------
+    logger.info("[Step 1/8] Loading settings & initializing directories...")
+    settings = load_settings()
 
-        class MockSettings:
-            source_query = "machine learning"
-            source_filter = ""
-            max_results = 10
-            freshness_threshold_days = 365
-            paths = MockPaths()
+    # Đảm bảo tất cả các thư mục lưu trữ artifact đều tồn tại
+    output_directories = (
+        settings.paths.quality_dir,
+        settings.paths.chroma_dir,
+        settings.paths.clean_csv.parent,
+        settings.paths.eval_testset.parent,
+        settings.paths.baseline_metrics.parent,
+        settings.paths.baseline_report.parent,
+    )
+    for path in output_directories:
+        path.mkdir(parents=True, exist_ok=True)
 
-        settings = MockSettings()
+    # -------------------------------------------------------------------------
+    # STEP 2: INGESTION - FETCH OR LOAD RAW RECORDS
+    # -------------------------------------------------------------------------
+    logger.info("[Step 2/8] Fetching / Loading raw Crossref records...")
+    raw_snapshot_path = settings.paths.raw_records_json
 
-    # Tạo các thư mục cần thiết
-    for path_attr in dir(settings.paths):
-        if not path_attr.startswith("_"):
-            path_val = getattr(settings.paths, path_attr)
-            if isinstance(path_val, (str, Path)):
-                Path(path_val).parent.mkdir(parents=True, exist_ok=True)
-
-    # STEP 2: Ingestion - Load hoặc Fetch Raw Records
-    logger.info("[Step 2/8] Fetching / Loading source records...")
-    raw_records_path = Path(settings.paths.raw_records_json)
-    
-    if raw_records_path.exists():
-        logger.info(f"Phát hiện file snapshot tại '{raw_records_path}'. Đang load...")
-        records = load_raw_records(raw_records_path)
+    if raw_snapshot_path.exists() and not settings.refresh_source:
+        logger.info(f"Phát hiện raw snapshot tại '{raw_snapshot_path}'. Tiến hành load...")
+        records = load_raw_records(raw_snapshot_path)
     else:
-        logger.info("Chưa có snapshot. Tiến hành gọi Crossref API...")
+        logger.info("Chưa có raw snapshot hoặc `refresh_source=True`. Đang gọi Crossref API...")
         records = fetch_source_records(settings)
 
-    logger.info(f"Tổng số raw records thu thập được: {len(records)}")
+    logger.info(f"-> Thu thập thành công {len(records)} raw records.")
 
-    # STEP 3: Clean Data & Build DataFrame
-    logger.info("[Step 3/8] Cleaning and transforming records into DataFrame...")
+    # -------------------------------------------------------------------------
+    # STEP 3: CLEAN DATA & WRITE ARTIFACTS
+    # -------------------------------------------------------------------------
+    logger.info("[Step 3/8] Cleaning raw data & writing clean artifacts...")
     run_date = datetime.now()
     df_clean = build_clean_dataframe(records, run_date=run_date)
-    logger.info(f"Số bản ghi sau khi làm sạch: {len(df_clean)} rows")
 
-    # STEP 4: Save Cleaned Data (CSV / Parquet)
-    logger.info("[Step 4/8] Saving cleaned dataset...")
-    cleaned_csv_path = getattr(settings.paths, "cleaned_csv", Path("data/processed/clean_papers.csv"))
-    cleaned_parquet_path = getattr(settings.paths, "cleaned_parquet", Path("data/processed/clean_papers.parquet"))
-    
-    df_clean.to_csv(cleaned_csv_path, index=False, encoding="utf-8")
-    df_clean.to_parquet(cleaned_parquet_path, index=False)
-    logger.info(f"Đã lưu dataset sạch vào: '{cleaned_csv_path}' và '{cleaned_parquet_path}'")
+    cleaning_report_path = settings.paths.quality_dir / "cleaning_report.json"
+    cleaning_report = write_clean_artifacts(
+        df=df_clean,
+        csv_path=settings.paths.clean_csv,
+        json_path=settings.paths.clean_json,
+        report_path=cleaning_report_path,
+    )
 
-    # STEP 5: Data Quality Checks & Freshness Report
-    logger.info("[Step 5/8] Running Data Observability checks...")
-    try:
-        quality_res = run_data_quality_checks(df_clean, settings, report_name="phase1_baseline")
-    except NotImplementedError:
-        logger.warning("Hàm `run_data_quality_checks` chưa được triển khai hoàn chỉnh. Sử dụng kết quả kiểm thử cơ bản...")
-        quality_res = {
-            "total_rows": len(df_clean),
-            "null_paper_ids": int(df_clean["paper_id"].isna().sum()) if not df_clean.empty else 0,
-            "unique_paper_ids": int(df_clean["paper_id"].nunique()) if not df_clean.empty else 0,
-            "status": "PASSED" if not df_clean.empty else "FAILED"
-        }
+    logger.info(f"-> Dataframe làm sạch: giữ lại {len(df_clean)} / {len(records)} bản ghi.")
+    logger.info(f"-> Báo cáo Audit Trail đã lưu tại: '{cleaning_report_path}'")
 
-    try:
-        freshness_path = getattr(settings.paths, "freshness_report_json", Path("data/quality/freshness_report.json"))
-        freshness_res = build_freshness_report(df_clean, settings, report_path=freshness_path)
-    except NotImplementedError:
-        logger.warning("Hàm `build_freshness_report` chưa được triển khai hoàn chỉnh. Sử dụng kết quả báo cáo cơ bản...")
-        latest_pub = str(df_clean["published"].max()) if not df_clean.empty else "N/A"
-        oldest_pub = str(df_clean["published"].min()) if not df_clean.empty else "N/A"
-        freshness_res = {
-            "latest_published": latest_pub,
-            "oldest_published": oldest_pub,
-            "stale_rows": 0,
-            "total_rows": len(df_clean),
-            "is_fresh": True
-        }
+    if df_clean.empty:
+        raise RuntimeError("[BLOCKER] Clean dataframe bị rỗng! Không thể tiếp tục pipeline.")
 
-    # STEP 6: Build Evaluation / Test Set
-    logger.info("[Step 6/8] Building evaluation test set...")
-    test_set_path = getattr(settings.paths, "test_set_json", Path("data/eval/test_set.json"))
-    try:
-        test_set = build_test_set(df_clean, output_path=test_set_path)
-    except NotImplementedError:
-        logger.warning("Hàm `build_test_set` chưa được triển khai hoàn chỉnh. Tạo mock test set để không gián đoạn pipeline...")
-        test_set = []
-        for idx, row in df_clean.head(3).iterrows():
-            test_set.append({
-                "id": f"q_{idx}",
-                "question_type": "summary",
-                "question": f"Bài báo '{row['title']}' nói về điều gì?",
-                "ground_truth": row["summary"],
-                "ground_truth_doc_ids": [row["paper_id"]]
-            })
-        test_set_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(test_set_path, "w", encoding="utf-8") as f:
-            json.dump(test_set, f, ensure_ascii=False, indent=2)
+    # Validate Handoff Contract
+    logger.info("Validating clean dataframe schema for Retrieval Contract...")
+    contract_check = validate_clean_dataframe(df_clean)
+    if contract_check["status"] == "fail":
+        raise RuntimeError(f"[BLOCKER] Clean dataframe không đạt Retrieval Contract: {contract_check}")
 
-    logger.info(f"Số câu hỏi thử nghiệm đã tạo: {len(test_set)}")
+    if contract_check.get("warnings"):
+        for warning in contract_check["warnings"]:
+            logger.warning(f"  [CONTRACT WARNING] {warning}")
 
-    # STEP 7: Run Evaluation
-    logger.info("[Step 7/8] Evaluating retrieval quality...")
-    metrics_res = evaluate_mock_retrieval(df_clean, test_set)
-    logger.info(f"Kết quả Evaluation: {metrics_res}")
+    logger.info("-> Clean Dataframe đạt yêu cầu Retrieval Contract 100%.")
 
-    # STEP 8: Generate Phase 1 Report
-    logger.info("[Step 8/8] Generating Markdown Report for Phase 1...")
-    report_path = getattr(settings.paths, "phase1_report_md", Path("reports/phase1_baseline_report.md"))
-    
+    # -------------------------------------------------------------------------
+    # STEP 4: BUILD EMBEDDING INDEX (CHROMA VECTOR STORE)
+    # -------------------------------------------------------------------------
+    logger.info("[Step 4/8] Building Local Embedding Index (Chroma Vector Store)...")
+    logger.info(f"  Model: {settings.embedding_model}")
+    logger.info(f"  Collection Name: {settings.baseline_collection_name}")
+
+    index = LocalEmbeddingIndex.build(
+        df=df_clean,
+        settings=settings,
+        embeddings_output_path=settings.paths.embeddings_json,
+    )
+    logger.info(f"-> Tạo Embedding Index thành công với {len(index.documents)} documents.")
+
+    # -------------------------------------------------------------------------
+    # STEP 5: RUN DATA QUALITY CHECKS & FRESHNESS REPORT
+    # -------------------------------------------------------------------------
+    logger.info("[Step 5/8] Running Data Quality Checks & Freshness Report...")
+    quality_payload = run_data_quality_checks(
+        df=df_clean,
+        settings=settings,
+        report_name="phase1_baseline",
+    )
+    logger.info(f"-> Quality Check: Passed {quality_payload['passed']}/{len(quality_payload['checks'])} checks.")
+
+    freshness_payload = build_freshness_report(
+        df=df_clean,
+        settings=settings,
+        report_path=settings.paths.freshness_report,
+    )
+    logger.info(f"-> Freshness Report đã lưu tại '{settings.paths.freshness_report}' (is_fresh={freshness_payload['is_fresh']})")
+
+    # -------------------------------------------------------------------------
+    # STEP 6: CREATE OR LOAD EVALUATION TEST SET
+    # -------------------------------------------------------------------------
+    logger.info("[Step 6/8] Handling Evaluation Test Set...")
+    test_set_path = settings.paths.eval_testset
+
+    if test_set_path.exists() and not settings.refresh_test_set:
+        logger.info(f"Phát hiện test set có sẵn tại: '{test_set_path}'. Đang load...")
+    else:
+        logger.info(f"Tạo mới test set từ clean dataframe và ghi ra: '{test_set_path}'...")
+        build_test_set(df_clean, output_path=test_set_path)
+
+    # Xác minh tính khớp giữa Test Set và Vector Index
+    test_set_data = read_json(test_set_path)
+    verify_res = verify_test_set_against_index(test_set_data, index)
+    if not verify_res["success"]:
+        logger.warning(f"Cảnh báo lệch match giữa Test Set và Index: {verify_res}")
+    else:
+        logger.info(f"-> Verify Test Set vs Index thành công! Tổng số câu hỏi: {verify_res['samples']}")
+
+    # -------------------------------------------------------------------------
+    # STEP 7: EVALUATE PIPELINE
+    # -------------------------------------------------------------------------
+    logger.info("[Step 7/8] Running Pipeline Evaluation Pass...")
+    eval_bundle = evaluate_pipeline(
+        settings=settings,
+        index=index,
+        test_set_path=test_set_path,
+        metrics_output_path=settings.paths.baseline_metrics,
+        answers_output_path=settings.paths.baseline_answers,
+    )
+
+    metrics_summary = eval_bundle.summary
+    logger.info("-> Kết quả Evaluation Metrics:")
+    logger.info(f"   - Retrieval Hit Rate: {metrics_summary.get('retrieval_hit_rate', 0.0):.4f}")
+    logger.info(f"   - Mean Token F1:     {metrics_summary.get('mean_token_f1', 0.0):.4f}")
+    logger.info(f"   - Judge Accuracy:    {metrics_summary.get('judge_accuracy', 0.0):.4f}")
+
+    # -------------------------------------------------------------------------
+    # STEP 8: GENERATE MARKDOWN BASELINE REPORT
+    # -------------------------------------------------------------------------
+    logger.info("[Step 8/8] Generating Markdown Report...")
     source_summary = {
-        "source": "Crossref API",
-        "query": getattr(settings, "source_query", "machine learning"),
-        "total_fetched": len(records),
-        "total_cleaned": len(df_clean)
+        "source": settings.source_api,
+        "query": settings.source_query,
+        "raw_records": len(records),
+        "clean_records": len(df_clean),
+        "freshness_threshold_days": settings.freshness_threshold_days,
     }
 
-    try:
-        generate_phase1_report(
-            report_path=report_path,
-            source_summary=source_summary,
-            metrics=metrics_res,
-            quality=quality_res,
-            freshness=freshness_res
-        )
-        logger.info(f"Đã xuất báo cáo thành công tại: '{report_path}'")
-    except NotImplementedError:
-        logger.warning("Hàm `generate_phase1_report` chưa hoàn thiện. Tạo báo cáo Markdown mặc định...")
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_content = f"""# Baseline Phase 1 Execution Report
-- **Execution Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-- **Source Query:** {source_summary['query']}
-
-## 1. Source Summary
-- Raw Records Fetched: {source_summary['total_fetched']}
-- Cleaned Records: {source_summary['total_cleaned']}
-
-## 2. Retrieval Evaluation
-- Hit Rate@3: {metrics_res.get('hit_rate@3')}
-- Total Test Queries: {metrics_res.get('total_eval_queries')}
-
-## 3. Data Observability & Quality
-- Total Rows: {quality_res.get('total_rows')}
-- Latest Publication Date: {freshness_res.get('latest_published')}
-"""
-        with open(report_path, "w", encoding="utf-8") as f:
-            f.write(report_content)
-        logger.info(f"Đã tạo báo cáo Markdown cơ bản tại: '{report_path}'")
+    generate_phase1_report(
+        report_path=settings.paths.baseline_report,
+        source_summary=source_summary,
+        metrics=metrics_summary,
+        quality=quality_payload,
+        freshness=freshness_payload,
+    )
+    logger.info(f"-> Báo cáo Markdown Baseline hoàn tất tại: '{settings.paths.baseline_report}'")
 
     logger.info("==================================================")
-    logger.info("  PIPELINE PHASE 1 HOÀN THÀNH THÀNH CÔNG!          ")
+    logger.info(" PIPELINE PHASE 1 ĐÃ CHẠY HOÀN THÀNH THÀNH CÔNG! ")
     logger.info("==================================================")
-
 
 if __name__ == "__main__":
     main()
