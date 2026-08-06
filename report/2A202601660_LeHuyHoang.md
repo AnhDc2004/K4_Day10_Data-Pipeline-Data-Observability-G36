@@ -134,8 +134,8 @@ Phần chưa xử lý triệt để:
 | --- | ---: | ---: | ---: | --- |
 | `retrieval_hit_rate` | 1.000 | 0.667 | 1.000 | Giảm đúng bằng 8/24 câu mất gold document do 2 record bị drop |
 | `mean_token_f1` | 1.000 | 0.671 | 1.000 | Bị `categories` kéo lên giả tạo, xem phân tích dưới |
-| `judge_accuracy` | 1.000 | 0.667 | 1.000 | LLM judge thật, fallback 0/24 ở cả ba trạng thái |
-| `mean_judge_score` | 5 | 3.750 | 5 | Judge chấm thấp ngay cả khi answer có vẻ trôi chảy |
+| `judge_accuracy` | 1.000 | 0.625 | 1.000 | LLM judge thật, fallback 0/24 ở cả ba trạng thái |
+| `mean_judge_score` | 5 | 3.708 | 5 | Judge chấm thấp ngay cả khi answer có vẻ trôi chảy |
 | Quality checks | 11/11 | 6/11 | 11/11 | Fail: `paper_id_unique`, `duplicate_records`, `summary_not_null`, `summary_min_chars`, `freshness_age_days` |
 | Freshness status | true | false | true | `stale_rows` 0 → 3, `max_age_days` 174 → 2067 |
 | Probe `top1` / `MRR` | 0.789 / 0.825 | 0.632 / 0.686 | 0.789 / 0.825 | Thước đo retrieval thuần, không bị exact lookup che |

@@ -43,8 +43,8 @@ Chạy: `uv run python script/run_corruption_flow.py`
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `retrieval_hit_rate` | 1.000 | 0.667 | 1.000 | **−0.333** | 0 |
 | `mean_token_f1` | 1.000 | 0.671 | 1.000 | **−0.329** | 0 |
-| `judge_accuracy` | 1.000 | 0.667 | 1.000 | **−0.333** | 0 |
-| `mean_judge_score` | 5 | 3.75 | 5 | **−1.25** | 0 |
+| `judge_accuracy` | 1.000 | 0.625 | 1.000 | **−0.375** | 0 |
+| `mean_judge_score` | 5 | 3.708 | 5 | **−1.292** | 0 |
 
 **Judge integrity: fallback 0/24 ở cả ba trạng thái** → `judge_accuracy` là LLM judge thật, so sánh được. (Xem §6 về lần chạy trước bị 403.)
 

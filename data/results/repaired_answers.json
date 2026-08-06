@@ -25,7 +25,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key points about the challenges faced by flat retrieval paradigms in the context of LLM agents."
+      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key points of the paper's abstract."
     }
   },
   {
@@ -112,7 +112,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "Both the model answer and the reference answer provide the same response, 'Uncategorized', which is materially correct."
+      "reasoning": "Both the model answer and the reference answer provide the same response, 'Uncategorized', indicating that they are in agreement and the answer is accurate."
     }
   },
   {
@@ -228,7 +228,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "Both the model answer and the reference answer provide the same response, 'Uncategorized', indicating that they are in agreement and the answer is materially correct."
+      "reasoning": "Both the model answer and the reference answer provide the same response, 'Uncategorized', indicating that they are materially correct and consistent with each other."
     }
   },
   {
@@ -344,7 +344,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "Both the model answer and the reference answer provide the same response, which is 'Uncategorized'. Therefore, the model answer is materially correct."
+      "reasoning": "Both the model answer and the reference answer provide the same response, 'Uncategorized', which is accurate and consistent."
     }
   },
   {
@@ -373,7 +373,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key points of the paper regarding the use of time-series foundation models and retrieval-based augmentation in financial forecasting."
+      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key points of the paper regarding time-series models and retrieval-based augmentation in financial forecasting."
     }
   },
   {
@@ -605,7 +605,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer is identical to the reference answer, accurately capturing the essence of the paper's focus on the pressures faced by professionals in design review."
+      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key point about the pressures faced by designers, engineers, and building officials in the context of design review."
     }
   },
   {

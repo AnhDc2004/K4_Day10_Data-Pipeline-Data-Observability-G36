@@ -1,6 +1,6 @@
 # Corruption Impact Report
 
-Generated at: 2026-08-06T16:23:49.877264+00:00
+Generated at: 2026-08-06T16:44:41.671296+00:00
 
 ## 1. Metric ba trang thai
 
@@ -8,8 +8,8 @@ Generated at: 2026-08-06T16:23:49.877264+00:00
 | --- | ---: | ---: | ---: | ---: | ---: |
 | `retrieval_hit_rate` | 1.000 | 0.667 | 1.000 | -0.333 | 0 |
 | `mean_token_f1` | 1.000 | 0.671 | 1.000 | -0.329 | 0 |
-| `judge_accuracy` | 1.000 | 0.667 | 1.000 | -0.333 | 0 |
-| `mean_judge_score` | 5 | 3.750 | 5 | -1.250 | 0 |
+| `judge_accuracy` | 1.000 | 0.625 | 1.000 | -0.375 | 0 |
+| `mean_judge_score` | 5 | 3.708 | 5 | -1.292 | 0 |
 
 So sample: baseline 24 / corrupted 24 / repaired 24 (phai bang nhau -- cung mot test set da khoa).
 

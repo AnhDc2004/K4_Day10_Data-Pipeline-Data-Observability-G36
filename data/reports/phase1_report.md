@@ -1,24 +1,16 @@
 # Phase 1 - Baseline Report
 
-Generated at: 2026-08-06T16:21:10.334383+00:00
+Generated at: 2026-08-06T16:42:05.779815+00:00
 
 ## 1. Source & scope
 
 | Field | Value |
 | --- | --- |
-| `source_api` | Crossref REST API |
-| `source_query` | agentic retrieval augmented generation large language model |
-| `source_filter` | from-pub-date:2026-02-07,has-abstract:true |
-| `max_results` | 24 |
+| `source` | Crossref REST API |
+| `query` | agentic retrieval augmented generation large language model |
 | `raw_records` | 24 |
-| `clean_rows` | 24 |
-| `index_collection` | papers-baseline |
-| `index_documents` | 24 |
-| `embedding_model` | sentence-transformers/all-MiniLM-L6-v2 |
-| `llm_provider` | openrouter |
-| `llm_model` | openai/gpt-4o-mini |
-| `top_k` | 4 |
-| `test_set_samples` | 24 |
+| `clean_records` | 24 |
+| `freshness_threshold_days` | 180 |
 
 ## 2. Evaluation metrics
 
@@ -36,7 +28,7 @@ Generated at: 2026-08-06T16:21:10.334383+00:00
 
 - Ket qua tong: **PASS** (11/11 check pass)
 - Total rows: 24
-- Report: `data\quality\baseline_quality.json`
+- Report: `data\quality\phase1-baseline_quality.json`
 
 | Check | Ket qua | Observed | Expected | Chi tiet |
 | --- | --- | --- | --- | --- |
@@ -66,7 +58,7 @@ Generated at: 2026-08-06T16:21:10.334383+00:00
 | `min_age_days` | 5 |
 | `mean_age_days` | 76.400 |
 | `missing_published` | 0 |
-| `generated_at` | 2026-08-06T16:21:09.798379+00:00 |
+| `generated_at` | 2026-08-06T16:41:09.046988+00:00 |
 | `report_path` | data\quality\freshness_report.json |
 
 ## 5. Evidence & limitations

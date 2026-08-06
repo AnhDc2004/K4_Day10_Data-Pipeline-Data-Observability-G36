@@ -3,6 +3,8 @@ from __future__ import annotations
 from datetime import datetime
 import logging
 
+import pandas as pd
+
 from core import load_settings, read_json
 from ingestion import build_clean_dataframe, write_clean_artifacts,fetch_source_records, load_raw_records
 from observability import build_freshness_report, run_data_quality_checks, generate_phase1_report
@@ -83,6 +85,12 @@ def main() -> None:
 
     logger.info(f"-> Dataframe làm sạch: giữ lại {len(df_clean)} / {len(records)} bản ghi.")
     logger.info(f"-> Báo cáo Audit Trail đã lưu tại: '{cleaning_report_path}'")
+
+    # Đọc lại từ CSV đã ghi, vì test set cũng được build từ chính file CSV này.
+    # Nếu build index thẳng từ dataframe in-memory, `published` còn là Timestamp và render
+    # thành "...T00:00:00+00:00" thay vì "... 00:00:00+00:00" như trong ground truth
+    # -> 6 câu hỏi loại `date` có token_f1 = 0 vì định dạng, không phải vì chất lượng dữ liệu.
+    df_clean = pd.read_csv(settings.paths.clean_csv)
 
     if df_clean.empty:
         raise RuntimeError("[BLOCKER] Clean dataframe bị rỗng! Không thể tiếp tục pipeline.")
