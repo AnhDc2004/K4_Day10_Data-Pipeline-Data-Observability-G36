@@ -6,13 +6,13 @@
 
 | Thông tin         | Nội dung                  |
 | ------------------ | -------------------------- |
-| Họ và tên       | [Họ và tên]             |
-| MSSV               | [MSSV]                     |
-| Khóa/Lớp         | [K3 hoặc K4]              |
-| Tên nhóm         | [Tên hoặc mã nhóm]     |
-| Vai trò chính    | [Vai trò]                 |
-| Repository         | [Đường dẫn repository] |
-| Ngày hoàn thành | [YYYY-MM-DD]               |
+| Họ và tên       | Phan Văn Phương             |
+| MSSV               | 2A202602033                     |
+| Khóa/Lớp         | K4              |
+| Tên nhóm         | G36     |
+| Vai trò chính    | Role 4                 |
+| Repository         | https://github.com/AnhDc2004/K4_Day10_Data-Pipeline-Data-Observability-G36 |
+| Ngày hoàn thành | 2026/08/06               |
 
 ## 2. Vai trò và phạm vi công việc
 
