@@ -241,15 +241,25 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
 
     problems: list[str] = []
 
-    # Manifest ghi persist_path tuyet doi cua may build. Neu commit len Git roi may khac load,
-    # `LocalEmbeddingIndex.load` se tro vao path khong ton tai -> khong tai lap duoc.
-    manifest_persist = Path(str(payload.get("persist_path", "")))
-    expected_persist = settings.paths.chroma_dir
-    result["persist_path_portable"] = manifest_persist == expected_persist
-    if manifest_persist != expected_persist:
+    # A manifest may only carry a project-relative path. Resolution belongs to
+    # the current checkout's settings, so an old absolute path is rejected.
+    manifest_persist_value = str(payload.get("persist_path", ""))
+    manifest_persist = Path(manifest_persist_value)
+    expected_persist = settings.paths.chroma_dir.resolve()
+    resolved_manifest_persist = (
+        (settings.paths.project_dir / manifest_persist).resolve()
+        if not manifest_persist.is_absolute()
+        else manifest_persist.resolve()
+    )
+    result["persist_path_portable"] = (
+        bool(manifest_persist_value)
+        and not manifest_persist.is_absolute()
+        and resolved_manifest_persist == expected_persist
+    )
+    if not result["persist_path_portable"]:
         problems.append(
-            f"persist_path trong manifest (`{manifest_persist}`) khac chroma_dir cua may nay "
-            f"(`{expected_persist}`) -> index khong load duoc o day."
+            f"persist_path trong manifest (`{manifest_persist_value}`) phai la path tuong doi "
+            f"tro toi chroma_dir cua project (`{expected_persist}`)."
         )
 
     if payload.get("embedding_model") != settings.embedding_model:

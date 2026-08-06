@@ -228,5 +228,5 @@ Cần: vai trò 4 rebuild index từ `papers_clean.csv` hiện tại (kèm sửa
 - [x] Verify doc ID trong index: 6/6 paper_id và 6/6 title lookup được, `success: true`.
 - [x] Unit test của nhóm: 8/8 PASS (`python -m unittest discover -s tests`).
 - [x] Test set build lại từ clean mới sau khi cleaning strip markup — 24 sample, 0 paper bị loại.
-- [ ] **Chờ vai trò 4 sửa B6** (`persist_path` trong manifest trỏ máy khác) — nếu không, `phase1.py` ở CP3 sẽ chết khi `LocalEmbeddingIndex.load()`.
-- [ ] **Chờ vai trò 4 sửa B7** (rebuild index từ clean hiện tại) — `verify_test_set_against_index` đang `success: false` vì index còn giữ title bản `<scp>`.
+- [x] **B6 đã xử lý bởi vai trò 4**: manifest ghi `data\\chroma` dạng tương đối; `LocalEmbeddingIndex.load()` dùng `settings.paths.chroma_dir` của checkout hiện tại.
+- [x] **B7 đã xử lý bởi vai trò 4**: index được rebuild từ clean snapshot hiện tại; manifest không còn title markup `<scp>` và verify trả `success: true`.
