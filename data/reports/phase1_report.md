@@ -1,6 +1,6 @@
 # Phase 1 - Baseline Report
 
-Generated at: 2026-08-06T10:06:27.689624+00:00
+Generated at: 2026-08-06T10:41:34.496190+00:00
 
 ## 1. Source & scope
 
@@ -58,7 +58,7 @@ Generated at: 2026-08-06T10:06:27.689624+00:00
 | `min_age_days` | 5 |
 | `mean_age_days` | 76.400 |
 | `missing_published` | 0 |
-| `generated_at` | 2026-08-06T10:03:53.558512+00:00 |
+| `generated_at` | 2026-08-06T10:37:56.382866+00:00 |
 | `report_path` | E:\Lab1\K4_Day10_Data-Pipeline-Data-Observability-G36\data\quality\freshness_report.json |
 
 ## 5. Evidence & limitations
