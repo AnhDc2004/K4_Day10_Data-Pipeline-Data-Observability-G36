@@ -1,0 +1,673 @@
+{
+  "status": "ok",
+  "message-type": "work-list",
+  "message-version": "1.0.0",
+  "message": {
+    "facets": {},
+    "total-results": 2958211,
+    "items": [
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              4,
+              30
+            ]
+          ],
+          "date-time": "2026-04-30T05:48:45Z",
+          "timestamp": 1777528125213,
+          "version": "3.51.4"
+        },
+        "reference-count": 0,
+        "publisher": "Oxford University Press",
+        "isbn-type": [
+          {
+            "value": "9780198828044",
+            "type": "print"
+          },
+          {
+            "value": "9780191883873",
+            "type": "electronic"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              28
+            ]
+          ]
+        },
+        "abstract": "<p>This chapter’s goal is to show how to apply machine learning algorithms in a general setting using some classic methods. In particular, it demonstrates how to apply three important machine learning algorithms, a support vector classifier (SVC), a random forest classifier (RFC), and a multilayer perceptron (MLP). While many of the methods studied later go beyond these now classic methods, this does not mean that these methods are obsolete. Also, the algorithms discussed here provide some form of baseline to discuss advanced methods like probabilistic reasoning and deep learning. The aim here is to demonstrate that applying machine learning methods based on machine learning libraries is not very difficult. It offers an opportunity to discuss evaluation techniques that are very important in practice.</p>",
+        "DOI": "10.1093/oso/9780198828044.003.0003",
+        "type": "book-chapter",
+        "created": {
+          "date-parts": [
+            [
+              2020,
+              1,
+              23
+            ]
+          ],
+          "date-time": "2020-01-23T10:54:18Z",
+          "timestamp": 1579776858000
+        },
+        "page": "38-65",
+        "source": "Crossref",
+        "is-referenced-by-count": 19,
+        "title": [
+          "Machine learning with sklearn"
+        ],
+        "prefix": "10.1093",
+        "author": [
+          {
+            "given": "Thomas P.",
+            "family": "Trappenberg",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "member": "286",
+        "published-online": {
+          "date-parts": [
+            [
+              2020,
+              1,
+              23
+            ]
+          ]
+        },
+        "container-title": [
+          "Fundamentals of Machine Learning"
+        ],
+        "original-title": [
+          "Machine learning with sklearn"
+        ],
+        "language": "en",
+        "deposited": {
+          "date-parts": [
+            [
+              2022,
+              8,
+              2
+            ]
+          ],
+          "date-time": "2022-08-02T20:21:55Z",
+          "timestamp": 1659471715000
+        },
+        "score": 16.838562,
+        "resource": {
+          "primary": {
+            "URL": "https://academic.oup.com/book/36775/chapter/321905277"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              28
+            ]
+          ]
+        },
+        "ISBN": [
+          "9780198828044",
+          "9780191883873"
+        ],
+        "references-count": 0,
+        "URL": "https://doi.org/10.1093/oso/9780198828044.003.0003",
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              28
+            ]
+          ]
+        }
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              8,
+              4
+            ]
+          ],
+          "date-time": "2026-08-04T16:51:44Z",
+          "timestamp": 1785862304834,
+          "version": "3.56.0"
+        },
+        "edition-number": "1",
+        "reference-count": 0,
+        "publisher": "Wiley",
+        "isbn-type": [
+          {
+            "value": "9781789450712",
+            "type": "print"
+          },
+          {
+            "value": "9781119902881",
+            "type": "electronic"
+          }
+        ],
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2022,
+                  2,
+                  25
+                ]
+              ],
+              "date-time": "2022-02-25T00:00:00Z",
+              "timestamp": 1645747200000
+            },
+            "content-version": "tdm",
+            "delay-in-days": 0,
+            "URL": "http://doi.wiley.com/10.1002/tdm_license_1.1"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2022,
+              3,
+              21
+            ]
+          ]
+        },
+        "DOI": "10.1002/9781119902881",
+        "type": "monograph",
+        "created": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              25
+            ]
+          ],
+          "date-time": "2022-02-25T17:49:03Z",
+          "timestamp": 1645811343000
+        },
+        "source": "Crossref",
+        "is-referenced-by-count": 1,
+        "title": [
+          "Optimization and Machine Learning"
+        ],
+        "prefix": "10.1002",
+        "member": "311",
+        "published-online": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              25
+            ]
+          ]
+        },
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119902881",
+            "content-type": "application/pdf",
+            "content-version": "vor",
+            "intended-application": "text-mining"
+          },
+          {
+            "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119902881",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2026,
+              8,
+              4
+            ]
+          ],
+          "date-time": "2026-08-04T15:51:17Z",
+          "timestamp": 1785858677000
+        },
+        "score": 16.484049,
+        "resource": {
+          "primary": {
+            "URL": "https://onlinelibrary.wiley.com/doi/book/10.1002/9781119902881"
+          }
+        },
+        "subtitle": [
+          "Optimization for Machine Learning and Machine Learning for Optimization"
+        ],
+        "issued": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              25
+            ]
+          ]
+        },
+        "ISBN": [
+          "9781789450712",
+          "9781119902881"
+        ],
+        "references-count": 0,
+        "alternative-id": [
+          "10.1002/9781119902881"
+        ],
+        "URL": "https://doi.org/10.1002/9781119902881",
+        "published": {
+          "date-parts": [
+            [
+              2022,
+              2,
+              25
+            ]
+          ]
+        }
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2024,
+              2,
+              13
+            ]
+          ],
+          "date-time": "2024-02-13T18:09:49Z",
+          "timestamp": 1707847789738
+        },
+        "edition-number": "1",
+        "reference-count": 0,
+        "publisher": "Cambridge University Press",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2012,
+                  6,
+                  5
+                ]
+              ],
+              "date-time": "2012-06-05T00:00:00Z",
+              "timestamp": 1338854400000
+            },
+            "content-version": "unspecified",
+            "delay-in-days": 0,
+            "URL": "https://www.cambridge.org/core/terms"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2012,
+              6,
+              5
+            ]
+          ]
+        },
+        "DOI": "10.1017/cbo9780511804779.017",
+        "type": "book-chapter",
+        "created": {
+          "date-parts": [
+            [
+              2012,
+              6,
+              19
+            ]
+          ],
+          "date-time": "2012-06-19T17:06:44Z",
+          "timestamp": 1340125604000
+        },
+        "page": "303-304",
+        "source": "Crossref",
+        "is-referenced-by-count": 1,
+        "title": [
+          "Machine learning"
+        ],
+        "prefix": "10.1017",
+        "member": "56",
+        "container-title": [
+          "Bayesian Reasoning and Machine Learning"
+        ],
+        "link": [
+          {
+            "URL": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/DE69032737ABE83A631835141D577DCB",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2022,
+              6,
+              13
+            ]
+          ],
+          "date-time": "2022-06-13T11:14:15Z",
+          "timestamp": 1655118855000
+        },
+        "score": 16.263548,
+        "resource": {
+          "primary": {
+            "URL": "https://www.cambridge.org/core/product/identifier/CBO9780511804779A124/type/book_part"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2012,
+              6,
+              5
+            ]
+          ]
+        },
+        "references-count": 0,
+        "URL": "https://doi.org/10.1017/cbo9780511804779.017",
+        "published": {
+          "date-parts": [
+            [
+              2012,
+              6,
+              5
+            ]
+          ]
+        }
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              5,
+              1
+            ]
+          ],
+          "date-time": "2026-05-01T03:50:48Z",
+          "timestamp": 1777607448356,
+          "version": "3.51.4"
+        },
+        "reference-count": 0,
+        "publisher": "Oxford University Press",
+        "isbn-type": [
+          {
+            "value": "9780190941659",
+            "type": "print"
+          },
+          {
+            "value": "9780197601495",
+            "type": "electronic"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2021,
+              7,
+              29
+            ]
+          ]
+        },
+        "abstract": "<p>Machine learning is involved in search, translation, detecting depression, likelihood of college dropout, finding lost children, and to sell all kinds of products. While barely beyond its inception, the current machine learning revolution will affect people and organizations no less than the Industrial Revolution’s effect on weavers and many other skilled laborers. Machine learning will automate hundreds of millions of jobs that were considered too complex for machines ever to take over even a decade ago, including driving, flying, painting, programming, and customer service, as well as many of the jobs previously reserved for humans in the fields of finance, marketing, operations, accounting, and human resources. This section explains how automated machine learning addresses exploratory data analysis, feature engineering, algorithm selection, hyperparameter tuning, and model diagnostics. The section covers the eight criteria considered essential for AutoML to have significant impact: <italic>accuracy, productivity, ease of use, understanding and learning, resource availability, process transparency, generalization</italic>, and <italic>recommended actions.</italic>\n               </p>",
+        "DOI": "10.1093/oso/9780190941659.003.0001",
+        "type": "book-chapter",
+        "created": {
+          "date-parts": [
+            [
+              2021,
+              7,
+              21
+            ]
+          ],
+          "date-time": "2021-07-21T12:49:28Z",
+          "timestamp": 1626871768000
+        },
+        "page": "1-22",
+        "source": "Crossref",
+        "is-referenced-by-count": 10,
+        "title": [
+          "Why Use Automated Machine Learning?"
+        ],
+        "prefix": "10.1093",
+        "author": [
+          {
+            "given": "Kai R.",
+            "family": "Larsen",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Daniel S.",
+            "family": "Becker",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "member": "286",
+        "published-online": {
+          "date-parts": [
+            [
+              2021,
+              7,
+              22
+            ]
+          ]
+        },
+        "container-title": [
+          "Automated Machine Learning for Business"
+        ],
+        "original-title": [
+          "Why Use Automated Machine Learning?"
+        ],
+        "language": "en",
+        "deposited": {
+          "date-parts": [
+            [
+              2022,
+              8,
+              2
+            ]
+          ],
+          "date-time": "2022-08-02T20:59:58Z",
+          "timestamp": 1659473998000
+        },
+        "score": 16.262457,
+        "resource": {
+          "primary": {
+            "URL": "https://academic.oup.com/book/40037/chapter/340418906"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2021,
+              7,
+              22
+            ]
+          ]
+        },
+        "ISBN": [
+          "9780190941659",
+          "9780197601495"
+        ],
+        "references-count": 0,
+        "URL": "https://doi.org/10.1093/oso/9780190941659.003.0001",
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              7,
+              22
+            ]
+          ]
+        }
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2024,
+              2,
+              1
+            ]
+          ],
+          "date-time": "2024-02-01T12:35:59Z",
+          "timestamp": 1706790959709
+        },
+        "edition-number": "1",
+        "reference-count": 0,
+        "publisher": "Cambridge University Press",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2012,
+                  8,
+                  5
+                ]
+              ],
+              "date-time": "2012-08-05T00:00:00Z",
+              "timestamp": 1344124800000
+            },
+            "content-version": "unspecified",
+            "delay-in-days": 416,
+            "URL": "https://www.cambridge.org/core/terms"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2011,
+              6,
+              16
+            ]
+          ]
+        },
+        "DOI": "10.1017/cbo9780511975509.007",
+        "type": "book-chapter",
+        "created": {
+          "date-parts": [
+            [
+              2012,
+              8,
+              8
+            ]
+          ],
+          "date-time": "2012-08-08T15:35:08Z",
+          "timestamp": 1344440108000
+        },
+        "page": "92-123",
+        "source": "Crossref",
+        "is-referenced-by-count": 2,
+        "title": [
+          "Machine learning"
+        ],
+        "prefix": "10.1017",
+        "member": "56",
+        "container-title": [
+          "Phase Transitions in Machine Learning"
+        ],
+        "link": [
+          {
+            "URL": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/05C394CE4126A5C0ACCF582BC37377A3",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2022,
+              6,
+              11
+            ]
+          ],
+          "date-time": "2022-06-11T06:44:00Z",
+          "timestamp": 1654929840000
+        },
+        "score": 16.260092,
+        "resource": {
+          "primary": {
+            "URL": "https://www.cambridge.org/core/product/identifier/CBO9780511975509A033/type/book_part"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2011,
+              6,
+              16
+            ]
+          ]
+        },
+        "references-count": 0,
+        "URL": "https://doi.org/10.1017/cbo9780511975509.007",
+        "published": {
+          "date-parts": [
+            [
+              2011,
+              6,
+              16
+            ]
+          ]
+        }
+      }
+    ],
+    "items-per-page": 5,
+    "query": {
+      "start-index": 0,
+      "search-terms": "machine learning"
+    }
+  }
+}
