@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from datetime import datetime
+import json
+from pathlib import Path
 from typing import Iterable
 
 import pandas as pd
 
-from core.utils import normalize_whitespace
+from core.utils import normalize_whitespace, write_csv, write_json
 from ingestion.crossref import PaperRecord
 
 
@@ -72,10 +74,16 @@ def build_clean_dataframe(records: list[PaperRecord], run_date: datetime) -> pd.
     with the most recent valid ``updated`` timestamp (input order breaks ties).
     """
     rows: list[dict[str, object]] = []
+    dropped_missing_paper_id = 0
+    dropped_missing_title = 0
     for source_order, record in enumerate(records):
         paper_id = _clean_text(record.paper_id)
         title = _clean_text(record.title)
-        if not paper_id or not title:
+        if not paper_id:
+            dropped_missing_paper_id += 1
+            continue
+        if not title:
+            dropped_missing_title += 1
             continue
 
         summary = _clean_text(record.summary)
@@ -108,21 +116,64 @@ def build_clean_dataframe(records: list[PaperRecord], run_date: datetime) -> pd.
             }
         )
 
+    report: dict[str, int] = {
+        "input_records": len(records),
+        "dropped_missing_paper_id": dropped_missing_paper_id,
+        "dropped_missing_title": dropped_missing_title,
+        "filtered_records": dropped_missing_paper_id + dropped_missing_title,
+        "duplicates_removed": 0,
+        "invalid_published_dates": 0,
+        "empty_summaries": 0,
+        "output_records": 0,
+    }
     if not rows:
-        return pd.DataFrame(columns=CLEAN_COLUMNS)
+        empty_df = pd.DataFrame(columns=CLEAN_COLUMNS)
+        empty_df.attrs["cleaning_report"] = report
+        return empty_df
 
     df = pd.DataFrame(rows)
     df["published"] = pd.to_datetime(df["published"], errors="coerce", utc=True)
     df["updated"] = pd.to_datetime(df["updated"], errors="coerce", utc=True)
+    report["invalid_published_dates"] = int(df["published"].isna().sum())
+    report["empty_summaries"] = int(df["summary"].eq("").sum())
 
     # Stable sort makes the last row the newest record and preserves input-order
     # precedence when two records have the same/missing update timestamp.
     df = df.sort_values(["paper_id", "updated", "_source_order"], na_position="first", kind="stable")
+    before_dedupe = len(df)
     df = df.drop_duplicates(subset="paper_id", keep="last")
+    report["duplicates_removed"] = before_dedupe - len(df)
 
     run_timestamp = pd.Timestamp(run_date)
     run_timestamp = run_timestamp.tz_localize("UTC") if run_timestamp.tzinfo is None else run_timestamp.tz_convert("UTC")
     age = (run_timestamp.normalize() - df["published"].dt.normalize()).dt.days
     df["age_days"] = age.clip(lower=0).astype("Int64")
 
-    return df.sort_values(["published", "paper_id"], na_position="last", ascending=[False, True], kind="stable").reset_index(drop=True)[CLEAN_COLUMNS]
+    result = df.sort_values(
+        ["published", "paper_id"], na_position="last", ascending=[False, True], kind="stable"
+    ).reset_index(drop=True)[CLEAN_COLUMNS]
+    report["output_records"] = len(result)
+    result.attrs["cleaning_report"] = report
+    return result
+
+
+def write_clean_artifacts(
+    df: pd.DataFrame,
+    csv_path: Path,
+    json_path: Path,
+    report_path: Path,
+) -> dict[str, int]:
+    """Write clean CSV/JSON plus the auditable filter/dedupe count report."""
+    missing_columns = [column for column in CLEAN_COLUMNS if column not in df.columns]
+    if missing_columns:
+        raise ValueError(f"Clean dataframe is missing columns: {missing_columns}")
+
+    report = dict(df.attrs.get("cleaning_report", {}))
+    if not report:
+        raise ValueError("Cleaning report is missing; use build_clean_dataframe before writing artifacts.")
+
+    write_csv(df, csv_path)
+    json_records = json.loads(df.to_json(orient="records", date_format="iso"))
+    write_json(json_path, json_records)
+    write_json(report_path, report)
+    return report

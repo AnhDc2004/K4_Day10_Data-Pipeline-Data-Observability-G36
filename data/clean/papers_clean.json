@@ -1,0 +1,107 @@
+[
+  {
+    "paper_id": "10.1002/9781119902881",
+    "title": "Optimization and Machine Learning",
+    "summary": "",
+    "authors": [],
+    "categories": [
+      "Uncategorized"
+    ],
+    "primary_category": "Uncategorized",
+    "published": "2022-03-21T00:00:00.000Z",
+    "updated": "2026-08-04T00:00:00.000Z",
+    "age_days": 1599,
+    "authors_joined": "",
+    "categories_joined": "Uncategorized",
+    "summary_chars": 0,
+    "text_for_embedding": "Title: Optimization and Machine Learning\nCategories: Uncategorized",
+    "abs_url": "https://doi.org/10.1002/9781119902881",
+    "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781119902881",
+    "comment": "Publisher: Wiley; Journal:"
+  },
+  {
+    "paper_id": "10.1093/oso/9780190941659.003.0001",
+    "title": "Why Use Automated Machine Learning?",
+    "summary": "Machine learning is involved in search, translation, detecting depression, likelihood of college dropout, finding lost children, and to sell all kinds of products. While barely beyond its inception, the current machine learning revolution will affect people and organizations no less than the Industrial Revolution\u2019s effect on weavers and many other skilled laborers. Machine learning will automate hundreds of millions of jobs that were considered too complex for machines ever to take over even a decade ago, including driving, flying, painting, programming, and customer service, as well as many of the jobs previously reserved for humans in the fields of finance, marketing, operations, accounting, and human resources. This section explains how automated machine learning addresses exploratory data analysis, feature engineering, algorithm selection, hyperparameter tuning, and model diagnostics. The section covers the eight criteria considered essential for AutoML to have significant impact: accuracy, productivity, ease of use, understanding and learning, resource availability, process transparency, generalization, and recommended actions.",
+    "authors": [
+      "Kai R. Larsen",
+      "Daniel S. Becker"
+    ],
+    "categories": [
+      "Uncategorized"
+    ],
+    "primary_category": "Uncategorized",
+    "published": "2021-07-29T00:00:00.000Z",
+    "updated": "2022-08-02T00:00:00.000Z",
+    "age_days": 1834,
+    "authors_joined": "Kai R. Larsen, Daniel S. Becker",
+    "categories_joined": "Uncategorized",
+    "summary_chars": 1150,
+    "text_for_embedding": "Title: Why Use Automated Machine Learning?\nSummary: Machine learning is involved in search, translation, detecting depression, likelihood of college dropout, finding lost children, and to sell all kinds of products. While barely beyond its inception, the current machine learning revolution will affect people and organizations no less than the Industrial Revolution\u2019s effect on weavers and many other skilled laborers. Machine learning will automate hundreds of millions of jobs that were considered too complex for machines ever to take over even a decade ago, including driving, flying, painting, programming, and customer service, as well as many of the jobs previously reserved for humans in the fields of finance, marketing, operations, accounting, and human resources. This section explains how automated machine learning addresses exploratory data analysis, feature engineering, algorithm selection, hyperparameter tuning, and model diagnostics. The section covers the eight criteria considered essential for AutoML to have significant impact: accuracy, productivity, ease of use, understanding and learning, resource availability, process transparency, generalization, and recommended actions.\nAuthors: Kai R. Larsen, Daniel S. Becker\nCategories: Uncategorized",
+    "abs_url": "https://doi.org/10.1093/oso/9780190941659.003.0001",
+    "pdf_url": "",
+    "comment": "Publisher: Oxford University Press; Journal: Automated Machine Learning for Business"
+  },
+  {
+    "paper_id": "10.1093/oso/9780198828044.003.0003",
+    "title": "Machine learning with sklearn",
+    "summary": "This chapter\u2019s goal is to show how to apply machine learning algorithms in a general setting using some classic methods. In particular, it demonstrates how to apply three important machine learning algorithms, a support vector classifier (SVC), a random forest classifier (RFC), and a multilayer perceptron (MLP). While many of the methods studied later go beyond these now classic methods, this does not mean that these methods are obsolete. Also, the algorithms discussed here provide some form of baseline to discuss advanced methods like probabilistic reasoning and deep learning. The aim here is to demonstrate that applying machine learning methods based on machine learning libraries is not very difficult. It offers an opportunity to discuss evaluation techniques that are very important in practice.",
+    "authors": [
+      "Thomas P. Trappenberg"
+    ],
+    "categories": [
+      "Uncategorized"
+    ],
+    "primary_category": "Uncategorized",
+    "published": "2019-11-28T00:00:00.000Z",
+    "updated": "2022-08-02T00:00:00.000Z",
+    "age_days": 2443,
+    "authors_joined": "Thomas P. Trappenberg",
+    "categories_joined": "Uncategorized",
+    "summary_chars": 808,
+    "text_for_embedding": "Title: Machine learning with sklearn\nSummary: This chapter\u2019s goal is to show how to apply machine learning algorithms in a general setting using some classic methods. In particular, it demonstrates how to apply three important machine learning algorithms, a support vector classifier (SVC), a random forest classifier (RFC), and a multilayer perceptron (MLP). While many of the methods studied later go beyond these now classic methods, this does not mean that these methods are obsolete. Also, the algorithms discussed here provide some form of baseline to discuss advanced methods like probabilistic reasoning and deep learning. The aim here is to demonstrate that applying machine learning methods based on machine learning libraries is not very difficult. It offers an opportunity to discuss evaluation techniques that are very important in practice.\nAuthors: Thomas P. Trappenberg\nCategories: Uncategorized",
+    "abs_url": "https://doi.org/10.1093/oso/9780198828044.003.0003",
+    "pdf_url": "",
+    "comment": "Publisher: Oxford University Press; Journal: Fundamentals of Machine Learning"
+  },
+  {
+    "paper_id": "10.1017/cbo9780511804779.017",
+    "title": "Machine learning",
+    "summary": "",
+    "authors": [],
+    "categories": [
+      "Uncategorized"
+    ],
+    "primary_category": "Uncategorized",
+    "published": "2012-06-05T00:00:00.000Z",
+    "updated": "2022-06-13T00:00:00.000Z",
+    "age_days": 5175,
+    "authors_joined": "",
+    "categories_joined": "Uncategorized",
+    "summary_chars": 0,
+    "text_for_embedding": "Title: Machine learning\nCategories: Uncategorized",
+    "abs_url": "https://doi.org/10.1017/cbo9780511804779.017",
+    "pdf_url": "",
+    "comment": "Publisher: Cambridge University Press; Journal: Bayesian Reasoning and Machine Learning"
+  },
+  {
+    "paper_id": "10.1017/cbo9780511975509.007",
+    "title": "Machine learning",
+    "summary": "",
+    "authors": [],
+    "categories": [
+      "Uncategorized"
+    ],
+    "primary_category": "Uncategorized",
+    "published": "2011-06-16T00:00:00.000Z",
+    "updated": "2022-06-11T00:00:00.000Z",
+    "age_days": 5530,
+    "authors_joined": "",
+    "categories_joined": "Uncategorized",
+    "summary_chars": 0,
+    "text_for_embedding": "Title: Machine learning\nCategories: Uncategorized",
+    "abs_url": "https://doi.org/10.1017/cbo9780511975509.007",
+    "pdf_url": "",
+    "comment": "Publisher: Cambridge University Press; Journal: Phase Transitions in Machine Learning"
+  }
+]
