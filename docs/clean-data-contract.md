@@ -7,6 +7,8 @@ evaluation, observability, corruption và repair.
 
 - `paper_id`, `title`: bắt buộc; chuẩn hóa khoảng trắng; loại record nếu rỗng.
 - `summary`, URL và `comment`: null được đổi thành chuỗi rỗng.
+- Chuỗi từ Crossref được giải mã HTML entity (`&amp;` → `&`) và loại bỏ
+  JATS/HTML markup trước khi tạo các trường dẫn xuất và embedding text.
 - `authors`, `categories`: null thành list rỗng; bỏ phần tử rỗng và trùng
   không phân biệt hoa/thường; giữ thứ tự đầu tiên.
 - `primary_category`: nếu có mà chưa nằm trong `categories`, thêm vào đầu list.

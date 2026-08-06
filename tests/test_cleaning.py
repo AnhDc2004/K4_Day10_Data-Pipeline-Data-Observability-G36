@@ -89,6 +89,21 @@ class CleanDataframeTest(unittest.TestCase):
         self.assertEqual(df.attrs["cleaning_report"]["invalid_published_dates"], 0)
         self.assertFalse(df["published"].isna().any())
 
+    def test_html_entities_and_jats_markup_are_removed_before_embedding(self) -> None:
+        record = paper(
+            title="Hi-<scp>RAG</scp> &amp; Agents",
+            summary="Research on R&amp;D with <jats:p>clean evidence</jats:p>.",
+            authors=["Alice &amp; Bob"],
+        )
+
+        df = build_clean_dataframe([record], datetime(2026, 8, 10, tzinfo=UTC))
+        row = df.iloc[0]
+
+        self.assertEqual(row["title"], "Hi-RAG & Agents")
+        self.assertEqual(row["summary"], "Research on R&D with clean evidence.")
+        self.assertEqual(row["authors"], ["Alice & Bob"])
+        self.assertNotRegex(row["text_for_embedding"], r"<[^>]+>|&(?:[A-Za-z]+|#\d+);")
+
     def test_writes_clean_artifacts_and_reason_counts(self) -> None:
         from tempfile import TemporaryDirectory
 
