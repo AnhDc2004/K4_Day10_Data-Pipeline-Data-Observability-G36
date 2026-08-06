@@ -4,7 +4,7 @@
   "message-version": "1.0.0",
   "message": {
     "facets": {},
-    "total-results": 101141,
+    "total-results": 101397,
     "items": [
       {
         "indexed": {
@@ -120,7 +120,7 @@
           "date-time": "2026-06-17T08:00:36Z",
           "timestamp": 1781683236000
         },
-        "score": 39.93096,
+        "score": 39.927002,
         "resource": {
           "primary": {
             "URL": "https://ieiap.ru/journal"
@@ -277,7 +277,7 @@
           "date-time": "2026-06-12T16:31:45Z",
           "timestamp": 1781281905000
         },
-        "score": 38.194824,
+        "score": 38.159817,
         "resource": {
           "primary": {
             "URL": "https://www.techrxiv.org/doi/full/10.36227/techrxiv.177272838.89432844/v1"
@@ -442,7 +442,7 @@
           "date-time": "2026-07-17T01:44:05Z",
           "timestamp": 1784252645000
         },
-        "score": 37.59828,
+        "score": 37.60218,
         "resource": {
           "primary": {
             "URL": "https://inatgi.net/index.php/jaiaa/article/view/806"
@@ -643,7 +643,7 @@
           "date-time": "2026-04-07T00:32:52Z",
           "timestamp": 1775521972000
         },
-        "score": 37.505245,
+        "score": 37.493683,
         "resource": {
           "primary": {
             "URL": "https://www.preprints.org/manuscript/202604.0339/v1"
@@ -766,7 +766,7 @@
           "date-time": "2026-05-06T16:40:10Z",
           "timestamp": 1778085610000
         },
-        "score": 36.664433,
+        "score": 36.664734,
         "resource": {
           "primary": {
             "URL": "https://isjem.com/download/speculative-retrieval-augmented-generation-for-cost-efficient-large-language-model-inference/"
@@ -1202,7 +1202,7 @@
           "date-time": "2026-02-28T05:20:35Z",
           "timestamp": 1772256035000
         },
-        "score": 36.65352,
+        "score": 36.651253,
         "resource": {
           "primary": {
             "URL": "https://www.mdpi.com/2076-3417/16/5/2244"
@@ -1366,7 +1366,7 @@
           "date-time": "2026-02-13T02:08:03Z",
           "timestamp": 1770948483000
         },
-        "score": 36.19711,
+        "score": 36.196312,
         "resource": {
           "primary": {
             "URL": "https://www.preprints.org/manuscript/202602.0996/v1"
@@ -1389,146 +1389,6 @@
               2026,
               2,
               12
-            ]
-          ]
-        },
-        "subtype": "preprint"
-      },
-      {
-        "indexed": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              6
-            ]
-          ],
-          "date-time": "2026-07-06T04:15:50Z",
-          "timestamp": 1783311350461,
-          "version": "3.54.6"
-        },
-        "posted": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              3
-            ]
-          ]
-        },
-        "group-title": "JMIR Formative Research",
-        "reference-count": 1,
-        "publisher": "JMIR Publications Inc.",
-        "content-domain": {
-          "domain": [],
-          "crossmark-restriction": false
-        },
-        "abstract": "<sec>\n                  <title>BACKGROUND</title>\n                  <p>There is evidence of rapid adoption of large language models (LLMs) in undergraduate medical education, with medical students using it to support their learning. This raises concerns particularly around the accuracy of LLM-generated information students are learning. Retrieval-augmented generation (RAG), which grounds a LLM in curated materials, may be a strategy to improve their accuracy.</p>\n                </sec>\n                <sec>\n                  <title>OBJECTIVE</title>\n                  <p>This study investigates if grounding LLM outputs in verifiable sources using RAG impacts trust and perceived usability amongst medical students.</p>\n                </sec>\n                <sec>\n                  <title>METHODS</title>\n                  <p>In a four-month qualitative study, second-year medical students at Bristol Medical School used a RAG-enabled LLM (NotebookLM) to help them learn course content. Following this, their perspectives were explored using a focus group and survey was. Qualitative data was analysed using thematic analysis and was supplemented by Likert scale data.</p>\n                </sec>\n                <sec>\n                  <title>RESULTS</title>\n                  <p>RAG-based LLMs were perceived as more reliable than standard LLM responses mainly due to the transparency of and control over information sources. The system functioned as an accessible, on-demand learning resource, improving efficiency and supporting self-directed study. Students continued to use strategies to cross check generated information. They demonstrated some awareness of ethical concerns, mostly around the environmental impact of LLMs and data privacy.</p>\n                </sec>\n                <sec>\n                  <title>CONCLUSIONS</title>\n                  <p>These findings suggest that RAG may enhance students’ trust in LLM outputs while maintaining their benefit as a flexible ‘study partner’. It highlights RAG as a strategy that educators can use to support students who use LLMs in the context of increasing. However, the impact of RAG-based LLMs over a longer period and on learning outcomes requires further evaluation.</p>\n                </sec>",
-        "DOI": "10.2196/preprints.106157",
-        "type": "posted-content",
-        "created": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              6
-            ]
-          ],
-          "date-time": "2026-07-06T03:55:08Z",
-          "timestamp": 1783310108000
-        },
-        "source": "Crossref",
-        "is-referenced-by-count": 0,
-        "title": [
-          "Does retrieval-augmented generation impact medical students’ perceptions of large language models? (Preprint)"
-        ],
-        "prefix": "10.2196",
-        "author": [
-          {
-            "ORCID": "https://orcid.org/0009-0008-3513-3029",
-            "authenticated-orcid": false,
-            "given": "Rohin",
-            "family": "Athavale",
-            "sequence": "first",
-            "affiliation": [],
-            "role": [
-              {
-                "vocabulary": "crossref",
-                "role": "author"
-              }
-            ]
-          },
-          {
-            "ORCID": "https://orcid.org/0009-0000-8683-3107",
-            "authenticated-orcid": false,
-            "given": "Alexander",
-            "family": "Cresswell",
-            "sequence": "additional",
-            "affiliation": [],
-            "role": [
-              {
-                "vocabulary": "crossref",
-                "role": "author"
-              }
-            ]
-          },
-          {
-            "ORCID": "https://orcid.org/0009-0001-4033-6380",
-            "authenticated-orcid": false,
-            "given": "Alice",
-            "family": "Huffman",
-            "sequence": "additional",
-            "affiliation": [],
-            "role": [
-              {
-                "vocabulary": "crossref",
-                "role": "author"
-              }
-            ]
-          }
-        ],
-        "member": "1010",
-        "reference": [
-          {
-            "key": "ref1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.52783/jier.v6i1.4539"
-          }
-        ],
-        "deposited": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              6
-            ]
-          ],
-          "date-time": "2026-07-06T03:55:08Z",
-          "timestamp": 1783310108000
-        },
-        "score": 35.646385,
-        "resource": {
-          "primary": {
-            "URL": "http://preprints.jmir.org/preprint/106157"
-          }
-        },
-        "issued": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              3
-            ]
-          ]
-        },
-        "references-count": 1,
-        "URL": "https://doi.org/10.2196/preprints.106157",
-        "published": {
-          "date-parts": [
-            [
-              2026,
-              7,
-              3
             ]
           ]
         },
@@ -1978,7 +1838,7 @@
           "date-time": "2026-07-02T10:56:27Z",
           "timestamp": 1782989787000
         },
-        "score": 35.587193,
+        "score": 35.714966,
         "resource": {
           "primary": {
             "URL": "https://www.mdpi.com/2075-5309/16/13/2637"
@@ -2027,6 +1887,146 @@
             ]
           ]
         }
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              6
+            ]
+          ],
+          "date-time": "2026-07-06T04:15:50Z",
+          "timestamp": 1783311350461,
+          "version": "3.54.6"
+        },
+        "posted": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              3
+            ]
+          ]
+        },
+        "group-title": "JMIR Formative Research",
+        "reference-count": 1,
+        "publisher": "JMIR Publications Inc.",
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "abstract": "<sec>\n                  <title>BACKGROUND</title>\n                  <p>There is evidence of rapid adoption of large language models (LLMs) in undergraduate medical education, with medical students using it to support their learning. This raises concerns particularly around the accuracy of LLM-generated information students are learning. Retrieval-augmented generation (RAG), which grounds a LLM in curated materials, may be a strategy to improve their accuracy.</p>\n                </sec>\n                <sec>\n                  <title>OBJECTIVE</title>\n                  <p>This study investigates if grounding LLM outputs in verifiable sources using RAG impacts trust and perceived usability amongst medical students.</p>\n                </sec>\n                <sec>\n                  <title>METHODS</title>\n                  <p>In a four-month qualitative study, second-year medical students at Bristol Medical School used a RAG-enabled LLM (NotebookLM) to help them learn course content. Following this, their perspectives were explored using a focus group and survey was. Qualitative data was analysed using thematic analysis and was supplemented by Likert scale data.</p>\n                </sec>\n                <sec>\n                  <title>RESULTS</title>\n                  <p>RAG-based LLMs were perceived as more reliable than standard LLM responses mainly due to the transparency of and control over information sources. The system functioned as an accessible, on-demand learning resource, improving efficiency and supporting self-directed study. Students continued to use strategies to cross check generated information. They demonstrated some awareness of ethical concerns, mostly around the environmental impact of LLMs and data privacy.</p>\n                </sec>\n                <sec>\n                  <title>CONCLUSIONS</title>\n                  <p>These findings suggest that RAG may enhance students’ trust in LLM outputs while maintaining their benefit as a flexible ‘study partner’. It highlights RAG as a strategy that educators can use to support students who use LLMs in the context of increasing. However, the impact of RAG-based LLMs over a longer period and on learning outcomes requires further evaluation.</p>\n                </sec>",
+        "DOI": "10.2196/preprints.106157",
+        "type": "posted-content",
+        "created": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              6
+            ]
+          ],
+          "date-time": "2026-07-06T03:55:08Z",
+          "timestamp": 1783310108000
+        },
+        "source": "Crossref",
+        "is-referenced-by-count": 0,
+        "title": [
+          "Does retrieval-augmented generation impact medical students’ perceptions of large language models? (Preprint)"
+        ],
+        "prefix": "10.2196",
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0009-0008-3513-3029",
+            "authenticated-orcid": false,
+            "given": "Rohin",
+            "family": "Athavale",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0000-8683-3107",
+            "authenticated-orcid": false,
+            "given": "Alexander",
+            "family": "Cresswell",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0001-4033-6380",
+            "authenticated-orcid": false,
+            "given": "Alice",
+            "family": "Huffman",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "member": "1010",
+        "reference": [
+          {
+            "key": "ref1",
+            "doi-asserted-by": "publisher",
+            "DOI": "10.52783/jier.v6i1.4539"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              6
+            ]
+          ],
+          "date-time": "2026-07-06T03:55:08Z",
+          "timestamp": 1783310108000
+        },
+        "score": 35.637676,
+        "resource": {
+          "primary": {
+            "URL": "http://preprints.jmir.org/preprint/106157"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              3
+            ]
+          ]
+        },
+        "references-count": 1,
+        "URL": "https://doi.org/10.2196/preprints.106157",
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              7,
+              3
+            ]
+          ]
+        },
+        "subtype": "preprint"
       },
       {
         "institution": [
@@ -2171,7 +2171,7 @@
           "date-time": "2026-06-15T06:08:17Z",
           "timestamp": 1781503697000
         },
-        "score": 35.487247,
+        "score": 35.504642,
         "resource": {
           "primary": {
             "URL": "https://www.researchsquare.com/article/rs-10012178/v1"
@@ -2652,7 +2652,7 @@
           "date-time": "2026-08-05T14:18:01Z",
           "timestamp": 1785939481000
         },
-        "score": 34.881783,
+        "score": 34.933174,
         "resource": {
           "primary": {
             "URL": "https://onepetro.org/SJ/article/doi/10.2118/234689-PA/801839/SafeRAG-A-Large-Language-Model-Based-Multistage"
@@ -2859,7 +2859,7 @@
           "date-time": "2026-07-04T20:37:12Z",
           "timestamp": 1783197432000
         },
-        "score": 34.59767,
+        "score": 34.597916,
         "resource": {
           "primary": {
             "URL": "https://www.ejournal.ummuba.ac.id/index.php/JUPTIK/article/view/4318"
@@ -3028,7 +3028,7 @@
           "date-time": "2026-07-10T14:51:37Z",
           "timestamp": 1783695097000
         },
-        "score": 34.48095,
+        "score": 34.48329,
         "resource": {
           "primary": {
             "URL": "https://hdl.handle.net/11681/50309"
@@ -3052,158 +3052,6 @@
             [
               2026,
               7
-            ]
-          ]
-        }
-      },
-      {
-        "indexed": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              6
-            ]
-          ],
-          "date-time": "2026-03-06T17:18:47Z",
-          "timestamp": 1772817527133,
-          "version": "3.50.1"
-        },
-        "reference-count": 0,
-        "publisher": "Leadership & Innovation Lab",
-        "issue": "16",
-        "license": [
-          {
-            "start": {
-              "date-parts": [
-                [
-                  2026,
-                  3,
-                  15
-                ]
-              ],
-              "date-time": "2026-03-15T00:00:00Z",
-              "timestamp": 1773532800000
-            },
-            "content-version": "unspecified",
-            "delay-in-days": 0,
-            "URL": "http://creativecommons.org/licenses/by/4.0"
-          }
-        ],
-        "content-domain": {
-          "domain": [],
-          "crossmark-restriction": false
-        },
-        "abstract": "<jats:p>Large Language Models (LLMs) that rely solely on parametric memory learned through training have demonstrated strong performance in biomedical question-answering, but their tendency to hallucinate facts and the difficulty of adjusting and adding to the learned knowledge limit their usefulness in clinical settings. Retrieval-Augmented Generation (RAG) has emerged as a promising solution by adding a non-parametric source of memory and grounding LLM outputs to reputable external sources. This paper aims to survey the evolution of RAG methodologies and highlight the most recent developments and shifts in paradigms like Agentic RAG. We highlight current state-of-the-art biomedical RAG systems, the latest evaluation benchmarks, and empirical findings regarding best fine-tuning practices. We also examine technical including lost-in-the-middle effects and scaling behaviour. Ethical concerns surrounding privacy and bias are brought to attention alongside research gaps. Finally, we discuss future directions of RAG in the biomedical field, including integration into Clinical Decision Support systems (CDS).</jats:p>",
-        "DOI": "10.70121/001c.158711",
-        "type": "journal-article",
-        "created": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              6
-            ]
-          ],
-          "date-time": "2026-03-06T11:10:26Z",
-          "timestamp": 1772795426000
-        },
-        "source": "Crossref",
-        "is-referenced-by-count": 0,
-        "title": [
-          "The Role of Retrieval-Augmented Generation in Improving Factual Accuracy for Medical Large Language Models"
-        ],
-        "prefix": "10.70121",
-        "volume": "Spring 2026",
-        "author": [
-          {
-            "given": "Eason",
-            "family": "Ni",
-            "sequence": "first",
-            "affiliation": [],
-            "role": [
-              {
-                "role": "author",
-                "vocabulary": "crossref"
-              }
-            ]
-          }
-        ],
-        "member": "50825",
-        "published-online": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              15
-            ]
-          ]
-        },
-        "container-title": [
-          "Scholarly Review Journal"
-        ],
-        "language": "en",
-        "link": [
-          {
-            "URL": "https://www.scholarlyreview.org/article/158711-the-role-of-retrieval-augmented-generation-in-improving-factual-accuracy-for-medical-large-language-models.pdf",
-            "content-type": "unspecified",
-            "content-version": "vor",
-            "intended-application": "similarity-checking"
-          }
-        ],
-        "deposited": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              6
-            ]
-          ],
-          "date-time": "2026-03-06T11:10:27Z",
-          "timestamp": 1772795427000
-        },
-        "score": 34.281155,
-        "resource": {
-          "primary": {
-            "URL": "https://www.scholarlyreview.org/article/158711-the-role-of-retrieval-augmented-generation-in-improving-factual-accuracy-for-medical-large-language-models"
-          }
-        },
-        "issued": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              15
-            ]
-          ]
-        },
-        "references-count": 0,
-        "journal-issue": {
-          "issue": "16",
-          "published-online": {
-            "date-parts": [
-              [
-                2026
-              ]
-            ]
-          }
-        },
-        "URL": "https://doi.org/10.70121/001c.158711",
-        "ISSN": [
-          "2996-8380"
-        ],
-        "issn-type": [
-          {
-            "value": "2996-8380",
-            "type": "electronic"
-          }
-        ],
-        "published": {
-          "date-parts": [
-            [
-              2026,
-              3,
-              15
             ]
           ]
         }
@@ -3753,7 +3601,7 @@
           "date-time": "2026-07-13T14:44:27Z",
           "timestamp": 1783953867000
         },
-        "score": 34.222633,
+        "score": 34.354515,
         "resource": {
           "primary": {
             "URL": "https://link.springer.com/10.1007/s10278-026-02086-9"
@@ -3868,6 +3716,158 @@
             }
           }
         ]
+      },
+      {
+        "indexed": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              6
+            ]
+          ],
+          "date-time": "2026-03-06T17:18:47Z",
+          "timestamp": 1772817527133,
+          "version": "3.50.1"
+        },
+        "reference-count": 0,
+        "publisher": "Leadership & Innovation Lab",
+        "issue": "16",
+        "license": [
+          {
+            "start": {
+              "date-parts": [
+                [
+                  2026,
+                  3,
+                  15
+                ]
+              ],
+              "date-time": "2026-03-15T00:00:00Z",
+              "timestamp": 1773532800000
+            },
+            "content-version": "unspecified",
+            "delay-in-days": 0,
+            "URL": "http://creativecommons.org/licenses/by/4.0"
+          }
+        ],
+        "content-domain": {
+          "domain": [],
+          "crossmark-restriction": false
+        },
+        "abstract": "<jats:p>Large Language Models (LLMs) that rely solely on parametric memory learned through training have demonstrated strong performance in biomedical question-answering, but their tendency to hallucinate facts and the difficulty of adjusting and adding to the learned knowledge limit their usefulness in clinical settings. Retrieval-Augmented Generation (RAG) has emerged as a promising solution by adding a non-parametric source of memory and grounding LLM outputs to reputable external sources. This paper aims to survey the evolution of RAG methodologies and highlight the most recent developments and shifts in paradigms like Agentic RAG. We highlight current state-of-the-art biomedical RAG systems, the latest evaluation benchmarks, and empirical findings regarding best fine-tuning practices. We also examine technical including lost-in-the-middle effects and scaling behaviour. Ethical concerns surrounding privacy and bias are brought to attention alongside research gaps. Finally, we discuss future directions of RAG in the biomedical field, including integration into Clinical Decision Support systems (CDS).</jats:p>",
+        "DOI": "10.70121/001c.158711",
+        "type": "journal-article",
+        "created": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              6
+            ]
+          ],
+          "date-time": "2026-03-06T11:10:26Z",
+          "timestamp": 1772795426000
+        },
+        "source": "Crossref",
+        "is-referenced-by-count": 0,
+        "title": [
+          "The Role of Retrieval-Augmented Generation in Improving Factual Accuracy for Medical Large Language Models"
+        ],
+        "prefix": "10.70121",
+        "volume": "Spring 2026",
+        "author": [
+          {
+            "given": "Eason",
+            "family": "Ni",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "member": "50825",
+        "published-online": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              15
+            ]
+          ]
+        },
+        "container-title": [
+          "Scholarly Review Journal"
+        ],
+        "language": "en",
+        "link": [
+          {
+            "URL": "https://www.scholarlyreview.org/article/158711-the-role-of-retrieval-augmented-generation-in-improving-factual-accuracy-for-medical-large-language-models.pdf",
+            "content-type": "unspecified",
+            "content-version": "vor",
+            "intended-application": "similarity-checking"
+          }
+        ],
+        "deposited": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              6
+            ]
+          ],
+          "date-time": "2026-03-06T11:10:27Z",
+          "timestamp": 1772795427000
+        },
+        "score": 34.280468,
+        "resource": {
+          "primary": {
+            "URL": "https://www.scholarlyreview.org/article/158711-the-role-of-retrieval-augmented-generation-in-improving-factual-accuracy-for-medical-large-language-models"
+          }
+        },
+        "issued": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              15
+            ]
+          ]
+        },
+        "references-count": 0,
+        "journal-issue": {
+          "issue": "16",
+          "published-online": {
+            "date-parts": [
+              [
+                2026
+              ]
+            ]
+          }
+        },
+        "URL": "https://doi.org/10.70121/001c.158711",
+        "ISSN": [
+          "2996-8380"
+        ],
+        "issn-type": [
+          {
+            "value": "2996-8380",
+            "type": "electronic"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              3,
+              15
+            ]
+          ]
+        }
       },
       {
         "indexed": {
@@ -4016,7 +4016,7 @@
           "date-time": "2026-02-26T14:41:27Z",
           "timestamp": 1772116887000
         },
-        "score": 34.180378,
+        "score": 34.16872,
         "resource": {
           "primary": {
             "URL": "https://jurnal.polbeng.ac.id/index.php/ISI/article/view/1484"
@@ -4286,7 +4286,7 @@
           "date-time": "2026-05-09T02:39:59Z",
           "timestamp": 1778294399000
         },
-        "score": 34.07954,
+        "score": 34.077316,
         "resource": {
           "primary": {
             "URL": "https://academic.oup.com/sleep/article/49/Supplement_1/A153/8673444"
@@ -4495,7 +4495,7 @@
           "date-time": "2026-07-10T18:10:19Z",
           "timestamp": 1783707019000
         },
-        "score": 34.009285,
+        "score": 34.04253,
         "resource": {
           "primary": {
             "URL": "https://www.researchsquare.com/article/rs-10178277/v1"
@@ -4668,7 +4668,7 @@
           "date-time": "2026-06-02T16:06:31Z",
           "timestamp": 1780416391000
         },
-        "score": 33.9356,
+        "score": 33.935337,
         "resource": {
           "primary": {
             "URL": "https://www.researchsquare.com/article/rs-9882260/v1"
@@ -4779,7 +4779,7 @@
           "date-time": "2026-05-16T07:57:01Z",
           "timestamp": 1778918221000
         },
-        "score": 33.5289,
+        "score": 33.52919,
         "resource": {
           "primary": {
             "URL": "https://www.ijraset.com/best-journal/hybrid-graph-neural-network-and-large-language-"
@@ -4914,7 +4914,7 @@
           "date-time": "2026-06-01T07:10:33Z",
           "timestamp": 1780297833000
         },
-        "score": 33.19267,
+        "score": 33.18401,
         "resource": {
           "primary": {
             "URL": "https://tns.ewapub.com/article/view/34055"
@@ -5141,7 +5141,7 @@
           "date-time": "2026-05-06T13:17:58Z",
           "timestamp": 1778073478000
         },
-        "score": 33.030704,
+        "score": 33.103268,
         "resource": {
           "primary": {
             "URL": "https://journals.flvc.org/FLAIRS/article/view/141782"
@@ -5321,7 +5321,7 @@
           "date-time": "2026-05-22T03:59:47Z",
           "timestamp": 1779422387000
         },
-        "score": 33.018024,
+        "score": 33.020077,
         "resource": {
           "primary": {
             "URL": "https://www.researchsquare.com/article/rs-9770645/v1"
@@ -5354,385 +5354,426 @@
           "date-parts": [
             [
               2026,
-              7,
-              16
+              2,
+              12
             ]
           ],
-          "date-time": "2026-07-16T10:07:33Z",
-          "timestamp": 1784196453526,
-          "version": "3.55.0"
+          "date-time": "2026-02-12T18:41:17Z",
+          "timestamp": 1770921677808,
+          "version": "3.50.1"
         },
-        "reference-count": 44,
-        "publisher": "Wiley",
-        "issue": "8",
+        "reference-count": 21,
+        "publisher": "Ovid Technologies (Wolters Kluwer Health)",
+        "issue": "3",
         "license": [
           {
             "start": {
               "date-parts": [
                 [
                   2026,
-                  6,
-                  30
+                  2,
+                  12
                 ]
               ],
-              "date-time": "2026-06-30T00:00:00Z",
-              "timestamp": 1782777600000
+              "date-time": "2026-02-12T00:00:00Z",
+              "timestamp": 1770854400000
             },
-            "content-version": "vor",
+            "content-version": "unspecified",
             "delay-in-days": 0,
-            "URL": "http://onlinelibrary.wiley.com/termsAndConditions#vor"
-          },
-          {
-            "start": {
-              "date-parts": [
-                [
-                  2026,
-                  6,
-                  30
-                ]
-              ],
-              "date-time": "2026-06-30T00:00:00Z",
-              "timestamp": 1782777600000
-            },
-            "content-version": "tdm",
-            "delay-in-days": 0,
-            "URL": "http://doi.wiley.com/10.1002/tdm_license_1.1"
+            "URL": "http://creativecommons.org/licenses/by/4.0/ http://creativecommons.org/licenses/by/4.0/"
           }
         ],
         "content-domain": {
           "domain": [
-            "onlinelibrary.wiley.com"
+            "lww.com",
+            "ovid.com"
           ],
           "crossmark-restriction": true
         },
-        "short-container-title": [
-          "Expert Systems"
-        ],
-        "published-print": {
-          "date-parts": [
-            [
-              2026,
-              8
-            ]
-          ]
-        },
-        "abstract": "<jats:title>ABSTRACT</jats:title>\n                  <jats:p>\n                    As tool repositories for Large Language Model (LLM) agents grow from dozens to hundreds of endpoints, flat retrieval paradigms that treat the repository as an unstructured list suffer from context overload, cross‐domain semantic collision and degraded selection accuracy. We propose Hi‐RAG, a Hierarchical Retrieval‐Augmented Generation framework that exploits the Type  Service  Tool structure of the Model Context Protocol (MCP) via a principled coarse‐to‐fine pipeline. Stage 1 applies a\n                    <jats:italic>Tool‐as‐Proxy</jats:italic>\n                    hybrid retrieval strategy (BM25 sparse retrieval combined with dense bi‐encoder search, fused via Weighted Reciprocal Rank Fusion) to identify candidate services efficiently. Stage 2 performs type‐aware re‐ranking over a local heterogeneous graph, integrating a domain‐level gating mechanism with contextualised tool attention for precise service scoring. We further introduce\n                    <jats:italic>MCPBench</jats:italic>\n                    , the first benchmark for hierarchical tool selection, comprising 201 tools across 40 real‐enterprise services—23% of queries require multi‐service reasoning. Experiments across five LLMs show Hi‐RAG improves Top‐1 accuracy by up to 7.5% (single‐service) and 10.0% (multi‐service) over Flat‐RAG, while reducing token consumption by up to 89% against full‐context injection. Comparisons with a strong late‐interaction baseline (ColBERT‐RAG) further confirm the superiority of Hi‐RAG. Zero‐shot evaluation on ToolLLM (16,464 tools) confirms scalability, and formal analyses establish  context growth with respect to repository size.\n                  </jats:p>",
-        "DOI": "10.1111/exsy.70341",
+        "abstract": "<jats:sec>\n                    <jats:title>Background:</jats:title>\n                    <jats:p>Idiosyncratic DILI is a complex clinical challenge requiring timely and accurate decision support. LiverTox, curated by the National Institute of Health (NIH), offers a comprehensive DILI evidence base, but its encyclopedia-like format hinders point-of-care use. Health care providers increasingly use general large language models (LLMs) for clinical care, raising safety concerns due to LLM hallucinations or misinformation. We hypothesize that retrieval-augmented generation (RAG) integration—grounding LLM responses in LiverTox content—would enable accurate DILI decision support.</jats:p>\n                  </jats:sec>\n                  <jats:sec>\n                    <jats:title>Methods:</jats:title>\n                    <jats:p>We processed 1343 LiverTox drug monographs into 8759 indexed segments using BioBERT embeddings. We developed a RAG pipeline that employs drug-specific prioritization, section-aware weighting, and semantic search to retrieve the most relevant content per query. Twenty-five DILI questions were evaluated across 6 models: 4 RAG-LLMs: Mistral-7B, Claude-3-Haiku, Claude-3-Opus, and GPT-4o, and 2 non-RAG GPT-4o variants (unconstrained; soft constrained with a prompt to reference LiverTox). Three hepatologists, blinded to the model, evaluated responses for accuracy, completeness, and conciseness using 5-point Likert scales. Analyses included pairwise comparisons and effect size estimation.</jats:p>\n                  </jats:sec>\n                  <jats:sec>\n                    <jats:title>Results:</jats:title>\n                    <jats:p>\n                      One hundred fifty model responses were evaluated with good inter-rater reliability. GPT-4o (RAG) achieved the highest overall scores (4.47±0.10). RAG-LLMs outperformed non-RAG GPT-4o variants in accuracy (\n                      <jats:italic toggle=\"yes\">p</jats:italic>\n                      &lt;0.001) and completeness (\n                      <jats:italic toggle=\"yes\">p</jats:italic>\n                      &lt;0.01). Moderate to large effect sizes in accuracy (d=0.778) and completeness (d=0.526) were noted with RAG. No hallucinations were observed in RAG-LLM outputs, while both non-RAG GPT-4o variants produced several hallucinated responses. There were no significant differences in scoring or hallucinated response rate between the 2 non-RAG variants.\n                    </jats:p>\n                  </jats:sec>\n                  <jats:sec>\n                    <jats:title>Conclusions:</jats:title>\n                    <jats:p>We developed an RAG-LLM integrated with LiverTox for evidence-based DILI management. RAG-LLM systems outperformed non-RAG variants and produced responses without observed hallucinations in this evaluation. Our LiverTox RAG-LLM enables reliable answers to drug hepatotoxicity questions at the point of care.</jats:p>\n                  </jats:sec>",
+        "DOI": "10.1097/hc9.0000000000000895",
         "type": "journal-article",
         "created": {
           "date-parts": [
             [
               2026,
-              7,
-              1
+              2,
+              12
             ]
           ],
-          "date-time": "2026-07-01T03:22:36Z",
-          "timestamp": 1782876156000
+          "date-time": "2026-02-12T18:00:08Z",
+          "timestamp": 1770919208000
         },
-        "update-policy": "https://doi.org/10.1002/crossmark_policy",
+        "update-policy": "https://doi.org/10.1097/lww.0000000000001000",
         "source": "Crossref",
         "is-referenced-by-count": 0,
         "title": [
-          "Hi‐\n                    <scp>RAG</scp>\n                    : A Hierarchical Retrieval‐Augmented Generation Framework for Scalable and Generalisable Tool Selection in Large Language Model Agents"
+          "Development of retrieval-augmented generation–based large language model for drug-induced liver injury using Livertox data"
         ],
-        "prefix": "10.1111",
-        "volume": "43",
+        "prefix": "10.1097",
+        "volume": "10",
         "author": [
           {
-            "ORCID": "https://orcid.org/0009-0004-6173-0071",
-            "authenticated-orcid": false,
-            "given": "Wei",
-            "family": "Tian",
+            "given": "Ashwin",
+            "family": "Rao",
             "sequence": "first",
             "affiliation": [
               {
-                "name": "School of Computer Science and Technology, East China Normal University  Shanghai China"
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
               }
             ],
             "role": [
               {
-                "vocabulary": "crossref",
-                "role": "author"
+                "role": "author",
+                "vocabulary": "crossref"
               }
             ]
           },
           {
-            "given": "Yuhao",
-            "family": "Zhou",
+            "given": "George",
+            "family": "Cholankeril",
             "sequence": "additional",
             "affiliation": [
               {
-                "name": "School of Computer Science and Technology, East China Normal University  Shanghai China"
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
               }
             ],
             "role": [
               {
-                "vocabulary": "crossref",
-                "role": "author"
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Avegail",
+            "family": "Flores",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Gagan",
+            "family": "Sood",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Terrence E.",
+            "family": "White",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "D. Bradley McWilliams School of Bioinformatics, University of Texas-Health at Houston, Houston, Texas, USA"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Fasiha",
+            "family": "Kanwal",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Hashem B.",
+            "family": "El-Serag",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Section of Gastroenterology and Hepatology, Department of Medicine, Baylor College of Medicine, Houston, Texas, USA"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
               }
             ]
           }
         ],
-        "member": "311",
+        "member": "276",
         "published-online": {
           "date-parts": [
             [
               2026,
-              6,
-              30
+              3
             ]
           ]
         },
         "reference": [
           {
-            "key": "e_1_2_12_2_1",
-            "unstructured": "Achiam J. S.Adler S.Agarwal et al.“Gpt‐4 Technical Report.”arXiv Preprint arXiv:2303.08774."
-          },
-          {
-            "key": "e_1_2_12_3_1",
-            "first-page": "41",
-            "volume-title": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics",
-            "author": "Asai A.",
-            "year": "2023"
-          },
-          {
-            "key": "e_1_2_12_4_1",
-            "unstructured": "Ba J. L. J. R.Kiros andG. E.Hinton.“Layer Normalization.”arXiv Preprint arXiv:1607.06450."
-          },
-          {
-            "key": "e_1_2_12_5_1",
-            "unstructured": "Bai J. S.Bai Y.Chu et al.“Qwen Technical Report.”arXiv Preprint arXiv:2309.16609."
-          },
-          {
-            "key": "e_1_2_12_6_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1145/1571941.1572114"
-          },
-          {
-            "key": "e_1_2_12_7_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.2196/52399"
-          },
-          {
-            "key": "e_1_2_12_8_1",
-            "unstructured": "Du Y. F.Wei andH.Zhang.“Anytool: Self‐Reflective Hierarchical Agents for Large‐Scale Api Calls.”arXiv Preprint arXiv:2402.04253."
-          },
-          {
-            "key": "e_1_2_12_9_1",
-            "unstructured": "Ehtesham A. A.Singh G. K.Gupta andS.Kumar.“A Survey of Agent Interoperability Protocols: Model Context Protocol (Mcp) agent Communication Protocol (Acp) agent‐To‐Agent Protocol (a2a) and Agent Network Protocol (Anp).”arXiv Preprint arXiv:2505.02279."
-          },
-          {
-            "key": "e_1_2_12_10_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1145/3637528.3671470"
-          },
-          {
-            "key": "e_1_2_12_11_1",
-            "unstructured": "Fei X. X.Zheng andH.Feng.“Mcp‐Zero: Active Tool Discovery for Autonomous Llm Agents.”arXiv Preprint arXiv:2506.01056."
-          },
-          {
-            "key": "e_1_2_12_12_1",
-            "unstructured": "Gan T. andQ.Sun.“Rag‐Mcp: Mitigating Prompt Bloat in Llm Tool Selection via Retrieval‐Augmented Generation.”arXiv Preprint arXiv:2505.03275."
-          },
-          {
-            "key": "e_1_2_12_13_1",
-            "unstructured": "Gao X. S.Xie J.Zhai S.Ma andC.Shen.“Mcp‐Radar: A Multi‐Dimensional Benchmark for Evaluating Tool Use Capabilities in Large Language Models.”arXiv Preprint arXiv:2505.16700."
-          },
-          {
-            "issue": "1",
-            "key": "e_1_2_12_14_1",
-            "first-page": "32",
-            "article-title": "Retrieval‐Augmented Generation for Large Language Models: A Survey",
-            "volume": "2",
-            "author": "Gao Y.",
+            "key": "R1-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "2088",
+            "DOI": "10.1016/j.cgh.2022.12.040",
+            "article-title": "The evolving profile of idiosyncratic drug-induced liver injury",
+            "volume": "21",
+            "author": "Fontana",
             "year": "2023",
-            "journal-title": "arXiv Preprint arXiv:2312.10997"
+            "journal-title": "Clin Gastroenterol Hepatol"
           },
           {
-            "key": "e_1_2_12_15_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1109/GCWkshp64532.2024.11100297"
-          },
-          {
-            "key": "e_1_2_12_16_1",
-            "unstructured": "Hasan M. M. H.Li E.Fallahzadeh G. K.Rajbahadur B.Adams andA. E.Hassan.“Model Context Protocol (Mcp) at First Glance: Studying the Security and Maintainability of Mcp Servers.”arXiv Preprint arXiv:2506.13538."
-          },
-          {
-            "key": "e_1_2_12_17_1",
+            "key": "R2-20260212",
             "doi-asserted-by": "crossref",
-            "unstructured": "Hou X. Y.Zhao S.Wang andH.Wang.2025.“Model Context Protocol (Mcp): Landscape Security Threats and Future Research Directions.”arXiv Preprint arXiv:2503.23278 [cs.CR].",
-            "DOI": "10.1145/3796519"
+            "first-page": "1419",
+            "DOI": "10.1053/j.gastro.2013.02.006",
+            "article-title": "Incidence, presentation, and outcomes in patients with drug-induced liver injury in the general population of Iceland",
+            "volume": "144",
+            "author": "Björnsson",
+            "year": "2013",
+            "journal-title": "Gastroenterology"
           },
           {
-            "key": "e_1_2_12_18_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1109/TBDATA.2019.2921572"
+            "key": "R3-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "451",
+            "DOI": "10.1053/jhep.2002.34857",
+            "article-title": "Incidence of drug-induced hepatic injuries: A French population-based study",
+            "volume": "36",
+            "author": "Sgro",
+            "year": "2002",
+            "journal-title": "Hepatology"
           },
           {
-            "key": "e_1_2_12_19_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.18653/v1/2020.emnlp-main.550"
+            "key": "R4-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "617",
+            "DOI": "10.14309/ajg.0000000000001655",
+            "article-title": "Secular trends in severe idiosyncratic drug-induced liver injury in North America: An update from the Acute Liver Failure Study Group Registry",
+            "volume": "117",
+            "author": "Rao",
+            "year": "2022",
+            "journal-title": "Am J Gastroenterol"
           },
           {
-            "key": "e_1_2_12_20_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1145/3600006.3613165"
+            "key": "R5-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "873",
+            "DOI": "10.1002/hep.26175",
+            "article-title": "LiverTox: A website on drug-induced liver injury",
+            "volume": "57",
+            "author": "Hoofnagle",
+            "year": "2013",
+            "journal-title": "Hepatology"
           },
           {
-            "key": "e_1_2_12_21_1",
-            "first-page": "9459",
-            "article-title": "Retrieval‐Augmented Generation for Knowledge‐Intensive Nlp Tasks",
-            "volume": "33",
-            "author": "Lewis P.",
-            "year": "2020",
-            "journal-title": "Advances in Neural Information Processing Systems"
+            "key": "R6-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "1036",
+            "DOI": "10.1002/hep.32689",
+            "article-title": "AASLD practice guidance on drug, herbal, and dietary supplement-induced liver injury",
+            "volume": "77",
+            "author": "Fontana",
+            "year": "2023",
+            "journal-title": "Hepatology"
           },
           {
-            "key": "e_1_2_12_22_1",
-            "unstructured": "Li H. Y.Su D.Cai Y.Wang andL.Liu.“A Survey on Retrieval‐Augmented Text Generation.”arXiv Preprint arXiv:2202.01110."
+            "key": "R7-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "172",
+            "DOI": "10.1038/s41586-023-06291-2",
+            "article-title": "Large language models encode clinical knowledge",
+            "volume": "620",
+            "author": "Singhal",
+            "year": "2023",
+            "journal-title": "Nature"
           },
           {
-            "key": "e_1_2_12_23_1",
-            "unstructured": "Li J. Y.Liang Q.Li et al.“PathMem: Toward Cognition‐Aligned Memory Transformation for Pathology MLLMs.”arXiv Preprint arXiv:2603.09943."
-          },
-          {
-            "key": "e_1_2_12_24_1",
-            "first-page": "151327",
-            "article-title": "Unleashing Foundation Vision Models: Adaptive Transfer for Diverse Data‐Limited Scientific Domains",
-            "volume": "38",
-            "author": "Li Q.",
-            "year": "2026",
-            "journal-title": "Advances in Neural Information Processing Systems"
-          },
-          {
-            "key": "e_1_2_12_25_1",
-            "unstructured": "Liu A. B.Feng B.Xue et al.“Deepseek‐v3 Technical Report.”arXiv Preprint arXiv:2412.19437."
-          },
-          {
-            "key": "e_1_2_12_26_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1162/tacl_a_00638"
-          },
-          {
-            "key": "e_1_2_12_27_1",
-            "first-page": "23",
-            "volume-title": "International Joint Conference on Computational Intelligence",
-            "author": "Lumer E.",
-            "year": "2025"
-          },
-          {
-            "key": "e_1_2_12_28_1",
-            "unstructured": "Luo Z. X.Shi X.Lin andJ.Gao.“Evaluation Report on Mcp Servers.”arXiv Preprint arXiv:2504.11094."
-          },
-          {
-            "key": "e_1_2_12_29_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.52202/079017-4020"
-          },
-          {
-            "key": "e_1_2_12_30_1",
-            "first-page": "9695",
-            "volume-title": "International Conference on Learning Representations",
-            "author": "Qin Y.",
-            "year": "2024"
-          },
-          {
-            "key": "e_1_2_12_31_1",
-            "article-title": "A Survey on Model Context Protocol: Architecture, State‐of‐The‐Art, Challenges and Future Directions",
-            "author": "Ray P. P.",
+            "key": "R8-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "1093",
+            "DOI": "10.1093/jamia/ocaf065",
+            "article-title": "Adoption of artificial intelligence in healthcare: Survey of health system priorities, successes, and challenges",
+            "volume": "32",
+            "author": "Poon",
             "year": "2025",
-            "journal-title": "Authorea Preprints"
+            "journal-title": "J Am Med Inform Assoc"
           },
           {
-            "key": "e_1_2_12_32_1",
-            "volume-title": "The Probabilistic Relevance Framework: BM25 and Beyond",
-            "author": "Robertson S.",
-            "year": "2009"
-          },
-          {
-            "key": "e_1_2_12_33_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.52202/075280-2997"
-          },
-          {
-            "key": "e_1_2_12_34_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.52202/075280-1657"
-          },
-          {
-            "key": "e_1_2_12_35_1",
-            "unstructured": "Singh A. A.Ehtesham S.Kumar andT.Talaei Khoei.“A Survey of the Model Context Protocol (mcp): Standardizing Context to Enhance Large Language Models (llms).”"
-          },
-          {
-            "key": "e_1_2_12_36_1",
-            "unstructured": "Su H. J.Kasai C. H.Wu et al.“Selective Annotation Makes Language Models Better Few‐Shot Learners.”arXiv Preprint arXiv:2209.01975."
-          },
-          {
-            "key": "e_1_2_12_37_1",
+            "key": "R9-20260212",
             "doi-asserted-by": "crossref",
-            "first-page": "1",
-            "DOI": "10.1145/3661145",
-            "article-title": "Significant Productivity Gains Through Programming With Large Language Models",
-            "volume": "8",
-            "author": "Weber T.",
+            "first-page": "e2343689",
+            "DOI": "10.1001/jamanetworkopen.2023.43689",
+            "article-title": "Leveraging large language models for decision support in personalized oncology",
+            "volume": "6",
+            "author": "Benary",
+            "year": "2023",
+            "journal-title": "JAMA Netw Open"
+          },
+          {
+            "key": "R10-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "100",
+            "DOI": "10.1038/s41746-024-01081-0",
+            "article-title": "Augmented non-hallucinating large language models as medical information curators",
+            "volume": "7",
+            "author": "Gilbert",
             "year": "2024",
-            "journal-title": "Proceedings of the ACM on Human‐Computer Interaction"
+            "journal-title": "NPJ Digit Med"
           },
           {
-            "key": "e_1_2_12_38_1",
-            "unstructured": "Wu S. O.Irsoy S.Lu et al.“Bloomberggpt: A Large Language Model for Finance.”arXiv Preprint arXiv:2303.17564."
+            "key": "R11-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "605",
+            "DOI": "10.1093/jamia/ocaf008",
+            "article-title": "Improving large language model applications in biomedicine with retrieval-augmented generation: A systematic review, meta-analysis, and clinical development guidelines",
+            "volume": "32",
+            "author": "Liu",
+            "year": "2025",
+            "journal-title": "J Am Med Inform Assoc"
           },
           {
-            "key": "e_1_2_12_39_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1145/3626772.3657878"
+            "key": "R12-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "1158",
+            "DOI": "10.1097/HEP.0000000000000834",
+            "article-title": "Development of a liver disease-specific large language model chat interface using retrieval-augmented generation",
+            "volume": "80",
+            "author": "Ge",
+            "year": "2024",
+            "journal-title": "Hepatology"
           },
           {
-            "key": "e_1_2_12_40_1",
-            "unstructured": "Yan Y. S.Wang J.Du et al.“Mcpworld: A Unified Benchmarking Testbed for Api Gui and Hybrid Computer Use Agents.”arXiv Preprint arXiv:2506.07672."
+            "key": "R13-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "279",
+            "DOI": "10.4300/JGME-D-12-00156.1",
+            "article-title": "Using effect size-or why the P value is not enough",
+            "volume": "4",
+            "author": "Sullivan",
+            "year": "2012",
+            "journal-title": "J Grad Med Educ"
           },
           {
-            "key": "e_1_2_12_41_1",
-            "unstructured": "Yang A. A.Li B.Yang et al.“Qwen3 Technical Report.”arXiv Preprint arXiv:2505.09388."
+            "key": "R14-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "581",
+            "DOI": "10.1586/14737167.4.5.581",
+            "article-title": "The truly remarkable universality of half a standard deviation: Confirmation through another look",
+            "volume": "4",
+            "author": "Norman",
+            "year": "2004",
+            "journal-title": "Expert Rev Pharmacoecon Outcomes Res"
           },
           {
-            "key": "e_1_2_12_42_1",
-            "unstructured": "Yang A. B.Yang B.Hui et al.“Qwen2 Technical Report.”ArXivabs/2407.10671."
+            "key": "R15-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "137",
+            "DOI": "10.1038/s41746-025-01536-y",
+            "article-title": "Evaluating base and retrieval augmented LLMs with document or online support for evidence based neurology",
+            "volume": "8",
+            "author": "Masanneck",
+            "year": "2025",
+            "journal-title": "NPJ Digit Med"
           },
           {
-            "key": "e_1_2_12_43_1",
-            "unstructured": "Yao S. J.Zhao D.Yu et al.“React: Synergizing Reasoning and Acting in Language Models.”arXiv Preprint arXiv:2210.03629."
+            "key": "R16-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "e240313",
+            "DOI": "10.1148/ryai.240313",
+            "article-title": "Enhancing large language models with retrieval-augmented generation: A radiology-specific approach",
+            "volume": "7",
+            "author": "Weinert",
+            "year": "2025",
+            "journal-title": "Radiol Artif Intell"
           },
           {
-            "key": "e_1_2_12_44_1",
-            "unstructured": "Yin D. L.Dong H.Cheng et al.“A Survey of Knowledge‐Intensive Nlp With Pre‐Trained Language Models.”arXiv Preprint arXiv:2202.08772."
+            "key": "R17-20260212",
+            "doi-asserted-by": "crossref",
+            "DOI": "10.1056/AIoa2300068",
+            "article-title": "Almanac—Retrieval-augmented language models for clinical medicine",
+            "volume": "1",
+            "author": "Zakka",
+            "year": "2024",
+            "journal-title": "NEJM AI"
           },
           {
-            "key": "e_1_2_12_45_1",
-            "doi-asserted-by": "publisher",
-            "DOI": "10.1007/s41019-025-00335-5"
+            "key": "R18-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "221",
+            "DOI": "10.1038/s42256-024-00976-7",
+            "article-title": "What large language models know and what people think they know",
+            "volume": "7",
+            "author": "Steyvers",
+            "year": "2025",
+            "journal-title": "Nature Machine Intelligence"
+          },
+          {
+            "key": "R19-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "e53164",
+            "DOI": "10.2196/53164",
+            "article-title": "Hallucination rates and reference accuracy of ChatGPT and Bard for systematic reviews: Comparative analysis",
+            "volume": "26",
+            "author": "Chelli",
+            "year": "2024",
+            "journal-title": "J Med Internet Res"
+          },
+          {
+            "key": "R20-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "330",
+            "DOI": "10.1038/s43856-025-01021-3",
+            "article-title": "Multi-model assurance analysis showing large language models are highly vulnerable to adversarial hallucination attacks during clinical decision support",
+            "volume": "5",
+            "author": "Omar",
+            "year": "2025",
+            "journal-title": "Commun Med (Lond)"
+          },
+          {
+            "key": "R21-20260212",
+            "doi-asserted-by": "crossref",
+            "first-page": "41",
+            "DOI": "10.1038/s41746-024-01029-4",
+            "article-title": "Prompt engineering in consistency and reliability with the evidence-based guideline for LLMs",
+            "volume": "7",
+            "author": "Wang",
+            "year": "2024",
+            "journal-title": "NPJ Digit Med"
           }
         ],
         "container-title": [
-          "Expert Systems"
+          "Hepatology Communications"
         ],
         "language": "en",
         "link": [
           {
-            "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1111/exsy.70341",
-            "content-type": "application/pdf",
-            "content-version": "vor",
-            "intended-application": "text-mining"
-          },
-          {
-            "URL": "https://onlinelibrary.wiley.com/doi/full-xml/10.1111/exsy.70341",
-            "content-type": "application/xml",
-            "content-version": "vor",
-            "intended-application": "text-mining"
-          },
-          {
-            "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1111/exsy.70341",
+            "URL": "https://journals.lww.com/10.1097/HC9.0000000000000895",
             "content-type": "unspecified",
             "content-version": "vor",
             "intended-application": "similarity-checking"
@@ -5742,58 +5783,46 @@
           "date-parts": [
             [
               2026,
-              7,
-              16
+              2,
+              12
             ]
           ],
-          "date-time": "2026-07-16T09:33:41Z",
-          "timestamp": 1784194421000
+          "date-time": "2026-02-12T18:00:11Z",
+          "timestamp": 1770919211000
         },
-        "score": 32.976143,
+        "score": 32.976044,
         "resource": {
           "primary": {
-            "URL": "https://onlinelibrary.wiley.com/doi/10.1111/exsy.70341"
+            "URL": "https://journals.lww.com/10.1097/HC9.0000000000000895"
           }
         },
         "issued": {
           "date-parts": [
             [
               2026,
-              6,
-              30
+              2,
+              12
             ]
           ]
         },
-        "references-count": 44,
+        "references-count": 21,
         "journal-issue": {
-          "issue": "8",
-          "published-print": {
+          "issue": "3",
+          "published-online": {
             "date-parts": [
               [
-                2026,
-                8
+                2026
               ]
             ]
           }
         },
-        "alternative-id": [
-          "10.1111/exsy.70341"
-        ],
-        "URL": "https://doi.org/10.1111/exsy.70341",
-        "archive": [
-          "Portico"
-        ],
+        "URL": "https://doi.org/10.1097/hc9.0000000000000895",
         "ISSN": [
-          "0266-4720",
-          "1468-0394"
+          "2471-254X"
         ],
         "issn-type": [
           {
-            "value": "0266-4720",
-            "type": "print"
-          },
-          {
-            "value": "1468-0394",
+            "value": "2471-254X",
             "type": "electronic"
           }
         ],
@@ -5801,15 +5830,14 @@
           "date-parts": [
             [
               2026,
-              6,
-              30
+              2,
+              12
             ]
           ]
         },
         "assertion": [
           {
-            "value": "2026-03-18",
-            "order": 0,
+            "value": "2025-08-12",
             "name": "received",
             "label": "Received",
             "group": {
@@ -5818,27 +5846,15 @@
             }
           },
           {
-            "value": "2026-06-12",
-            "order": 2,
+            "value": "2025-10-21",
             "name": "accepted",
             "label": "Accepted",
             "group": {
               "name": "publication_history",
               "label": "Publication History"
             }
-          },
-          {
-            "value": "2026-06-30",
-            "order": 3,
-            "name": "published",
-            "label": "Published",
-            "group": {
-              "name": "publication_history",
-              "label": "Publication History"
-            }
           }
-        ],
-        "article-number": "e70341"
+        ]
       }
     ],
     "items-per-page": 24,

@@ -241,8 +241,6 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
 
     problems: list[str] = []
 
-    # A manifest may only carry a project-relative path. Resolution belongs to
-    # the current checkout's settings, so an old absolute path is rejected.
     manifest_persist_value = str(payload.get("persist_path", ""))
     manifest_persist = Path(manifest_persist_value)
     expected_persist = settings.paths.chroma_dir.resolve()
@@ -279,8 +277,6 @@ def audit_index_manifest(settings: Settings, manifest_path: Path, df: pd.DataFra
         if extra:
             problems.append(f"{len(extra)} paper_id co trong index nhung khong co trong clean.")
 
-        # paper_id khop khong du: cleaning co the doi noi dung (vd decode HTML entity) ma giu nguyen id.
-        # Index cu + clean moi -> answer va ground_truth doc tu hai phien ban khac nhau.
         by_id = {str(record["paper_id"]): record for record in df.to_dict(orient="records")}
 
         def normalize_content(value: object) -> str:

@@ -9,6 +9,7 @@ from typing import Any
 
 from datasets import Dataset
 from pydantic import BaseModel, Field
+import math
 
 from core.config import Settings
 from core.utils import normalize_whitespace, read_json, write_json
@@ -69,6 +70,38 @@ Return:
             reasoning="Fallback heuristic judge used because the LLM evaluator was unavailable.",
         )
 
+def _summarize_ragas(result) -> dict[str, Any]:
+    if isinstance(result, dict):                    
+        return {k: float(v) for k, v in result.items()}
+
+    scores = getattr(result, "scores", None)        
+    if not scores:
+        return {"error": f"Không đọc được scores từ {type(result).__name__}"}
+
+    keys: list[str] = []
+    for row in scores:
+        for k in row:
+            if k not in keys:
+                keys.append(k)
+
+    summary: dict[str, Any] = {"total_samples": len(scores)}
+    for key in keys:
+        values = []
+        for row in scores:
+            value = row.get(key)
+            if value is None:
+                continue
+            value = float(value)
+            if not math.isnan(value):
+                values.append(value)
+        summary[key] = mean(values) if values else None
+        summary[f"{key}_n"] = len(values)
+        summary["per_sample"] = [
+        {k: (None if v is None else float(v)) for k, v in row.items()}
+        for row in scores
+        ]
+    
+    return summary
 
 def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, Any]:
     if os.getenv("RUN_RAGAS", "").lower() not in {"1", "true", "yes"}:
@@ -78,8 +111,11 @@ def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, A
             shim = types.ModuleType("langchain_community.chat_models.vertexai")
             shim.ChatVertexAI = type("ChatVertexAI", (), {})
             sys.modules["langchain_community.chat_models.vertexai"] = shim
+            
         from ragas import evaluate
         from ragas.metrics import answer_relevancy, context_precision, context_recall, faithfulness
+
+        answer_relevancy.strictness = 1
 
         dataset = Dataset.from_dict(
             {
@@ -95,10 +131,14 @@ def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, A
             llm=build_llm(settings=settings, temperature=0.0),
             embeddings=MiniLMEmbeddings(settings.embedding_model),
         )
-        return dict(result)
-    except Exception as exc:  # pragma: no cover
-        return {"error": f"Ragas evaluation failed: {exc}"}
+        return _summarize_ragas(result)          # <-- thay cho dict(result)
 
+    except Exception as exc:
+        import traceback
+        return {
+            "error": f"Ragas evaluation failed: {exc!r}",
+            "traceback": traceback.format_exc(),
+        }
 
 def evaluate_pipeline(
     settings: Settings,

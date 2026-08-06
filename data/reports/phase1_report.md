@@ -1,6 +1,6 @@
 # Phase 1 - Baseline Report
 
-Generated at: 2026-08-06T10:41:34.496190+00:00
+Generated at: 2026-08-06T18:36:38.291894+00:00
 
 ## 1. Source & scope
 
@@ -17,12 +17,22 @@ Generated at: 2026-08-06T10:41:34.496190+00:00
 | Field | Value |
 | --- | --- |
 | `So sample` | 24 |
-| `Retrieval hit rate` | 1.000 |
-| `Mean token F1` | 0.750 |
-| `Judge accuracy` | 1.000 |
-| `Mean judge score` | 5 |
+| `Retrieval hit rate` | 0.833 |
+| `Mean token F1` | 0.676 |
+| `Judge accuracy` | 0.875 |
+| `Mean judge score` | 4.583 |
 
-> Ragas: error - Ragas evaluation failed: 0
+| Field | Value |
+| --- | --- |
+| `total_samples` | 24 |
+| `answer_relevancy` | 0.171 |
+| `answer_relevancy_n` | 24 |
+| `context_precision` | 0.667 |
+| `context_precision_n` | 24 |
+| `context_recall` | 0.708 |
+| `context_recall_n` | 24 |
+| `faithfulness` | 0.618 |
+| `faithfulness_n` | 24 |
 
 ## 3. Data quality
 
@@ -42,7 +52,7 @@ Generated at: 2026-08-06T10:41:34.496190+00:00
 | `text_for_embedding_not_empty` | PASS | 0 | 0 missing |  |
 | `summary_min_chars` | PASS | 0 | 0 row < 100 ky tu |  |
 | `published_parseable` | PASS | 0 | 0 row khong parse duoc ngay |  |
-| `freshness_age_days` | PASS | 174 | max age_days <= 180, 0 row thieu age_days |  |
+| `freshness_age_days` | PASS | 175 | max age_days <= 180, 0 row thieu age_days |  |
 
 ## 4. Freshness
 
@@ -54,11 +64,11 @@ Generated at: 2026-08-06T10:41:34.496190+00:00
 | `total_rows` | 24 |
 | `is_fresh` | true |
 | `freshness_threshold_days` | 180 |
-| `max_age_days` | 174 |
-| `min_age_days` | 5 |
-| `mean_age_days` | 76.400 |
+| `max_age_days` | 175 |
+| `min_age_days` | 6 |
+| `mean_age_days` | 83.800 |
 | `missing_published` | 0 |
-| `generated_at` | 2026-08-06T10:37:56.382866+00:00 |
+| `generated_at` | 2026-08-06T18:34:47.753560+00:00 |
 | `report_path` | E:\Lab1\K4_Day10_Data-Pipeline-Data-Observability-G36\data\quality\freshness_report.json |
 
 ## 5. Evidence & limitations

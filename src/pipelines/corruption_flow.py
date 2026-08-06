@@ -6,56 +6,17 @@ from pathlib import Path
 
 import pandas as pd
 
-# 1. Core Utilities & Settings
-from core.config import Settings, load_settings
-from core.utils import read_csv, read_json, write_csv
-
-# 2. Ingestion & Cleaning
-from cleaning import build_clean_dataframe, write_clean_artifacts
-from ingestion.crossref import load_raw_records
-
-# 3. Observability & Data Quality
-from quality import build_freshness_report, run_data_quality_checks
-
-# 4. Retrieval, Indexing & Contract Validation
-from retrieval.contract import validate_clean_dataframe
-from retrieval.index import LocalEmbeddingIndex
-
-# 5. Evaluation & Reporting
+from core import Settings, load_settings, read_json, write_csv
+from ingestion import load_raw_records, build_clean_dataframe, corrupt_clean_dataframe
+from observability import build_freshness_report, run_data_quality_checks, generate_corruption_report
+from retrieval import validate_clean_dataframe, LocalEmbeddingIndex
 from evaluation import evaluate_pipeline
-from reporting import generate_corruption_report
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 logger = logging.getLogger(__name__)
-
-
-def create_corrupted_dataframe(df_baseline: pd.DataFrame) -> pd.DataFrame:
-    """Tạo dữ liệu lỗi cố ý (Corrupted) từ Baseline để kiểm thử Observability & Resilience.
-    
-    Các lỗi mô phỏng:
-    - Mất Title/Summary (Gây đứt gãy embedding semantic).
-    - Làm sai lệch ngày xuất bản (Kích hoạt cảnh báo Freshness).
-    """
-    df_corrupted = df_baseline.copy()
-
-    if len(df_corrupted) > 0:
-        # Mô phỏng lỗi missing title & empty summary
-        df_corrupted.loc[0, "title"] = ""
-        if len(df_corrupted) > 1:
-            df_corrupted.loc[1, "summary"] = ""
-            df_corrupted.loc[1, "summary_chars"] = 0
-            df_corrupted.loc[1, "text_for_embedding"] = f"Title: {df_corrupted.loc[1, 'title']}"
-
-    if "published" in df_corrupted.columns and len(df_corrupted) > 2:
-        # Mô phỏng dữ liệu quá cũ (Stale)
-        df_corrupted.loc[2, "published"] = "2010-01-01"
-        df_corrupted.loc[2, "age_days"] = 5000
-
-    return df_corrupted
 
 
 def main() -> None:
@@ -65,7 +26,7 @@ def main() -> None:
     logger.info("==================================================")
 
     # -------------------------------------------------------------------------
-    # 1. LOAD BASELINE METRICS & CLEAN DATASET
+    # 1. ĐỌC CLEANED BASELINE METRICS & DATASET
     # -------------------------------------------------------------------------
     logger.info("[Step 1/8] Loading baseline settings and clean artifacts...")
     settings = load_settings()
@@ -76,31 +37,32 @@ def main() -> None:
             "Vui lòng chạy Phase 1 (`python script/run_phase1.py`) trước!"
         )
 
-    df_baseline = read_csv(settings.paths.clean_csv)
+    df_baseline = pd.read_csv(settings.paths.clean_csv)
     baseline_metrics = read_json(settings.paths.baseline_metrics)
     logger.info(f"-> Nạp thành công {len(df_baseline)} bản ghi baseline clean.")
 
     # -------------------------------------------------------------------------
-    # 2. CREATE CORRUPTED DATAFRAME
+    # 2. TẠO CORRUPTED DATASET & AUDIT LOG
     # -------------------------------------------------------------------------
-    logger.info("[Step 2/8] Generating corrupted dataframe...")
-    df_corrupted = create_corrupted_dataframe(df_baseline)
+    logger.info("[Step 2/8] Generating corrupted dataframe with full scenarios...")
+    corruption_log_path = settings.paths.quality_dir / "corruption_log.json"
+    df_corrupted = corrupt_clean_dataframe(df_baseline, output_log_path=corruption_log_path)
 
     # -------------------------------------------------------------------------
-    # 3. SAVE CORRUPTED ARTIFACTS (PATH ISOLATION - KHÔNG GHI ĐÈ BASELINE)
+    # 3. SAVE CORRUPTED ARTIFACTS (PATH ISOLATION)
     # -------------------------------------------------------------------------
     logger.info("[Step 3/8] Writing isolated corrupted artifacts...")
     write_csv(df_corrupted, settings.paths.corrupted_clean_csv)
     logger.info(f"-> Corrupted CSV đã lưu tại path riêng: '{settings.paths.corrupted_clean_csv}'")
 
     # -------------------------------------------------------------------------
-    # 4. REBUILD CORRUPTED INDEX & EVALUATE (COLLECTION ISOLATION)
+    # 4. REBUILD EMBEDDING & EVALUATE TREN TEST SET CŨ
     # -------------------------------------------------------------------------
-    logger.info("[Step 4/8] Building Corrupted Index (Collection: 'papers-corrupted')...")
+    logger.info("[Step 4/8] Rebuilding Corrupted Embedding Index (Collection: 'papers-corrupted')...")
     index_corrupted = LocalEmbeddingIndex.build(
         df=df_corrupted,
         settings=settings,
-        embeddings_output_path=settings.paths.corrupted_embeddings_json,  # Tên Collection: "papers-corrupted"
+        embeddings_output_path=settings.paths.corrupted_embeddings_json,
     )
     logger.info(f"-> Corrupted Index built thành công (collection='{index_corrupted.collection_name}').")
 
@@ -114,7 +76,7 @@ def main() -> None:
     )
 
     # -------------------------------------------------------------------------
-    # 5. RUN QUALITY CHECKS & FRESHNESS ON CORRUPTED DATA
+    # 5. RUN QUALITY CHECKS & TẠO FRESHNESS REPORT TREN CORRUPTED DATA
     # -------------------------------------------------------------------------
     logger.info("[Step 5/8] Running Data Quality & Freshness checks on Corrupted Data...")
     corrupted_quality = run_data_quality_checks(
@@ -131,7 +93,7 @@ def main() -> None:
     )
 
     # -------------------------------------------------------------------------
-    # 6. REPAIR DATA FROM RAW RECORDS & VALIDATE CONTRACT (STOP ON FAILURE)
+    # 6. REPAIR LAI TU RAW SOURCE & VALIDATE CONTRACT
     # -------------------------------------------------------------------------
     logger.info("[Step 6/8] Repairing dataset from raw snapshot records...")
     raw_records = load_raw_records(settings.paths.raw_records_json)
@@ -139,30 +101,28 @@ def main() -> None:
     run_date = datetime.now()
     df_repaired = build_clean_dataframe(raw_records, run_date=run_date)
 
-    # STOPS TO FIX DATA CONTRACT: Kiểm tra ngặt nghèo hợp đồng dữ liệu
+    # Guard Clause: Dừng ngay nếu vi phạm Data Contract thay vì vá JSON
     logger.info("Validating Repaired Dataframe against Retrieval Contract...")
     contract_check = validate_clean_dataframe(df_repaired)
     
     if contract_check["status"] == "fail":
-        # DỪNG PIPELINE ĐỂ SỬA CODE/CONTRACT THAY VÌ VÁ FILE JSON
         hard_failures = contract_check.get("hard_failures", [])
         raise RuntimeError(
             f"[BLOCKER] Repaired dataframe vi phạm Data Contract! Hard Failures: {hard_failures}. "
             "Pipeline dừng lại để yêu cầu sửa logic Data Cleaning/Contract thay vì vá JSON kết quả."
         )
 
-    # Lưu artifacts repaired tại PATH RÊNG
     write_csv(df_repaired, settings.paths.repaired_clean_csv)
     logger.info(f"-> Repaired CSV đã lưu tại path riêng: '{settings.paths.repaired_clean_csv}'")
 
     # -------------------------------------------------------------------------
-    # 7. EVALUATE REPAIRED DATASET (COLLECTION ISOLATION)
+    # 7. EVALUATE LAI LAN NUOAC (REPAIRED DATASET)
     # -------------------------------------------------------------------------
-    logger.info("[Step 7/8] Building Repaired Index (Collection: 'papers-repaired') & Evaluating...")
+    logger.info("[Step 7/8] Rebuilding Repaired Index (Collection: 'papers-repaired') & Re-evaluating...")
     index_repaired = LocalEmbeddingIndex.build(
         df=df_repaired,
         settings=settings,
-        embeddings_output_path=settings.paths.repaired_embeddings_json,  # Tên Collection: "papers-repaired"
+        embeddings_output_path=settings.paths.repaired_embeddings_json,
     )
 
     repaired_eval = evaluate_pipeline(
@@ -187,7 +147,7 @@ def main() -> None:
     )
 
     # -------------------------------------------------------------------------
-    # 8. GENERATE COMPARISON REPORT (MARKDOWN)
+    # 8. TAO COMPARISON REPORT (MARKDOWN)
     # -------------------------------------------------------------------------
     logger.info("[Step 8/8] Generating Comparison Report (Baseline vs Corrupted vs Repaired)...")
     generate_corruption_report(

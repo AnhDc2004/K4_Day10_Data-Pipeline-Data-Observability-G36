@@ -136,16 +136,11 @@ def build_clean_dataframe(records: list[PaperRecord], run_date: datetime) -> pd.
         return empty_df
 
     df = pd.DataFrame(rows)
-    # Crossref mixes full dates, timestamps, and year-month values in one batch.
-    # ``format="mixed"`` parses each value independently instead of inferring one
-    # format for the entire Series.
     df["published"] = pd.to_datetime(df["published"], errors="coerce", utc=True, format="mixed")
     df["updated"] = pd.to_datetime(df["updated"], errors="coerce", utc=True, format="mixed")
     report["invalid_published_dates"] = int(df["published"].isna().sum())
     report["empty_summaries"] = int(df["summary"].eq("").sum())
 
-    # Stable sort makes the last row the newest record and preserves input-order
-    # precedence when two records have the same/missing update timestamp.
     df = df.sort_values(["paper_id", "updated", "_source_order"], na_position="first", kind="stable")
     before_dedupe = len(df)
     df = df.drop_duplicates(subset="paper_id", keep="last")

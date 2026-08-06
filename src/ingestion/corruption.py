@@ -6,8 +6,8 @@ from typing import Any
 
 import pandas as pd
 
-from core.utils import now_utc, write_json
-from ingestion.cleaning import _embedding_text
+from core import now_utc, write_json
+from ingestion import _embedding_text
 
 
 NOISE_MARKER = "[CORRUPTED_NOISE] irrelevant tokens xqzv qqq 000"
@@ -47,6 +47,7 @@ def _operation(
 
 
 def _rebuild_derived_fields(df: pd.DataFrame) -> None:
+    """Tái tạo các trường phái sinh (summary_chars, text_for_embedding) sau khi làm hỏng dữ liệu."""
     df["summary_chars"] = df["summary"].fillna("").astype(str).str.len()
     df["text_for_embedding"] = df.apply(
         lambda row: _embedding_text(
@@ -59,23 +60,21 @@ def _rebuild_derived_fields(df: pd.DataFrame) -> None:
     )
 
 
-def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
-    """Create a deterministic corrupted copy and write an auditable log.
+def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path: Path | str) -> pd.DataFrame:
+    """Tạo bản sao dữ liệu bị corrupt theo các kịch bản cố định và ghi audit log.
 
-    The baseline dataframe is never mutated. Each operation records affected
-    IDs, parameters, and row counts before/after so the artifact can be checked
-    independently and reproduced.
+    Baseline dataframe không bao giờ bị thay đổi trực tiếp (Immutability).
     """
     _require_columns(df)
     if len(df) < 7:
-        raise ValueError("At least 7 clean rows are required for five independent corruption scenarios.")
+        raise ValueError("At least 7 clean rows are required for independent corruption scenarios.")
 
     corrupted = df.copy(deep=True)
     corrupted["published"] = pd.to_datetime(corrupted["published"], errors="coerce", utc=True, format="mixed")
     operations: list[dict[str, Any]] = []
     baseline_count = len(corrupted)
 
-    # 1. Remove two latest records to simulate an incomplete incremental load.
+    # 1. Remove two latest records (Xóa một số latest records)
     before = len(corrupted)
     latest_indices = corrupted.sort_values("published", ascending=False, na_position="last").head(2).index
     latest_ids = corrupted.loc[latest_indices, "paper_id"].astype(str).tolist()
@@ -90,17 +89,16 @@ def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
         )
     )
 
-    # Use stable paper_id order so repeated runs corrupt the same source rows.
     candidate_indices = corrupted.sort_values("paper_id", kind="stable").index.tolist()
 
-    # 2. Blank one summary (missing-content scenario).
+    # 2. Blank one summary (Blank summary)
     index = candidate_indices[0]
     paper_id = str(corrupted.at[index, "paper_id"])
     before = len(corrupted)
     corrupted.at[index, "summary"] = ""
     operations.append(_operation("missing_summary", [paper_id], {"replacement": ""}, before, len(corrupted)))
 
-    # 3. Inject a visible, reproducible noise marker into another summary.
+    # 3. Inject noise marker (Add noise vào summary)
     index = candidate_indices[1]
     paper_id = str(corrupted.at[index, "paper_id"])
     before = len(corrupted)
@@ -110,8 +108,18 @@ def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
         _operation("inject_noise", [paper_id], {"marker": NOISE_MARKER, "target_field": "summary"}, before, len(corrupted))
     )
 
-    # 4. Age one paper by two years and keep age_days consistent with the date shift.
+    # 4. Truncate title (Truncate title)
     index = candidate_indices[2]
+    paper_id = str(corrupted.at[index, "paper_id"])
+    before = len(corrupted)
+    original_title = str(corrupted.at[index, "title"] or "")
+    corrupted.at[index, "title"] = original_title[:15] if len(original_title) > 15 else original_title
+    operations.append(
+        _operation("truncate_title", [paper_id], {"max_chars": 15, "original": original_title}, before, len(corrupted))
+    )
+
+    # 5. Age one paper by 2 years (Làm stale publication date)
+    index = candidate_indices[3]
     paper_id = str(corrupted.at[index, "paper_id"])
     before = len(corrupted)
     days_shift = 730
@@ -129,8 +137,8 @@ def corrupt_clean_dataframe(df: pd.DataFrame, output_log_path) -> pd.DataFrame:
         )
     )
 
-    # 5. Add an exact duplicate row; keeping the same stable ID is intentional.
-    index = candidate_indices[3]
+    # 6. Add exact duplicate row (Add duplicate rows)
+    index = candidate_indices[4]
     paper_id = str(corrupted.at[index, "paper_id"])
     before = len(corrupted)
     duplicate = corrupted.loc[[index]].copy(deep=True)

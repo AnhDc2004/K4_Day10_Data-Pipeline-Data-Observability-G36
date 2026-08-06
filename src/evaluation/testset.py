@@ -12,11 +12,8 @@ MIN_PAPERS = 6
 
 REQUIRED_FIELDS = ("paper_id", "title", "summary", "authors_joined", "categories_joined", "published")
 
-# Dung 5 key ma `evaluation.metrics.evaluate_pipeline` truy cap truc tiep, thieu key nao la KeyError.
 REQUIRED_SAMPLE_KEYS = ("id", "question_type", "question", "ground_truth", "ground_truth_doc_ids")
 
-# Cum tu khoa phai giu nguyen: `retrieval/qa.py::_extract_answer` route answer bang cach
-# match chuoi tren question.lower(). Doi cach dien dat -> answer roi ve nhanh summary mac dinh.
 QUESTION_TEMPLATES: dict[str, str] = {
     "summary": "What is the paper '{title}' about?",
     "authors": "Who authored the paper '{title}'?",
@@ -39,10 +36,8 @@ def paper_rejection_reason(row: dict[str, Any]) -> str | None:
             return f"missing_{field}"
     title = _text(row, "title")
     if "'" in title:
-        # `qa.answer_question` bat exact title bang regex r"'([^']+)'" -> title co nhay don lam vo lookup.
         return "title_contains_single_quote"
     if re.search(r"<[^>]+>", title):
-        # Title con markup JATS tho (vd `<scp>RAG</scp>`) -> cau hoi ban va lam nhieu LLM judge.
         return "title_contains_markup"
     if len(title) < 10:
         return "title_too_short"
@@ -73,7 +68,6 @@ def select_representative_papers(
     used_title_prefixes: set[str] = set()
 
     records = working.to_dict(orient="records")
-    # pass 0: moi category chi lay 1 paper (da dang hon); pass 1: lay them cho du limit.
     for prefer_new_category in (True, False):
         for row in records:
             if len(selected) >= limit:
@@ -144,7 +138,6 @@ def validate_test_set(test_set: list[dict[str, Any]], df: pd.DataFrame) -> list[
         if not str(item["question"]).strip():
             errors.append(f"{item['id']}: question rong")
         if not str(item["ground_truth"]).strip():
-            # ground_truth rong -> token_f1 luon 0 va judge khong co gi de so sanh.
             errors.append(f"{item['id']}: ground_truth rong")
         if not item["ground_truth_doc_ids"]:
             errors.append(f"{item['id']}: ground_truth_doc_ids rong")

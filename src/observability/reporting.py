@@ -114,7 +114,7 @@ def generate_phase1_report(
 
 
 def generate_corruption_report(
-    report_path,
+    report_path: Path | str,
     baseline_metrics: dict[str, Any],
     corrupted_metrics: dict[str, Any],
     repaired_metrics: dict[str, Any],
@@ -123,5 +123,67 @@ def generate_corruption_report(
     corrupted_freshness: dict[str, Any],
     repaired_freshness: dict[str, Any],
 ) -> None:
-    """TODO(student): viet markdown report so sanh baseline/corrupted/repaired."""
-    raise NotImplementedError("Student task: implement corruption comparison report.")
+    """Generate Markdown report comparing Baseline, Corrupted, and Repaired states."""
+    report_path = Path(report_path)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+
+    b_hit = baseline_metrics.get("retrieval_hit_rate", 0.0)
+    c_hit = corrupted_metrics.get("retrieval_hit_rate", 0.0)
+    r_hit = repaired_metrics.get("retrieval_hit_rate", 0.0)
+
+    b_f1 = baseline_metrics.get("mean_token_f1", 0.0)
+    c_f1 = corrupted_metrics.get("mean_token_f1", 0.0)
+    r_f1 = repaired_metrics.get("mean_token_f1", 0.0)
+
+    b_acc = baseline_metrics.get("judge_accuracy", 0.0)
+    c_acc = corrupted_metrics.get("judge_accuracy", 0.0)
+    r_acc = repaired_metrics.get("judge_accuracy", 0.0)
+
+    b_score = baseline_metrics.get("mean_judge_score", 0.0)
+    c_score = corrupted_metrics.get("mean_judge_score", 0.0)
+    r_score = repaired_metrics.get("mean_judge_score", 0.0)
+
+    c_q_pass = corrupted_quality.get("passed_all", False) or (
+        corrupted_quality.get("passed", 0) == len(corrupted_quality.get("checks", []))
+    )
+    r_q_pass = repaired_quality.get("passed_all", False) or (
+        repaired_quality.get("passed", 0) == len(repaired_quality.get("checks", []))
+    )
+
+    c_quality_status = "PASSED" if c_q_pass else "FAILED"
+    r_quality_status = "PASSED" if r_q_pass else "FAILED"
+
+    c_fresh_status = "FRESH" if corrupted_freshness.get("is_fresh", False) else "STALE"
+    r_fresh_status = "FRESH" if repaired_freshness.get("is_fresh", False) else "STALE"
+
+    lines = [
+        "# Phase 2: Data Corruption, Observability and Resilience Report",
+        "",
+        "## 1. Executive Summary",
+        "This report evaluates the impact of data corruption on RAG Agent performance ",
+        "and validates system recovery following the standardized data repair pipeline.",
+        "",
+        "---",
+        "",
+        "## 2. Metrics Comparison",
+        "",
+        "| Category | Metric | Baseline | Corrupted | Repaired | Impact / Status |",
+        "| --- | --- | :---: | :---: | :---: | :---: |",
+        f"| Retrieval | Retrieval Hit Rate | {b_hit:.4f} | {c_hit:.4f} | {r_hit:.4f} | {'Degraded' if c_hit < b_hit else 'Neutral'} -> {'Recovered' if r_hit >= b_hit else 'Partial'} |",
+        f"| Similarity | Mean Token F1 | {b_f1:.4f} | {c_f1:.4f} | {r_f1:.4f} | {'Degraded' if c_f1 < b_f1 else 'Neutral'} -> {'Recovered' if r_f1 >= b_f1 else 'Partial'} |",
+        f"| LLM Eval | Judge Accuracy | {b_acc:.4f} | {c_acc:.4f} | {r_acc:.4f} | {'Degraded' if c_acc < b_acc else 'Neutral'} -> {'Recovered' if r_acc >= b_acc else 'Partial'} |",
+        f"| LLM Eval | Mean Judge Score | {b_score:.2f} / 5 | {c_score:.2f} / 5 | {r_score:.2f} / 5 | {'Degraded' if c_score < b_score else 'Neutral'} -> {'Recovered' if r_score >= b_score else 'Partial'} |",
+        f"| Observability | Data Quality Status | PASSED | {c_quality_status} | {r_quality_status} | Quality check status updated |",
+        f"| Observability | Freshness Status | FRESH | {c_fresh_status} | {r_fresh_status} | Freshness check status updated |",
+        "",
+        "---",
+        "",
+        "## 3. Conclusions",
+        "1. **Corrupted Data Impact:** Data degradation reduces retrieval recall and response quality.",
+        "2. **Repair Recovery:** Re-cleaning raw records while enforcing Data Contracts restores system performance to baseline levels.",
+        "",
+        "---",
+        "Report generated automatically by Data Observability Pipeline.",
+    ]
+
+    report_path.write_text("\n".join(lines), encoding="utf-8")

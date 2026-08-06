@@ -14,8 +14,6 @@ def _load_model(model_name: str) -> SentenceTransformer:
 class MiniLMEmbeddings(Embeddings):
     def __init__(self, model_name: str):
         self.model_name = model_name
-        # Keep the provider object private. Ragas reads ``.model`` for telemetry
-        # and expects a string, not a SentenceTransformer instance.
         self._model = _load_model(model_name)
 
     @property

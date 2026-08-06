@@ -1,6 +1,6 @@
 {
   "report_name": "phase1_baseline",
-  "generated_at": "2026-08-06T10:37:56.379866+00:00",
+  "generated_at": "2026-08-06T18:34:47.751567+00:00",
   "total_rows": 24,
   "success": true,
   "passed": 11,
@@ -79,7 +79,7 @@
     {
       "name": "freshness_age_days",
       "success": true,
-      "observed": 174,
+      "observed": 175,
       "expected": "max age_days <= 180, 0 row thieu age_days",
       "details": ""
     }

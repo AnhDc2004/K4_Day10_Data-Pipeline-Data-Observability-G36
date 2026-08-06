@@ -40,7 +40,6 @@ def parse_crossref_payload(payload: dict[str, Any]) -> list[PaperRecord]:
     records: list[PaperRecord] = []
 
     for item in items:
-        # Chuẩn hóa DOI thành lower-case làm stable paper_id
         raw_doi = item.get("DOI", "")
         if not raw_doi or not isinstance(raw_doi, str):
             continue
@@ -86,7 +85,6 @@ def parse_crossref_payload(payload: dict[str, Any]) -> list[PaperRecord]:
                 break
 
         publisher = item.get("publisher", "")
-        # Safe-access chống IndexError khi container-title rỗng
         container_titles = item.get("container-title", [])
         container_title = container_titles[0] if container_titles else ""
 
@@ -161,10 +159,8 @@ def fetch_source_records(settings: Settings) -> list[PaperRecord]:
     with open(raw_api_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
-    # 2. Parse payload thành records
     records = parse_crossref_payload(payload)
 
-    # 3. Lưu JSON Snapshot vào đúng Contract Path
     raw_records_path = Path(settings.paths.raw_records_json)
     raw_records_path.parent.mkdir(parents=True, exist_ok=True)
     with open(raw_records_path, "w", encoding="utf-8") as f:
@@ -191,7 +187,6 @@ if __name__ == "__main__":
 
     logger.info("--- BẮT ĐẦU CHẠY INGESTION TEST ---")
     try:
-        # Sử dụng load_settings chuẩn từ core.config
         settings = load_settings()
         records = fetch_source_records(settings)
         logger.info(f"SUCCESS: Fetch và parse thành công {len(records)} bài báo!")

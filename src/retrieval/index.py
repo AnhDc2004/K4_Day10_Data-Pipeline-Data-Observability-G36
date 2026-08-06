@@ -138,7 +138,7 @@ class LocalEmbeddingIndex:
             "collection_name": collection_name,
             "documents": documents,
         }
-        # Fail before writing if a future metadata field reintroduces NaN.
+
         json.dumps(manifest, allow_nan=False)
         write_json(manifest_path, manifest)
         return cls(
@@ -155,7 +155,6 @@ class LocalEmbeddingIndex:
             settings=settings,
             collection_name=payload["collection_name"],
             documents=payload["documents"],
-            # Do not trust a machine-specific path serialized by another checkout.
             persist_path=settings.paths.chroma_dir,
         )
 
