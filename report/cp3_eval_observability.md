@@ -5,9 +5,9 @@
 > Trạng thái: **baseline end-to-end đã chạy xong**, artifact và report khớp nhau.
 
 ---
+Ghi chú: Số liệu trong file này thuộc lần chạy tại checkpoint. Số liệu cuối dùng cho bài nộp nằm ở data/results/*.json và group_report.md.
 
 ## 1. Điều kiện tiền đề — B6 và B7 đã được vai trò 4 sửa
-
 Chạy lại trước khi evaluate, tất cả xanh:
 
 ```

@@ -4,10 +4,10 @@
 > Tiếp nối [cp3_eval_observability.md](cp3_eval_observability.md)
 > Trạng thái: **corruption flow chạy end-to-end**, đủ artifact ba trạng thái, judge LLM thật ở cả ba.
 
+Ghi chú: Số liệu trong file này thuộc lần chạy tại checkpoint. Số liệu cuối dùng cho bài nộp nằm ở data/results/*.json và group_report.md.
 ---
 
 ## 1. Phạm vi đã mở rộng
-
 CP5/CP6 của tôi phụ thuộc corrupted/repaired dataset, mà `src/ingestion/corruption.py` (vai trò 3) và `src/pipelines/corruption_flow.py` (vai trò 1) chưa implement. Được nhóm đồng ý, tôi implement luôn cả hai để repo chạy được end-to-end:
 
 | File | Nội dung |
