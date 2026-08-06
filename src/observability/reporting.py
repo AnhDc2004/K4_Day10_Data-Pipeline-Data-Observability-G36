@@ -110,7 +110,21 @@ def generate_phase1_report(
         "",
     ]
 
-    write_text(Path(report_path), "\n".join(lines))
+    _write_with_relative_paths(Path(report_path), lines)
+
+
+def _write_with_relative_paths(report_path: Path, lines: list[str]) -> None:
+    """Ghi report, doi path tuyet doi cua may hien tai thanh path tuong doi so voi project root.
+
+    Report duoc commit len Git nen khong duoc chua path rieng cua may nguoi chay.
+    """
+    text = "\n".join(lines)
+    resolved = report_path.resolve()
+    if len(resolved.parents) >= 3:
+        project_root = resolved.parents[2]  # <root>/data/reports/<file>.md
+        for prefix in (f"{project_root}\\", f"{project_root}/"):
+            text = text.replace(prefix, "")
+    write_text(report_path, text)
 
 
 def generate_corruption_report(
