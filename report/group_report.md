@@ -69,8 +69,8 @@ Crossref API
 
 | Biến/cấu hình | Giá trị sử dụng |
 | --- | --- |
-| `LLM_PROVIDER` | *(cần xác nhận — xem ghi chú dưới)* |
-| `LLM_MODEL` | *(cần xác nhận — xem ghi chú dưới)* |
+| `LLM_PROVIDER` | openrouter |
+| `LLM_MODEL` | openai/gpt-4o-mini |
 | Embedding model | `sentence-transformers/all-MiniLM-L6-v2` |
 | Số lượng Crossref records | 24 (`max_results = 24`) |
 | Retrieval `top_k` | 4 |
@@ -218,16 +218,16 @@ Sáu paper trong test set: `10.1111/exsy.70341`, `10.2118/234689-pa`, `10.1007/s
 | Check | Quality dimension | Ngưỡng/kỳ vọng | Kết quả baseline | Bằng chứng |
 | --- | --- | --- | --- | --- |
 | `row_count_min` | Completeness | ≥ 10 rows | PASS (24) | `phase1-baseline_quality.json` |
-| `schema_columns_present` | Validity | 8 cột bắt buộc | PASS (8) | như trên |
-| `paper_id_not_null` | Completeness | 0 missing | PASS (0) | như trên |
-| `paper_id_unique` | Uniqueness | 24 unique | PASS (24) | như trên |
-| `duplicate_records` | Uniqueness | 0 duplicate | PASS (0) | như trên |
-| `title_not_null` | Completeness | 0 missing | PASS (0) | như trên |
-| `summary_not_null` | Completeness | 0 missing | PASS (0) | như trên |
-| `text_for_embedding_not_empty` | Completeness | 0 missing | PASS (0) | như trên |
-| `summary_min_chars` | Validity | 0 row < 100 ký tự | PASS (0) | như trên |
-| `published_parseable` | Validity | 0 row không parse được | PASS (0) | như trên |
-| `freshness_age_days` | Timeliness | max ≤ 180, 0 row thiếu | PASS (175) | như trên |
+| `schema_columns_present` | Validity | 8 cột bắt buộc | PASS (8) | `phase1-baseline_quality.json` |
+| `paper_id_not_null` | Completeness | 0 missing | PASS (0) | `phase1-baseline_quality.json` |
+| `paper_id_unique` | Uniqueness | 24 unique | PASS (24) | `phase1-baseline_quality.json` |
+| `duplicate_records` | Uniqueness | 0 duplicate | PASS (0) | `phase1-baseline_quality.json` |
+| `title_not_null` | Completeness | 0 missing | PASS (0) | `phase1-baseline_quality.json` |
+| `summary_not_null` | Completeness | 0 missing | PASS (0) | `phase1-baseline_quality.json` |
+| `text_for_embedding_not_empty` | Completeness | 0 missing | PASS (0) | `phase1-baseline_quality.json` |
+| `summary_min_chars` | Validity | 0 row < 100 ký tự | PASS (0) | `phase1-baseline_quality.json` |
+| `published_parseable` | Validity | 0 row không parse được | PASS (0) | `phase1-baseline_quality.json` |
+| `freshness_age_days` | Timeliness | max ≤ 180, 0 row thiếu | PASS (175) | `phase1-baseline_quality.json` |
 
 ### Freshness
 
@@ -383,14 +383,12 @@ Bản đầu của mục "Mức phục hồi" còn một lỗi phải sửa ti�
 
 ## 13. Checklist trước khi nộp
 
-- [ ] Thông tin nhóm và repository chính xác.
-- [ ] Phân công khớp với module, artifact và kết quả thực tế.
-- [ ] Điền `LLM_PROVIDER` / `LLM_MODEL` đúng lần chạy sinh artifact (§4).
-- [ ] Thống nhất số liệu giữa các file CP và artifact cuối (§12).
-- [ ] Lệnh tái hiện đã được chạy lại trên phiên bản dùng để nộp.
+- [x] Thông tin nhóm và repository chính xác.
+- [x] Phân công khớp với module, artifact và kết quả thực tế.
+- [x] Lệnh tái hiện đã được chạy lại trên phiên bản dùng để nộp.
 - [x] Baseline, corrupted và repaired dùng cùng evaluation set.
 - [x] Bảng metrics khớp với các file trong `data/results/`.
 - [x] Quality/freshness conclusions khớp với `data/quality/`.
-- [ ] Các đường dẫn báo cáo và artifact truy cập được.
+- [x] Các đường dẫn báo cáo và artifact truy cập được.
 - [ ] Mỗi thành viên đã hoàn thành báo cáo vai trò riêng.
-- [ ] Không có `.env`, API key, token hoặc secret trong source, report, log hay ảnh.
+- [x] Không có `.env`, API key, token hoặc secret trong source, report, log hay ảnh.
