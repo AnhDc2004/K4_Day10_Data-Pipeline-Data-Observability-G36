@@ -113,8 +113,8 @@ $env:RUN_RAGAS="1"
 
 | Lệnh | Trạng thái | Thời điểm chạy gần nhất | Bằng chứng |
 | --- | --- | --- | --- |
-| Baseline pipeline | Thành công (8/8 step) | *(điền từ log lần chạy cuối)* | `data/reports/phase1_report.md`, `baseline_metrics.json`, `baseline_answers.json` |
-| Corruption flow | Thành công (8/8 step) | *(điền từ log lần chạy cuối)* | `corrupted_metrics.json`, `repaired_metrics.json`, `data/reports/corruption_report.md` |
+| Baseline pipeline | Thành công (8/8 step) | 2026-08-06 20:54:47 | `data/reports/phase1_report.md`, `baseline_metrics.json`, `baseline_answers.json` |
+| Corruption flow | Thành công (8/8 step) | 2026-08-06 21:07:34 | `corrupted_metrics.json`, `repaired_metrics.json`, `data/reports/corruption_report.md` |
 
 ## 5. Ingestion, cleaning và data contract
 
