@@ -1,0 +1,12 @@
+{
+  "raw_api_response": {
+    "file": "crossref_response.json",
+    "sha256": "de97b5f9d1818c3c1ff68bf577c83771388de72e2717b3751db0e8f19d5ef660",
+    "items": 24
+  },
+  "raw_records": {
+    "file": "crossref_records.json",
+    "sha256": "f72a5f9b2f697c5f13881762075681f232e58c10e8d687a069d1d5fa6349eca1",
+    "records": 24
+  }
+}
